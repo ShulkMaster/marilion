@@ -1,2 +1,2 @@
 # marilion
-Gestor de reserciones para  pequeños hoteles
+Gestor de reservaciones de pequeños hoteles
