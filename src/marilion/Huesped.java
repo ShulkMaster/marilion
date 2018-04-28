@@ -9,6 +9,11 @@ package marilion;
  *
  * @author mcdre
  */
-public class Huesped {
-    public String nombre;
+public class Huesped extends Persona{
+
+    public Huesped(String Nombre, String Apellido, String Dui) {
+        super(Nombre, Apellido, Dui);
+    }
+    
+    
 }
