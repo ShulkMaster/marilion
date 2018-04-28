@@ -12,7 +12,7 @@ package marilion;
     cuántos días ha reservado la habitación
     costo por noche de la habitación 
     el total que se le cobrará a su tarjeta de crédito. 
-xd
+xd2
 
  */
 public class Marilion {
