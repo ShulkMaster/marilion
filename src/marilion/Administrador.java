@@ -9,9 +9,17 @@ package marilion;
  *
  * @author yury_
  */
-public class Administrador  extends Persona{
+public class Administrador  extends Persona {
     
-    public String username;
-    private String password;
+    public String Username;
+    private String Password;
+
+    public Administrador(String username, String password, String Nombre, String Apellido, String Dui) {
+        super(Nombre, Apellido, Dui);
+        this.Username = username;
+        this.Password = password;
+    }
+    
+    
     
 }
