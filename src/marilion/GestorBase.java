@@ -13,6 +13,6 @@ package marilion;
 public class GestorBase {
     private Huesped Db_HuespedesActivos;
     private Huesped Db_ReservaHist;
-    private Reservacio reservacion;
+    private Reservacion reservacion;
     
 }
