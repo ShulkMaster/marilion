@@ -10,5 +10,6 @@ package marilion;
  * @author yury_
  */
 public class Menu {
+    GestorHotel gestorHotel;
     
 }

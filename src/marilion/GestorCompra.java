@@ -13,4 +13,5 @@ public class GestorCompra {
     private int tipoPago;
     private float monto;
     public Persona cliente;
+    public boolean Realizado;
 }

@@ -16,6 +16,7 @@ public class GestorHotel {
     ArrayList<Huesped> ListaDeHuespedes;
     ArrayList<Reservacion> ListaDeReservas;
     ArrayList<Factura> ListaDeFactura;
+    GestorBase base;
 
     public GestorHotel(ArrayList<Habitacion> ListaDeHabitacion, ArrayList<Huesped> ListaDeHuespedes, ArrayList<Reservacion> ListaDeReservas, ArrayList<Factura> ListaDeFactura) {
         this.ListaDeHabitacion = ListaDeHabitacion;
