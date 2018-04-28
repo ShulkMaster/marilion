@@ -15,8 +15,18 @@ import java.util.ArrayList;
 public class Habitacion {
     public char indicadorDePiso;
     public int numeroHabitacion;
-    public int habitacionEstado;
-    public String tipo;
+    public EstadoHabitacion habitacionEstado;
+    public TipoDeHabitacion Tipo;
     public int piso;
     public ArrayList<Huesped> listaHuesped; 
+
+    public Habitacion(char indicadorDePiso, int numeroHabitacion, EstadoHabitacion habitacionEstado, TipoDeHabitacion Tipo, int piso, ArrayList<Huesped> listaHuesped) {
+        this.indicadorDePiso = indicadorDePiso;
+        this.numeroHabitacion = numeroHabitacion;
+        this.habitacionEstado = habitacionEstado;
+        this.Tipo = Tipo;
+        this.piso = piso;
+        this.listaHuesped = listaHuesped;
+    }
+    
 }
