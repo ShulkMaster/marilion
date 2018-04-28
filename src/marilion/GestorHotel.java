@@ -15,13 +15,14 @@ public class GestorHotel {
     ArrayList<Habitacion> ListaDeHabitacion;
     ArrayList<Huesped> ListaDeHuespedes;
     ArrayList<Reservacion> ListaDeReservas;
+    ArrayList<Factura> ListaDeFactura;
 
-    public GestorHotel(ArrayList<Habitacion> ListaDeHabitacion, ArrayList<Huesped> ListaDeHuespedes, ArrayList<Reservacion> ListaDeReservas) {
+    public GestorHotel(ArrayList<Habitacion> ListaDeHabitacion, ArrayList<Huesped> ListaDeHuespedes, ArrayList<Reservacion> ListaDeReservas, ArrayList<Factura> ListaDeFactura) {
         this.ListaDeHabitacion = ListaDeHabitacion;
         this.ListaDeHuespedes = ListaDeHuespedes;
         this.ListaDeReservas = ListaDeReservas;
+        this.ListaDeFactura = ListaDeFactura;
     }
-    
     
     
 }
