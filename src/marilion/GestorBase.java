@@ -5,13 +5,14 @@
  */
 package marilion;
 
+
 /**
  *
- * @author mcdre
+ * @author yury_
  */
-public class Huesped extends Persona{
-
-    public Huesped(String Nombre, String Apellido, String Dui) {
-        super(Nombre, Apellido, Dui);
-    }
+public class GestorBase {
+    private Huesped Db_HuespedesActivos;
+    private Huesped Db_ReservaHist;
+    private Reservacio reservacion;
+    
 }
