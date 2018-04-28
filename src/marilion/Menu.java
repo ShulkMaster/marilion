@@ -11,5 +11,20 @@ package marilion;
  */
 public class Menu {
     GestorHotel gestorHotel;
+    public static Menu menu;
+
+    private Menu() {
+    }
+    
+    public static void Init(){
+        if(menu == null){
+            menu = new Menu();
+        }
+        else{
+            System.out.println("El menu ya existe");
+        }
+    }
+    
+    
     
 }
