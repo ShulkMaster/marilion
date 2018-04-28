@@ -14,6 +14,4 @@ public class Huesped extends Persona{
     public Huesped(String Nombre, String Apellido, String Dui) {
         super(Nombre, Apellido, Dui);
     }
-    
-    
 }
