@@ -11,8 +11,16 @@ package marilion;
  */
 public class Persona {
     
-    public String nombre;
-    public String apellido;
-    private String dui;
+    public String Nombre;
+    public String Apellido;
+    private String Dui;
+
+    public Persona(String Nombre, String Apellido, String Dui) {
+        this.Nombre = Nombre;
+        this.Apellido = Apellido;
+        this.Dui = Dui;
+    }
+    
+    
     
 }
