@@ -19,7 +19,7 @@ public class GestorBase {
     //aqui deben ir los archivos de la base de datos, 4 archivos. 
     //Hay que cambiar y agregar la lista de factura
     public File habitaciones;
-    public ArrayList<Huesped> huespedTest;
+    public ArrayList<Huesped> huespedTest = new ArrayList<>();
     private Huesped Db_HuespedesActivos;
     private Huesped Db_ReservaHist;
     private Reservacion reservacion;
@@ -30,6 +30,15 @@ public class GestorBase {
         crearTestfile("habitacion","a 15 true doble 1 yury.mario.cecil.gerardo", 5);
         for (int i = 0; i < 5; i++) {
             listaAux.add(creadoHabitacion());
+        }
+        System.out.println("Habitaciones creadas");
+        for (Habitacion listaAux1 : listaAux) {
+            System.out.println("Indicador de piso: "+listaAux1.indicadorDePiso);
+            System.out.println("Numero de Habitacion: "+listaAux1.numeroHabitacion);
+            System.out.println("piso: "+listaAux1.piso);
+            System.out.println("Huesped name: "+listaAux1.listaHuesped.get(0).Nombre);
+            System.out.println("Huesped apellido: "+listaAux1.listaHuesped.get(0).Nombre);
+            System.out.println("");
         }
         return listaAux;
     }
@@ -76,23 +85,27 @@ public class GestorBase {
      * @return Habitacion
      */
     private Habitacion creadoHabitacion() {
+        /*
         FileReader fichero;
-        String indicadorDePiso,numeroDeHabitacion,piso;
+        String master,indicadorDePiso,numeroDeHabitacion,piso;
         Habitacion haux;
         try {
             fichero = new FileReader(habitaciones);
             BufferedReader br = new BufferedReader(fichero);
-            String
+            while((master = br.readLine())!=null){
+                
+            }
             fichero.close();
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GestorBase.class.getName()).log(Level.SEVERE, null, ex);
+        */
             return new Habitacion('a', 20, EstadoHabitacion.Habilitada, TipoDeHabitacion.Doble, 1, huespedTest);
-        } catch (IOException ex) {
+        /*} catch (IOException ex) {
             Logger.getLogger(GestorBase.class.getName()).log(Level.SEVERE, null, ex);
         }
             return haux;
-        
+        */
     }
     /**
      * metodo de prueba para crear huespedes por que si 
