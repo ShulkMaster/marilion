@@ -1,0 +1,24 @@
+1. Crear Reservacion
+2. Pago de reservacion
+3. DB
+    3.1 Facturas
+    3.2 Reservas
+    3.3 Huespedes Actuales
+    3.4 Habitaciones
+4. Cancelar Reservacion
+5. Cambiar Reservacion
+    5.1 Cambio Fecha
+    5.2 Cambio de principal
+    5.3 Cambio de paquete
+    5.4 Cambio de dias
+    5.5 Cambio de acompanniantes
+6. Ver Lista de Reservaciones
+7. Entregar Habitacion
+8. Retirar Habitacion
+9. GestionDeHabitaciones
+    9.1 Habilitar habitacion
+    9.2 Deshabilitar habitacion
+    9.3 habilitar piso
+    9.4 deshabilitar piso
+10. Exit
+

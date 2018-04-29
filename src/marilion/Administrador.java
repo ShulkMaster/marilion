@@ -19,6 +19,11 @@ public class Administrador  extends Persona {
         this.Username = username;
         this.Password = password;
     }
+
+    public String getPassword() {
+        return Password;
+    }
+    
     
     
     

@@ -18,11 +18,11 @@ public class GestorHotel {
     ArrayList<Factura> ListaDeFactura;
     GestorBase base;
 
-    public GestorHotel(ArrayList<Habitacion> ListaDeHabitacion, ArrayList<Huesped> ListaDeHuespedes, ArrayList<Reservacion> ListaDeReservas, ArrayList<Factura> ListaDeFactura) {
-        this.ListaDeHabitacion = ListaDeHabitacion;
-        this.ListaDeHuespedes = ListaDeHuespedes;
-        this.ListaDeReservas = ListaDeReservas;
-        this.ListaDeFactura = ListaDeFactura;
+    public GestorHotel() {
+        this.ListaDeHabitacion = base.GetListHabitacion();
+        this.ListaDeHuespedes = base.GetListHuespedesActivos();
+        this.ListaDeReservas = base.GetListReservacion();
+        this.ListaDeFactura = base.GetListFactura();
     }
     
     
