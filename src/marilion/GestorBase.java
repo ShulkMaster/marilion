@@ -5,9 +5,7 @@
  */
 package marilion;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 
 /**
@@ -22,14 +20,7 @@ public class GestorBase {
     private Huesped Db_ReservaHist;
     private Reservacion reservacion;
     
-    public static Connection createDatabaseConnection()
-		throws SQLException, ClassNotFoundException {
-	String driver = "org.apache.derby.jdbc.EmbeddedDriver";
-	Class.forName(driver);
-	String url = "jdbc:derby:sampleDB";
-	Connection c = DriverManager.getConnection(url);
-	return c;
-}
+
 
     public ArrayList<Habitacion> GetListHabitacion() {
         ArrayList<Habitacion> listaAux = new ArrayList<Habitacion>();
