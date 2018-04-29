@@ -18,26 +18,29 @@ public class GestorBase {
 
     //aqui deben ir los archivos de la base de datos, 4 archivos. 
     //Hay que cambiar y agregar la lista de factura
-    public File habitaciones;
-    public ArrayList<Huesped> huespedTest = new ArrayList<>();
+    public File habitacion;
     private Huesped Db_HuespedesActivos;
     private Huesped Db_ReservaHist;
     private Reservacion reservacion;
 
     public ArrayList<Habitacion> GetListHabitacion() {
-        ArrayList<Habitacion> listaAux = new ArrayList<Habitacion>();
+        ArrayList<Habitacion> listaAux = new ArrayList<>();
         CrearHuespedTest(3);
-        crearTestfile("habitacion","a 15 true doble 1 yury.mario.cecil.gerardo", 5);
-        for (int i = 0; i < 5; i++) {
+        //si van a mandar una lista separen los objetos con : o algotro caracter que no sea el "." sino da error nullperro >:V
+        crearTestfile("habitacion", "a 15 true doble 1 yury:mario:cecil:gerardo", 5);
+        System.out.println("Las habitaciones desde archivo son: ");
+        for (int i = 0; i < 4; i++) {
             listaAux.add(creadoHabitacion());
         }
-        System.out.println("Habitaciones creadas");
+        System.out.println("Habitaciones creadas de objeto");
+        int i = 0;
         for (Habitacion listaAux1 : listaAux) {
-            System.out.println("Indicador de piso: "+listaAux1.indicadorDePiso);
-            System.out.println("Numero de Habitacion: "+listaAux1.numeroHabitacion);
-            System.out.println("piso: "+listaAux1.piso);
-            System.out.println("Huesped name: "+listaAux1.listaHuesped.get(0).Nombre);
-            System.out.println("Huesped apellido: "+listaAux1.listaHuesped.get(0).Nombre);
+            System.out.println("Indicador de piso: " + listaAux1.indicadorDePiso);
+            System.out.println("Numero de Habitacion: " + listaAux1.numeroHabitacion);
+            System.out.println("piso: " + listaAux1.piso);
+            System.out.println("Huesped name: " + listaAux1.listaHuesped.get(i).Nombre);
+            System.out.println("Huesped apellido: " + listaAux1.listaHuesped.get(i).Apellido);
+            i++;
             System.out.println("");
         }
         return listaAux;
@@ -51,92 +54,130 @@ public class GestorBase {
      * @param times indica el numero de veces que se creara un registro
      *
      */
-    private void crearTestfile(String filename,String baseRecord, int times) {
-        habitaciones = new File(filename+".txt");
+    private void crearTestfile(String filename, String baseRecord, int times) {
+        habitacion = new File(filename + ".txt");
         FileWriter fichero = null;
-        PrintWriter pw = null;
+        PrintWriter pw;
         try {
-            fichero = new FileWriter(habitaciones);
+            fichero = new FileWriter(habitacion);
             pw = new PrintWriter(fichero);
 
             for (int i = 0; i < times; i++) {
                 pw.println(baseRecord + "\n");
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("El archivo " + habitacion.getName() + "No existe ni pudo ser creado");
         } finally {
             try {
                 if (null != fichero) {
                     fichero.close();
                 }
-            } catch (Exception e2) {
-                e2.printStackTrace();
+            } catch (IOException e2) {
+                System.out.println("FileWritter not nut but not able to close");
             }
         }
 
     }
 
     /**
-     * este metodo crea habitaciones de prueba para probar el gestor de bases por
+     * este metodo crea habitacion de prueba para probar el gestor de bases por
      * que a gerar se le ocurrio que seria buena idea tener una ArrayList dentro
-     * de un arraylist dentro del objeto
-     * y se quejan de mi menu :v
+     * de un arraylist dentro del objeto y se quejan de mi menu :v
+     *
      * @return Habitacion
      */
     private Habitacion creadoHabitacion() {
-        /*
         FileReader fichero;
-        String master,indicadorDePiso,numeroDeHabitacion,piso;
+        String master, indicadorDePiso, numeroDeHabitacion, piso, huesoed;
         Habitacion haux;
         try {
-            fichero = new FileReader(habitaciones);
+            fichero = new FileReader(habitacion);
             BufferedReader br = new BufferedReader(fichero);
-            while((master = br.readLine())!=null){
-                
-            }
+            master = br.readLine();
+            indicadorDePiso = master.split(" ")[0];
+            numeroDeHabitacion = master.split(" ")[1];
+            piso = master.split(" ")[4];
+            huesoed = master.split(" ")[5];
+            haux = new Habitacion(indicadorDePiso.charAt(0),
+                    Integer.parseInt(numeroDeHabitacion),
+                    EstadoHabitacion.Habilitada,
+                    TipoDeHabitacion.Doble,
+                    Integer.parseInt(piso),
+                    /*en el archivo los nombre de huespedes se separan por :
+                    este metodo devuelve el arreglo de cadenas con los diferentes
+                    nombres de los huespedes en la Habitacion
+                    */
+                    CrearHuespedTest(4, huesoed.split(":")));
             fichero.close();
-
         } catch (FileNotFoundException ex) {
+            System.out.println("No se encontro el archivo Retorno habitacion por defecto");
+            return new Habitacion('a', 20, EstadoHabitacion.Habilitada, TipoDeHabitacion.Doble, 1, CrearHuespedTest(3));
+        } catch (IOException ex) {
             Logger.getLogger(GestorBase.class.getName()).log(Level.SEVERE, null, ex);
-        */
-            return new Habitacion('a', 20, EstadoHabitacion.Habilitada, TipoDeHabitacion.Doble, 1, huespedTest);
-        /*} catch (IOException ex) {
-            Logger.getLogger(GestorBase.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("No se pudo leer el buffer, retorno x defectt");
+            return new Habitacion('b', 25, EstadoHabitacion.Habilitada, TipoDeHabitacion.Sencilla, 1, CrearHuespedTest(2));
         }
-            return haux;
-        */
+
+        //retorno quemado mientras el metodo esta en desarrollo, trabajando para usted @fovialito
+        return haux;
+
     }
+
     /**
-     * metodo de prueba para crear huespedes por que si 
-     * @param cantidad  indica el numero de huespedes a crear por habitacion. prueba
+     *metodo de prueba para crear huespedes por que si
+     *
+     * @param cantidad indica el numero de huespedes a crear por habitacion.
+     * prueba
      */
-    private void CrearHuespedTest(int cantidad) {
+    private ArrayList<Huesped> CrearHuespedTest(int cantidad) {
+        ArrayList<Huesped> listaAux = new ArrayList<>();
         for (int i = 0; i < cantidad; i++) {
-            huespedTest.add(new Huesped(("gerardo" + i), ("mariposon" + i), ("00045671" + i)));
+            listaAux.add(new Huesped(("gerardo" + i), ("mariposon" + i), ("00045671" + i)));
         }
+        return listaAux;
+    }
+
+    /**
+     *metodo de prueba para crear huespedes por que si
+     *y circulex solo es una varianle para ir seleccionando un nombre diferente
+     * del array en cada iteracion
+     * @param cantidad indica el numero de huespedes a crear por habitacion.
+     * @param majes es un arreglo de cadenas con los nombres de los huespedes
+     *
+     * prueba
+     */
+    private ArrayList<Huesped> CrearHuespedTest(int cantidad, String[] majes) {
+        ArrayList<Huesped> listaAux = new ArrayList<>();
+        int circulex = 0;
+        for (int i = 0; i < cantidad; i++) {
+            listaAux.add(new Huesped((majes[circulex] + i), ("mariposon" + i), ("00045671" + i * circulex)));
+            circulex++;
+            circulex = circulex % (majes.length);
+        }
+        return listaAux;
     }
 
     public ArrayList<Factura> GetListFactura() {
-        ArrayList<Factura> listaAux = new ArrayList<Factura>();
+        ArrayList<Factura> listaAux = new ArrayList<>();
 
         return listaAux;
     }
 
     public ArrayList<Reservacion> GetListReservacion() {
-        ArrayList<Reservacion> listaAux = new ArrayList<Reservacion>();
+        ArrayList<Reservacion> listaAux = new ArrayList<>();
 
         return listaAux;
     }
 
     public ArrayList<Huesped> GetListHuespedesActivos() {
-        ArrayList<Huesped> listaAux = new ArrayList<Huesped>();
+        ArrayList<Huesped> listaAux = new ArrayList<>();
 
         return listaAux;
     }
 
     public ArrayList<Administrador> GetListAdministradores() {
-        ArrayList<Administrador> listaAux = new ArrayList<Administrador>();
+        ArrayList<Administrador> listaAux = new ArrayList<>();
 
         return listaAux;
     }
