@@ -15,6 +15,7 @@ public class Menu {
 
     ArrayList<Administrador> admins;
     GestorHotel gestorHotel;
+    private final GestorBase archivador = new GestorBase();
     boolean Finalizado;
 
     public Menu() {
@@ -234,7 +235,7 @@ public class Menu {
     }
 
     private void DB_Habitaciones() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        archivador.GetListHabitacion();
     }
 
 }
