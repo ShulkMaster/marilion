@@ -16,6 +16,8 @@ public class GestorHotel {
     ArrayList<Huesped> ListaDeHuespedes;
     ArrayList<Reservacion> ListaDeReservas;
     ArrayList<Factura> ListaDeFactura;
+    ArrayList<Administrador> ListaDeAdmins;
+    
     GestorBase base;
 
     public GestorHotel() {
@@ -23,6 +25,7 @@ public class GestorHotel {
         this.ListaDeHuespedes = base.GetListHuespedesActivos();
         this.ListaDeReservas = base.GetListReservacion();
         this.ListaDeFactura = base.GetListFactura();
+        this.ListaDeAdmins = base.GetListAdministradores();
     }
     
     

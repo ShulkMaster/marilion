@@ -20,8 +20,8 @@ public class Menu {
     public Menu() {
         //quitar comentario cuando se cree el gestor de base de datos
         
-        
-        //admins = gestorHotel.base.GetListAdministradores();
+        admins = new ArrayList<Administrador>();
+        //admins = gestorHotel.ListaDeAdmins;
         Finalizado = false;
 
     }
