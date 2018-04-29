@@ -12,6 +12,7 @@ import java.util.Date;
  * @author mcdre
  */
 public class Factura {
+    public Reservacion reserv;
     public Huesped cliente;
     public float monto;
     public Date fecha;
