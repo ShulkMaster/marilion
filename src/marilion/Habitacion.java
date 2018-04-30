@@ -19,6 +19,11 @@ public class Habitacion {
     public TipoDeHabitacion Tipo;
     public int piso;
     public ArrayList<Huesped> listaHuesped; 
+    
+    public Habitacion()
+    {
+        
+    }
 
     public Habitacion(char indicadorDePiso, int numeroHabitacion, EstadoHabitacion habitacionEstado, TipoDeHabitacion Tipo, int piso, ArrayList<Huesped> listaHuesped) {
         this.indicadorDePiso = indicadorDePiso;

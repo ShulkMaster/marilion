@@ -217,7 +217,7 @@ public class GestorBase {
             for (Reservacion re : lista) {
 
                 for (Habitacion hab : re.ListaHabitacionR) {
-                    pw.print(hab.indicadorDePiso + hab.numeroHabitacion + "$");
+                    pw.print(hab.indicadorDePiso +""+ hab.numeroHabitacion + "$");
                 }
                 pw.print(" ");
 
