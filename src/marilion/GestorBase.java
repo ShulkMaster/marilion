@@ -255,13 +255,12 @@ public class GestorBase {
         try {
             fichero = new FileWriter(ficheroe);
             pw = new PrintWriter(fichero);
-            pw.println("##");
             for(Administrador admin:arrayList)
             {
-                pw.print(admin.ToString());
-                pw.println(admin.Username);
-                pw.println(admin.getPassword());
-                pw.println("##");
+                pw.print(admin.ToString() +" ");
+                pw.print(admin.Username + " ");
+                pw.print(admin.getPassword() + " ");
+                pw.print("\n");
             }
             
 
