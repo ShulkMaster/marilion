@@ -14,7 +14,7 @@ import java.util.Date;
 public class Factura {
 
     public Reservacion reserv;
-    public Huesped cliente;
+    public Persona cliente;
     public float monto;
     public String fecha;
 
