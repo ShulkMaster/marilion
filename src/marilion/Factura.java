@@ -12,22 +12,18 @@ import java.util.Date;
  * @author mcdre
  */
 public class Factura {
+
     public Reservacion reserv;
     public Huesped cliente;
     public float monto;
     public String fecha;
-    
-    
+
     @Override
-    public String toString()
-    {
-        String re = reserv.Id_Reservacion + "\n"
-                + cliente.ToString() + "\n"
-                + monto + "\n"
-                + fecha;
-                
-        
-        return re;
+    public String toString() {
+        return reserv.Id_Reservacion + "$"
+                + cliente.ToString() + "$"
+                + monto + "$"
+                + fecha + "$";
     }
-    
+
 }
