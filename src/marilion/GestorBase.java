@@ -25,13 +25,14 @@ public class GestorBase {
 
     public ArrayList<Habitacion> GetListHabitacion() {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
-        CrearHuespedTest(3);
+        CrearHuespedTest(2);
         //si van a mandar una lista separen los objetos con : o algotro caracter que no sea el "." sino da error nullperro >:V
-        crearTestfile("habitacion", "a 15 true doble 1 yury:mario:cecil:gerardo", 5);
+        crearTestfile("habitacion", "a 15 true doble 1 yury:mario:cecil:gerardo", 4);
         System.out.println("Las habitaciones desde archivo son: ");
         for (int i = 0; i < 4; i++) {
             listaAux.add(creadoHabitacion());
         }
+        EscribirHabitaciones(listaAux,"habitaciones.txt");
         System.out.println("Habitaciones creadas de objeto");
         int i = 0;
         for (Habitacion listaAux1 : listaAux) {

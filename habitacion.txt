@@ -6,5 +6,3 @@ a 15 true doble 1 yury:mario:cecil:gerardo
 
 a 15 true doble 1 yury:mario:cecil:gerardo
 
-a 15 true doble 1 yury:mario:cecil:gerardo
-
