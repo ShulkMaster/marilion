@@ -285,7 +285,7 @@ public class GestorBase {
             fichero = new FileWriter(ficheroe);
             pw = new PrintWriter(fichero);
             for (Habitacion h : arrayList) {
-                pw.append(h.toString()+"\r\n");
+                pw.println(h.toString()+"\n");
             }
 
         } catch (Exception e) {
