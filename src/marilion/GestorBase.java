@@ -277,7 +277,7 @@ public class GestorBase {
             }
         }
     }
-
+    //Metodo para escribir el archivo a utilizar de base para las habitaciones donde se tendra una habitacion por linea
     private void EscribirHabitaciones(ArrayList<Habitacion> arrayList, String ficheroe) {
         FileWriter fichero = null;
         PrintWriter pw = null;
@@ -285,8 +285,8 @@ public class GestorBase {
             fichero = new FileWriter(ficheroe);
             pw = new PrintWriter(fichero);
             for (Habitacion h : arrayList) {
-                pw.println("##");
                 pw.print(h.toString());
+                pw.println("\r\n");
             }
 
         } catch (Exception e) {
