@@ -20,7 +20,10 @@ public class Persona {
         this.Apellido = Apellido;
         this.Dui = Dui;
     }
-    
+    public Persona(String Nombre, String Apellido) {
+        this.Nombre = Nombre;
+        this.Apellido = Apellido;
+    }
     
     public String ToString()
     {

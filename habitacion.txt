@@ -1,13 +1,10 @@
-a 1 1 yury
-b 2 1 raul:Kai
-
-c 3 1 betmen
-d 4 1 thanos:maria
-e 5 1 berserker
-f 6 1 zepeto:moreno
-g 7 3 moromoro
-h 8 1 mario:cecil
-i 9 3 gerardo
-
-j 10 3 sepermen:sapito
-
+a 1 1 yury#rivera#00088:Kai#kepler#00022:
+b 2 1 raul#marip#00011:Kai#kepler#00022:
+c 3 1 betmen#maple#00015:
+d 4 1 thanos#kaite#00032:maria#maraz#00057:
+e 5 1 berserker#paerto#00057:
+f 6 1 zepeto#mareki#00078:moreno#makar#00065:
+g 7 3 moromoro#pereo#00015:
+h 8 1 mario#cordales#00069:cecil#judas#00096:
+i 9 3 gerardo#castrado#00042:
+j 10 3 sepermen#zaper#00017:sapito#cabronzete#00067:

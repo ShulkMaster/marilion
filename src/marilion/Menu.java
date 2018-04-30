@@ -235,7 +235,7 @@ public class Menu {
     }
 
     private void DB_Habitaciones() {
-        archivador.GetListHabitacion();
+        archivador.printListHabitacion();
     }
 
 }
