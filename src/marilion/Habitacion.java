@@ -34,12 +34,11 @@ public class Habitacion {
     {
         String re;
         
-        re = indicadorDePiso + "\n" + this.numeroHabitacion + "\n"+ this.habitacionEstado +"\n"+this.Tipo + "/n"
-            + this.piso;
-        re = re + "\n" + "huespedes:";
+        re = indicadorDePiso + " " + numeroHabitacion + " "+ habitacionEstado +
+                " "+ Tipo +" "+ piso +" ";
         for(Huesped h: listaHuesped)
         {
-             re = re + "\n" + h.ToString();
+             re = re + ":" + h.ToString();
         }
         
         return re;
