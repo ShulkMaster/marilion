@@ -107,7 +107,7 @@ public class GestorBase {
                     /*en el archivo los nombre de huespedes se separan por :
                     este metodo devuelve el arreglo de cadenas con los diferentes
                     nombres de los huespedes en la Habitacion
-                    */
+                     */
                     CrearHuespedTest(4, huesoed.split(":")));
             fichero.close();
         } catch (FileNotFoundException ex) {
@@ -125,7 +125,7 @@ public class GestorBase {
     }
 
     /**
-     *metodo de prueba para crear huespedes por que si
+     * metodo de prueba para crear huespedes por que si
      *
      * @param cantidad indica el numero de huespedes a crear por habitacion.
      * prueba
@@ -139,9 +139,10 @@ public class GestorBase {
     }
 
     /**
-     *metodo de prueba para crear huespedes por que si
-     *y circulex solo es una varianle para ir seleccionando un nombre diferente
-     * del array en cada iteracion
+     * metodo de prueba para crear huespedes por que si y circulex solo es una
+     * varianle para ir seleccionando un nombre diferente del array en cada
+     * iteracion
+     *
      * @param cantidad indica el numero de huespedes a crear por habitacion.
      * @param majes es un arreglo de cadenas con los nombres de los huespedes
      *
@@ -180,6 +181,188 @@ public class GestorBase {
         ArrayList<Administrador> listaAux = new ArrayList<>();
 
         return listaAux;
+    }
+
+    //metodo para escribir las listas universal 
+    public <E> void Escribir(String fichero, ArrayList<E> lista) {
+        switch (fichero) {
+            case "reservacion.txt":
+                this.EscribirReservacion((ArrayList<Reservacion>) lista, fichero);
+                break;
+            case "admins.txt":
+                this.EscribirAdmins((ArrayList<Administrador>) lista, fichero);
+                break;
+            case "habitaciones.txt":
+                this.EscribirHabitaciones((ArrayList<Habitacion>)lista,fichero);
+                break;
+            case "huespedes.txt":
+                this.EscribirHuespedesActuales((ArrayList<Huesped>)lista,fichero);
+                break;
+            case "facturas.txt":
+                this.EscribirFacturas((ArrayList<Factura>)lista,fichero);
+                break;
+        }
+    }
+    //aca estan todos los metodos de escritura solo faltan los de lectura
+    private void EscribirReservacion(ArrayList<Reservacion> lista, String ficheroe) {
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try {
+            fichero = new FileWriter(ficheroe);
+            pw = new PrintWriter(fichero);
+
+            //aca va el verdadero codigo de escritura de DB
+            for (Reservacion re : lista) {
+                pw.println("##");
+                pw.println("hab:");
+                for (Habitacion hab : re.ListaHabitacionR) {
+                    pw.println(hab.indicadorDePiso + hab.numeroHabitacion);
+                }
+                pw.println("end");
+                pw.println("Personas:");
+                for (Persona p : re.ListaPersonas) {
+                    pw.print(p.ToString());
+                }
+                pw.println("end");
+                pw.println(re.NumeroDeHabitacion);
+                pw.println(re.Estado);
+                pw.println(re.Dias);
+                pw.println(re.Id_Reservacion);
+                pw.print(re.PersonaAPagar.ToString());
+                pw.println(re.fechaIni);
+                pw.println(re.tipo);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Nuevamente aprovechamos el finally para 
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero) {
+                    fichero.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+    }
+
+    private void EscribirAdmins(ArrayList<Administrador> arrayList, String ficheroe) {
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try {
+            fichero = new FileWriter(ficheroe);
+            pw = new PrintWriter(fichero);
+            pw.println("##");
+            for(Administrador admin:arrayList)
+            {
+                pw.print(admin.ToString());
+                pw.println(admin.Username);
+                pw.println(admin.getPassword());
+                pw.println("##");
+            }
+            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Nuevamente aprovechamos el finally para 
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero) {
+                    fichero.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+    }
+
+    private void EscribirHabitaciones(ArrayList<Habitacion> arrayList, String ficheroe) {
+         FileWriter fichero = null;
+        PrintWriter pw = null;
+        try
+        {
+            fichero = new FileWriter(ficheroe);
+            pw = new PrintWriter(fichero);
+            for(Habitacion h: arrayList)
+            {
+                pw.println("##");
+                pw.print(h.toString());
+            }
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           try {
+           // Nuevamente aprovechamos el finally para 
+           // asegurarnos que se cierra el fichero.
+           if (null != fichero)
+              fichero.close();
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        }
+    }
+
+    private void EscribirHuespedesActuales(ArrayList<Huesped> arrayList, String ficheroe) {
+         FileWriter fichero = null;
+        PrintWriter pw = null;
+        try
+        {
+            fichero = new FileWriter(ficheroe);
+            pw = new PrintWriter(fichero);
+
+            for(Huesped h:arrayList)
+            {
+                pw.println("##");
+                pw.print(h.ToString());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           try {
+           // Nuevamente aprovechamos el finally para 
+           // asegurarnos que se cierra el fichero.
+           if (null != fichero)
+              fichero.close();
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        }
+    }
+
+    private void EscribirFacturas(ArrayList<Factura> arrayList, String ficheroe) {
+         FileWriter fichero = null;
+        PrintWriter pw = null;
+        try
+        {
+            fichero = new FileWriter(ficheroe);
+            pw = new PrintWriter(fichero);
+            
+            for(Factura f: arrayList)
+            {
+                pw.println("##");
+                pw.print(f.toString());
+            }
+            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           try {
+           // Nuevamente aprovechamos el finally para 
+           // asegurarnos que se cierra el fichero.
+           if (null != fichero)
+              fichero.close();
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        }
     }
 
 }

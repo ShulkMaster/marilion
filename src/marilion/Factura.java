@@ -15,6 +15,19 @@ public class Factura {
     public Reservacion reserv;
     public Huesped cliente;
     public float monto;
-    public Date fecha;
+    public String fecha;
+    
+    
+    @Override
+    public String toString()
+    {
+        String re = reserv.Id_Reservacion + "\n"
+                + cliente.ToString() + "\n"
+                + monto + "\n"
+                + fecha;
+                
+        
+        return re;
+    }
     
 }

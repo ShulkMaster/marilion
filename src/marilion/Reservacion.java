@@ -13,14 +13,15 @@ import java.util.Date;
  * @author gerar
  */
 public class Reservacion {
-    ArrayList<Habitacion> ListaHabitacionR;
-    ArrayList<Persona> ListaPersonas;
-    int NumeroDeHabitacion;
-    EstadoReservacion Estado;
-    int Dias;
-    int Id_Reservacion;
-    Persona PersonaAPagar;
-    Date fechaIni;
+    public ArrayList<Habitacion> ListaHabitacionR;
+    public ArrayList<Persona> ListaPersonas;
+    public int NumeroDeHabitacion;
+    public EstadoReservacion Estado;
+    public int Dias;
+    public int Id_Reservacion;
+    public Persona PersonaAPagar;
+    public String fechaIni;
+    public PaqueteTipo tipo;
     
     
     

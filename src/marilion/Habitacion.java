@@ -29,4 +29,20 @@ public class Habitacion {
         this.listaHuesped = listaHuesped;
     }
     
+    @Override
+    public String toString()
+    {
+        String re;
+        
+        re = indicadorDePiso + "\n" + this.numeroHabitacion + "\n"+ this.habitacionEstado +"\n"+this.Tipo + "/n"
+            + this.piso;
+        re = re + "\n" + "huespedes:";
+        for(Huesped h: listaHuesped)
+        {
+             re = re + "\n" + h.ToString();
+        }
+        
+        return re;
+    }
+    
 }

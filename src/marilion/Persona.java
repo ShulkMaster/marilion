@@ -22,5 +22,10 @@ public class Persona {
     }
     
     
+    public String ToString()
+    {
+        return Nombre+"\n"+Apellido + "\n"+ Dui;
+    }
+    
     
 }
