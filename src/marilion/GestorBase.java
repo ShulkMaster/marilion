@@ -230,6 +230,7 @@ public class GestorBase {
                 pw.print(re.PersonaAPagar.ToString()+ " ");
                 pw.print(re.fechaIni+ " ");
                 pw.print(re.tipo);
+                pw.print("\n");
 
             }
 
