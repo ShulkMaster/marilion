@@ -338,8 +338,7 @@ public class GestorBase {
             pw = new PrintWriter(fichero);
 
             for (Factura f : arrayList) {
-                pw.println("##");
-                pw.print(f.toString());
+                pw.println(f.toString()+"\n");
             }
 
         } catch (Exception e) {
