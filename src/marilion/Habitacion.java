@@ -30,6 +30,9 @@ public class Habitacion {
     }
     
     @Override
+    
+    //Devuelve una linea para la base de dato
+    
     public String toString()
     {
         String re;
