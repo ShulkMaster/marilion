@@ -1,8 +1,13 @@
-a 15 true doble 1 yury:mario:cecil:gerardo
+a 1 1 yury
+b 2 1 raul:Kai
 
-a 15 true doble 1 yury:mario:cecil:gerardo
+c 3 1 betmen
+d 4 1 thanos:maria
+e 5 1 berserker
+f 6 1 zepeto:moreno
+g 7 3 moromoro
+h 8 1 mario:cecil
+i 9 3 gerardo
 
-a 15 true doble 1 yury:mario:cecil:gerardo
-
-a 15 true doble 1 yury:mario:cecil:gerardo
+j 10 3 sepermen:sapito
 

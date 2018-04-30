@@ -18,7 +18,7 @@ public class GestorBase {
 
     //aqui deben ir los archivos de la base de datos, 4 archivos. 
     //Hay que cambiar y agregar la lista de factura
-    public File habitacion;
+    private File archivoTXT;
     private Huesped Db_HuespedesActivos;
     private Huesped Db_ReservaHist;
     private Reservacion reservacion;
@@ -27,7 +27,7 @@ public class GestorBase {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
         CrearHuespedTest(2);
         //si van a mandar una lista separen los objetos con : o algotro caracter que no sea el "." sino da error nullperro >:V
-        crearTestfile("habitacion", "a 15 true doble 1 yury:mario:cecil:gerardo", 4);
+        //crearTestfile("habitacion", "a 15 true doble 1 yury:mario:cecil:gerardo", 4);
         System.out.println("Las habitaciones desde archivo son: ");
         for (int i = 0; i < 4; i++) {
             listaAux.add(creadoHabitacion());
@@ -38,11 +38,10 @@ public class GestorBase {
         for (Habitacion listaAux1 : listaAux) {
             System.out.println("Indicador de piso: " + listaAux1.indicadorDePiso);
             System.out.println("Numero de Habitacion: " + listaAux1.numeroHabitacion);
-            System.out.println("piso: " + listaAux1.piso);
             System.out.println("Huesped name: " + listaAux1.listaHuesped.get(i).Nombre);
             System.out.println("Huesped apellido: " + listaAux1.listaHuesped.get(i).Apellido);
             i++;
-            System.out.println("");
+            System.out.println();
         }
         return listaAux;
     }
@@ -56,11 +55,11 @@ public class GestorBase {
      *
      */
     private void crearTestfile(String filename, String baseRecord, int times) {
-        habitacion = new File(filename + ".txt");
+        archivoTXT = new File(filename + ".txt");
         FileWriter fichero = null;
         PrintWriter pw;
         try {
-            fichero = new FileWriter(habitacion);
+            fichero = new FileWriter(archivoTXT);
             pw = new PrintWriter(fichero);
 
             for (int i = 0; i < times; i++) {
@@ -68,7 +67,7 @@ public class GestorBase {
             }
 
         } catch (IOException e) {
-            System.out.println("El archivo " + habitacion.getName() + "No existe ni pudo ser creado");
+            System.out.println("El archivo " + archivoTXT.getName() + "No existe ni pudo ser creado");
         } finally {
             try {
                 if (null != fichero) {
@@ -93,31 +92,26 @@ public class GestorBase {
         String master, indicadorDePiso, numeroDeHabitacion, piso, huesoed;
         Habitacion haux;
         try {
-            fichero = new FileReader(habitacion);
+            fichero = new FileReader(archivoTXT);
             BufferedReader br = new BufferedReader(fichero);
             master = br.readLine();
             indicadorDePiso = master.split(" ")[0];
             numeroDeHabitacion = master.split(" ")[1];
             piso = master.split(" ")[4];
             huesoed = master.split(" ")[5];
-            haux = new Habitacion(indicadorDePiso.charAt(0),
-                    Integer.parseInt(numeroDeHabitacion),
-                    EstadoHabitacion.Habilitada,
-                    TipoDeHabitacion.Doble,
-                    Integer.parseInt(piso),
+            haux = new Habitacion(indicadorDePiso.charAt(0),Integer.parseInt(numeroDeHabitacion),EstadoHabitacion.Habilitada,CrearHuespedTest(4, huesoed.split(":")));
                     /*en el archivo los nombre de huespedes se separan por :
                     este metodo devuelve el arreglo de cadenas con los diferentes
                     nombres de los huespedes en la Habitacion
                      */
-                    CrearHuespedTest(4, huesoed.split(":")));
             fichero.close();
         } catch (FileNotFoundException ex) {
             System.out.println("No se encontro el archivo Retorno habitacion por defecto");
-            return new Habitacion('a', 20, EstadoHabitacion.Habilitada, TipoDeHabitacion.Doble, 1, CrearHuespedTest(3));
+            return new Habitacion('a', 20, EstadoHabitacion.Habilitada, CrearHuespedTest(3));
         } catch (IOException ex) {
             Logger.getLogger(GestorBase.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("No se pudo leer el buffer, retorno x defectt");
-            return new Habitacion('b', 25, EstadoHabitacion.Habilitada, TipoDeHabitacion.Sencilla, 1, CrearHuespedTest(2));
+            return new Habitacion('b', 25, EstadoHabitacion.Habilitada, CrearHuespedTest(2));
         }
 
         //retorno quemado mientras el metodo esta en desarrollo, trabajando para usted @fovialito
