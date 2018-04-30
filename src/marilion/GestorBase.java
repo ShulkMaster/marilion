@@ -213,24 +213,23 @@ public class GestorBase {
 
             //aca va el verdadero codigo de escritura de DB
             for (Reservacion re : lista) {
-                pw.println("##");
-                pw.println("hab:");
+                
                 for (Habitacion hab : re.ListaHabitacionR) {
-                    pw.println(hab.indicadorDePiso + hab.numeroHabitacion);
+                    pw.print(hab.indicadorDePiso + hab.numeroHabitacion + "$");
                 }
-                pw.println("end");
-                pw.println("Personas:");
+                pw.print(" ");
+                
                 for (Persona p : re.ListaPersonas) {
-                    pw.print(p.ToString());
+                    pw.print(p.ToString() + ":");
                 }
-                pw.println("end");
-                pw.println(re.NumeroDeHabitacion);
-                pw.println(re.Estado);
-                pw.println(re.Dias);
-                pw.println(re.Id_Reservacion);
-                pw.print(re.PersonaAPagar.ToString());
-                pw.println(re.fechaIni);
-                pw.println(re.tipo);
+                pw.print(" ");
+                pw.print(re.NumeroDeHabitacion+ " ");
+                pw.print(re.Estado+ " ");
+                pw.print(re.Dias+ " ");
+                pw.print(re.Id_Reservacion+ " ");
+                pw.print(re.PersonaAPagar.ToString()+ " ");
+                pw.print(re.fechaIni+ " ");
+                pw.print(re.tipo);
 
             }
 
