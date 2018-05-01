@@ -69,6 +69,8 @@ public class Menu {
 
     public void Iniciar() {
         int opcion;
+        String fecha="30#4#2018";
+        int id=0353715;
         while (!Finalizado) {
             this.Opciones(1);
             opcion = Reader.consola.nextInt();
@@ -89,7 +91,7 @@ public class Menu {
                     opcion = Reader.consola.nextInt();
                     switch(opcion){
                         case 1:
-                            this.CambioFecha();
+                            //this.CambioFecha(id,this.DB_Reservas(),fecha);
                             break;
                         case 2:
                             this.cambioPrincipal();
@@ -174,8 +176,9 @@ public class Menu {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void CambioFecha() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private ArrayList<Reservacion> CambioFecha(int id ,ArrayList<Reservacion> listR,String fecha) {
+        listR=gestorHotel.cambioFecha(id, listR, fecha);
+        return listR;
     }
 
     private void cambioPrincipal() {

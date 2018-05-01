@@ -28,5 +28,18 @@ public class GestorHotel {
         this.ListaDeAdmins = base.getListAdministradores();
     }
     
-    
+    public ArrayList<Reservacion> cambioFecha(int id,ArrayList<Reservacion> listR,String fecha){
+        ArrayList<Reservacion> listN=new ArrayList<>();
+        
+        for (Reservacion e : listR){
+            if(id==e.Id_Reservacion){
+                e.fechaIni=fecha;
+                listN.add(e);
+            }
+            else{
+                listN.add(e);
+            }
+        }
+        return listN;
+    }
 }
