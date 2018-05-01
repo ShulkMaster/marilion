@@ -165,7 +165,55 @@ public class Menu {
     }
 
     private void CrearReservacion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int dias;
+        String fecha;
+        ArrayList<Persona> personas = new ArrayList<Persona>();
+        Persona perpagar;
+        
+        while(true)
+        {
+            System.out.println("Ingrese la fecha:");
+            System.out.println("Ingrese el dia:");
+            int dia = Reader.consola.nextInt();
+            System.out.println("Ingrese el mes:");
+            int mes = Reader.consola.nextInt();
+            System.out.println("Ingrese el annio:");
+            int annio = Reader.consola.nextInt();
+            System.out.println("Ingrese los dias a quedarse ");
+            dias = Reader.consola.nextInt();
+            //algun metodo que defina si puede hacer la reservacion y si hay habitaciones disponibles
+            if(true)//aquiva el metodo)
+            {
+                fecha = dia +"/"+ mes + "/"+annio;
+                break;
+            }
+        }
+        
+        System.out.println("Ingrese acompanniantes:");
+        while(true)
+        {
+            System.out.println("Ingrese el nombre: ");
+            String auxnombre = Reader.consola.next();
+            System.out.println("Ingrese el apellido: ");
+            String auxapellido = Reader.consola.next();
+            System.out.println("Ingrese el dui: ");
+            String auxdui = Reader.consola.next();
+            Persona aux = new Persona(auxnombre,auxapellido,auxdui);
+            personas.add(aux);
+            System.out.println("end 1");
+            if(Reader.consola.nextInt() == 1)
+            {
+                break;
+            }
+        }
+        
+        System.out.println("Ingrese el nombre: ");
+            String auxnombre = Reader.consola.next();
+            System.out.println("Ingrese el apellido: ");
+            String auxapellido = Reader.consola.next();
+            System.out.println("Ingrese el dui: ");
+            String auxdui = Reader.consola.next();
+        
     }
 
     private void PagoReservacion() {
@@ -240,7 +288,7 @@ public class Menu {
     }
 
     private void DB_HuespedesActuales() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        archivador.printAdmin();
     }
 
     private void DB_Habitaciones() {
