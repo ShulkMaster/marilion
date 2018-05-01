@@ -6,11 +6,13 @@
 package marilion;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
  * @author gerar
  */
+
 public class GestorHotel {
     ArrayList<Habitacion> ListaDeHabitacion;
     ArrayList<Huesped> ListaDeHuespedes;
@@ -28,10 +30,16 @@ public class GestorHotel {
         this.ListaDeAdmins = base.getListAdministradores();
     }
     
-    public ArrayList<Reservacion> cambioFecha(int id,ArrayList<Reservacion> listR,String fecha){
-        ArrayList<Reservacion> listN=new ArrayList<>();
+    public void cambioFecha(){
+        ArrayList<Reservacion> listN = new ArrayList<>();
+        Scanner leer = new Scanner(System.in);
+        String fecha;
+        listN=base.getListReservacion();
+        int id = leer.nextInt();
+        fecha = leer.nextLine();
         
-        for (Reservacion e : listR){
+        
+        for (Reservacion e : listN){
             if(id==e.Id_reservacion){
                 e.fechaIni=fecha;
                 listN.add(e);
@@ -40,6 +48,7 @@ public class GestorHotel {
                 listN.add(e);
             }
         }
-        return listN;
+        base.Escribir("reservacion.txt", listN);
+
     }
 }
