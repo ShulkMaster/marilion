@@ -114,8 +114,8 @@ public class GestorBase {
         return new Factura(Id_fact, client2, monto2, fecha);
 
     }
-    
-    private Reservacion creadoReservacion(String master){
+
+    private Reservacion creadoReservacion(String master) {
         int reserva, factura, huesped;
         String Id_Habitacion;
         reserva = Integer.parseInt(master.split(" ")[0]);
@@ -123,6 +123,16 @@ public class GestorBase {
         huesped = Integer.parseInt(master.split(" ")[2]);
         Id_Habitacion = master.split(" ")[3];
         return new Reservacion(reserva, factura, huesped, Id_Habitacion);
+    }
+    
+    private Administrador creadoAdmin(String master){
+        String username, password, nombre, apellido,dui;
+        username = master.split(" ")[0];
+        password = master.split(" ")[1];
+        nombre = master.split(" ")[2];
+        apellido = master.split(" ")[3];
+        dui = master.split(" ")[4];
+        return new Administrador(username, password, nombre, apellido, dui);
     }
 
     /**
@@ -171,12 +181,13 @@ public class GestorBase {
         for (Factura auxF : getListFactura()) {
             System.out.println("<-------------- Factura " + contador + "-------------------->");
             System.out.println("ID factura: " + auxF.Id_factura);
-            System.out.println("Cliente: " + auxF.cliente.Nombre+ " "+ auxF.cliente.Apellido);
+            System.out.println("Cliente: " + auxF.cliente.Nombre + " " + auxF.cliente.Apellido);
             System.out.println("Monto a pagar: " + auxF.monto);
-            System.out.println("Fecha: "+ auxF.fecha);
+            System.out.println("Fecha: " + auxF.fecha);
             contador++;
         }
     }
+
     public void printListReservas() {
         int contador = 1;
         for (Reservacion auxF : getListReservacion()) {
@@ -184,6 +195,17 @@ public class GestorBase {
             System.out.println("ID reservacion: " + auxF.Id_reservacion);
             System.out.println("ID Huespedes: " + auxF.Id_huespedes);
             System.out.println("ID habitacion: " + auxF.Id_habitacion);
+            contador++;
+        }
+    }
+    public void printListAdmin() {
+        int contador = 1;
+        for (Administrador auxF : getListAdministradores()) {
+            System.out.println("<-------------- Administrador " + contador + "-------------------->");
+            System.out.println("Username: " + auxF.Username);
+            System.out.println("password: " + auxF.getPassword());
+            System.out.println("Nombre: " + auxF.Nombre);
+            System.out.println("Apellido: " + auxF.Apellido);
             contador++;
         }
     }
@@ -240,14 +262,18 @@ public class GestorBase {
         return listaAux;
     }
 
-    public ArrayList<Huesped> getListHuespedesActivos() {
-        ArrayList<Huesped> listaAux = new ArrayList<>();
-
+    public ArrayList<Administrador> getListAdministradores() {
+        ArrayList<Administrador> listaAux = new ArrayList<>();
+        System.out.println("Las administradores obtenidos de archivo son : ");
+        for (String registro : getFileContent("adminTEST")) {
+            Administrador currenAdmin = creadoAdmin(registro);
+            listaAux.add(currenAdmin);
+        }
         return listaAux;
     }
 
-    public ArrayList<Administrador> getListAdministradores() {
-        ArrayList<Administrador> listaAux = new ArrayList<>();
+    public ArrayList<Huesped> getListHuespedesActivos() {
+        ArrayList<Huesped> listaAux = new ArrayList<>();
 
         return listaAux;
     }
