@@ -31,6 +31,27 @@ public class Reservacion {
                Id_huespedes+" "+
                Id_habitacion;
     }
+
+    public void setDias(int dias) {
+        this.dias = dias;
+    }
+
+    public void setId_habitacion(String Id_habitacion) {
+        this.Id_habitacion = Id_habitacion;
+    }
+
+    public void setEstado(EstadoReservacion Estado) {
+        this.Estado = Estado;
+    }
+
+    public void setFechaIni(String fechaIni) {
+        this.fechaIni = fechaIni;
+    }
+
+    public void setTipo(PaqueteTipo tipo) {
+        this.tipo = tipo;
+    }
+    
     
     
     
