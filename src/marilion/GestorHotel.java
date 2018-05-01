@@ -32,7 +32,7 @@ public class GestorHotel {
         ArrayList<Reservacion> listN=new ArrayList<>();
         
         for (Reservacion e : listR){
-            if(id==e.Id_Reservacion){
+            if(id==e.Id_reservacion){
                 e.fechaIni=fecha;
                 listN.add(e);
             }
