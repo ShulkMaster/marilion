@@ -23,6 +23,16 @@ public class Reservacion {
         this.Id_huespedes = Id_huespedes;
         this.Id_habitacion = Id_habitacion;
     }
+
+    @Override
+    public String toString() {
+        return Id_reservacion+" "+
+               Id_factura+" "+
+               Id_huespedes+" "+
+               Id_habitacion;
+    }
+    
+    
     
     
 }

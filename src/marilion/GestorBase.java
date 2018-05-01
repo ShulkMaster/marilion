@@ -16,8 +16,7 @@ import java.util.logging.Logger;
  */
 public class GestorBase {
 
-    //aqui deben ir los archivos de la base de datos, 4 archivos. 
-    //Hay que cambiar y agregar la lista de factura
+    //se cambiaro los 4 archivos por uno generico que lo carga 1 a la vez
     private File archivoTXT;
 
     private ArrayList<String> getFileContent(String filename) {
@@ -124,9 +123,9 @@ public class GestorBase {
         Id_Habitacion = master.split(" ")[3];
         return new Reservacion(reserva, factura, huesped, Id_Habitacion);
     }
-    
-    private Administrador creadoAdmin(String master){
-        String username, password, nombre, apellido,dui;
+
+    private Administrador creadoAdmin(String master) {
+        String username, password, nombre, apellido, dui;
         username = master.split(" ")[0];
         password = master.split(" ")[1];
         nombre = master.split(" ")[2];
@@ -197,7 +196,9 @@ public class GestorBase {
             System.out.println("ID habitacion: " + auxF.Id_habitacion);
             contador++;
         }
+        EscribirReservacion(getListReservacion(),"reservacion.txt");
     }
+
     public void printListAdmin() {
         int contador = 1;
         for (Administrador auxF : getListAdministradores()) {
@@ -274,7 +275,6 @@ public class GestorBase {
 
     public ArrayList<Huesped> getListHuespedesActivos() {
         ArrayList<Huesped> listaAux = new ArrayList<>();
-
         return listaAux;
     }
 
@@ -299,7 +299,7 @@ public class GestorBase {
         }
     }
 
-    //aca estan todos los metodos de escritura solo faltan los de lectura
+    //aca estan todos los metodos de escritura
     private void EscribirReservacion(ArrayList<Reservacion> lista, String ficheroe) {
         FileWriter fichero = null;
         PrintWriter pw = null;
@@ -309,16 +309,7 @@ public class GestorBase {
 
             //aca va el verdadero codigo de escritura de DB
             for (Reservacion re : lista) {
-
-                pw.print(" ");
-
-                pw.print(" ");
-                pw.print(re.Estado + " ");
-                pw.print(re.PersonaAPagar.ToString() + " ");
-                pw.print(re.fechaIni + " ");
-                pw.print(re.tipo);
-                pw.print("\n");
-
+                pw.println(re.toString());
             }
 
         } catch (Exception e) {
@@ -372,7 +363,7 @@ public class GestorBase {
             fichero = new FileWriter(ficheroe);
             pw = new PrintWriter(fichero);
             for (Habitacion h : arrayList) {
-                pw.println(h.toString() + "\n");
+                pw.println(h.toString());
             }
 
         } catch (Exception e) {

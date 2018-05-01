@@ -35,12 +35,32 @@ public class Habitacion {
     public String toString() {
         String re;
 
-        re = indicadorDePiso + " " + numeroHabitacion + " " + habitacionEstado + " ";
+        re = indicadorDePiso + " " + numeroHabitacion + " " + paserEstadoH(habitacionEstado) + " ";
         for (Huesped h : listaHuesped) {
             re = re + h.ToString();
         }
-        
+
         return re;
+    }
+
+    private String paserEstadoH(EstadoHabitacion estate) {
+        String marker;
+        switch (estate) {
+            case Habilitada:
+                marker = "1";
+                break;
+            case Deshabilitada:
+                marker = "2";
+                break;
+            case EnUso:
+                marker = "3";
+                break;
+            default:
+                marker = "2";
+                System.err.println("Error desconocido: Estado mutante");
+                break;
+        }
+        return marker;
     }
 
 }
