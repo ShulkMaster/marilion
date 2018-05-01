@@ -182,9 +182,13 @@ public class Menu {
             System.out.println("Ingrese los dias a quedarse ");
             dias = Reader.consola.nextInt();
             //algun metodo que defina si puede hacer la reservacion y si hay habitaciones disponibles
+            //aqui adentro voy a crear las habitaciones cuando haya metodo que devvuelva habitaciones
+            System.out.println("Ingrese id habitaciones:");
+            String habitaciones_ids = Reader.consola.next();
             if(true)//aquiva el metodo)
             {
                 fecha = dia +"/"+ mes + "/"+annio;
+                
                 break;
             }
         }
