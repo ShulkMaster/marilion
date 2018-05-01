@@ -1,7 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+        System.out.println("\033[30mEste texto es Negro");
+        System.out.println("\033[31mEste texto es Rojo");
+        System.out.println("\033[32mEste texto es Verde");
+        System.out.println("\033[33mEste texto es Amarillo");
+        System.out.println("\033[34mEste texto es Azul");
+        System.out.println("\033[35mEste texto es Magenta");
+        System.out.println("\033[36mEste texto es Cyan");
+        System.out.println("\033[37mEste texto es Blanco");
+        System.out.println((char)27 + "[34;43mEjemplo de texto azul y fondo amarillo");
  */
 package marilion;
 
@@ -173,6 +179,7 @@ public class GestorBase {
             }
             contador++;
         }
+        getListHabitacionesActivas();
     }
 
     public void printListFacturas() {
@@ -196,7 +203,7 @@ public class GestorBase {
             System.out.println("ID habitacion: " + auxF.Id_habitacion);
             contador++;
         }
-        EscribirReservacion(getListReservacion(),"reservacion.txt");
+        EscribirReservacion(getListReservacion(), "reservacion.txt");
     }
 
     public void printListAdmin() {
@@ -275,6 +282,18 @@ public class GestorBase {
 
     public ArrayList<Huesped> getListHuespedesActivos() {
         ArrayList<Huesped> listaAux = new ArrayList<>();
+        return listaAux;
+    }
+
+    public ArrayList<Habitacion> getListHabitacionesActivas() {
+         ArrayList<Habitacion> listaAux = new ArrayList<>();
+        for (Habitacion auxH : getListHabitacion()) {
+            if(auxH.habitacionEstado.equals(EstadoHabitacion.Habilitada)){
+                System.out.println("\033[32mHabitacion "+ auxH.indicadorDePiso+auxH.numeroHabitacion+ " esta habilitada");
+                listaAux.add(auxH);
+            }
+
+        }
         return listaAux;
     }
 
