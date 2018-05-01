@@ -175,8 +175,14 @@ public class Menu {
     private void CancelarReservacion() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    private void CambioFecha()
+    {
+        //aca va el verdadero cambio de fecha
+        
+    }
 
-    private ArrayList<Reservacion> CambioFecha(int id ,ArrayList<Reservacion> listR,String fecha) {
+    private ArrayList<Reservacion> CambioFechaAlgo(int id ,ArrayList<Reservacion> listR,String fecha) {
         listR=gestorHotel.cambioFecha(id, listR, fecha);
         return listR;
     }
