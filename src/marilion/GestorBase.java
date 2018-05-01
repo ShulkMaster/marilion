@@ -7,7 +7,6 @@ package marilion;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,28 +23,6 @@ public class GestorBase {
     private Huesped Db_ReservaHist;
     private Reservacion reservacion;
 
-    public ArrayList<Habitacion> GetListHabitacion() {
-        ArrayList<Habitacion> listaAux = new ArrayList<>();
-        System.out.println("Las habitaciones leidas desde archivo son: ");
-        for (String registro : getFileContent("habitacion")) {
-            Habitacion currenthabitacion = creadoHabitacion(registro);
-            listaAux.add(currenthabitacion);
-        }
-        return listaAux;
-    }
-    
-    public void printListHabitacion(){
-        int contador = 1;
-        for(Habitacion auxH : GetListHabitacion()){
-            System.out.println("<-------------- Habitacion "+contador+"-------------------->");
-            System.out.println("indicador de piso: "+auxH.indicadorDePiso);
-            System.out.println("estado de habitacion: "+auxH.habitacionEstado);
-            System.out.println("numero de habitacion: "+auxH.numeroHabitacion);
-            System.out.println("lista de huespedes"+auxH.listaHuesped);
-            contador++;
-        }
-    }
-
     private ArrayList<String> getFileContent(String filename) {
         ArrayList<String> filecontent = new ArrayList<>();
         String cadenaAux;
@@ -58,46 +35,33 @@ public class GestorBase {
                 System.out.println(cadenaAux);
                 filecontent.add(cadenaAux);
             }
+            lectorLines.close();
+            lectorArchivo.close();
+            archivoTXT = null;
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GestorBase.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("No se encontro el archivo " + archivoTXT.getName());
         } catch (IOException ex) {
             Logger.getLogger(GestorBase.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("No se puede leer el archivo " + archivoTXT.getName());
         }
         return filecontent;
     }
 
     /**
-     * este metodo crea un archivo de prueva para sus metodos get
+     * este metodo crea personas con el formato estandar leido desde archivo
      *
-     * @param baseRecord es una plantilla para crear records falsos a modo de
-     * prueba en sus metodos
-     * @param times indica el numero de veces que se creara un registro
-     *
+     * @param master es la cadena maestra que contiene una linea del archivo de
+     * texto en que se guarda la informacion, ese registro contiene toda la
+     * informacion necesaria para recontruir una habitacion en memoria RAM
+     * @return Persona
      */
-    private void crearTestfile(String filename, String baseRecord, int times) {
-        archivoTXT = new File(filename + ".txt");
-        FileWriter fichero = null;
-        PrintWriter pw;
-        try {
-            fichero = new FileWriter(archivoTXT);
-            pw = new PrintWriter(fichero);
-
-            for (int i = 0; i < times; i++) {
-                pw.println(baseRecord + "\n");
-            }
-
-        } catch (IOException e) {
-            System.err.println("El archivo " + archivoTXT.getName() + "No existe ni pudo ser creado");
-        } finally {
-            try {
-                if (null != fichero) {
-                    fichero.close();
-                }
-            } catch (IOException e2) {
-                System.err.println("FileWritter not nut but not able to close");
-            }
-        }
-
+    private Persona creadoPersona(String master) {
+        String nombre, apellido, dui;
+        nombre = master.split("#")[0];
+        apellido = master.split("#")[1];
+        dui = master.split("#")[2];
+        return new Persona(nombre, apellido, dui);
     }
 
     /**
@@ -111,25 +75,55 @@ public class GestorBase {
      * @return Habitacion
      */
     private Habitacion creadoHabitacion(String master) {
-        String indicadorDePiso, numeroDeHabitacion, huespedes;
+        char indicadorDePiso;
+        int numeroDeHabitacion;
+        String[] huespedes;
         EstadoHabitacion estado;
-        Habitacion haux;
-        indicadorDePiso = master.split(" ")[0];
-        numeroDeHabitacion = master.split(" ")[1];
+        indicadorDePiso = master.split(" ")[0].charAt(0);
+        numeroDeHabitacion = Integer.parseInt(master.split(" ")[1]);
         estado = parseState(master.split(" ")[2]);
-        huespedes = master.split(" ")[3];
-        System.out.println(huespedes);
+        huespedes = master.split(" ")[3].split(":");
         /*en el archivo los nombre de huespedes se separan por :
           este metodo devuelve el arreglo de cadenas con los diferentes
           nombres de los huespedes en la Habitacion
          */
-        System.out.println(Arrays.toString(huespedes.split(":")));
-        haux = new Habitacion(indicadorDePiso.charAt(0), Integer.parseInt(numeroDeHabitacion), estado, CrearHuesped(huespedes.split(":")));
-        //retorno quemado mientras el metodo esta en desarrollo, trabajando para usted @fovialito
-        return haux;
+        return new Habitacion(indicadorDePiso, numeroDeHabitacion, estado, crearHuesped(huespedes));
 
     }
 
+    /**
+     * este metodo crea una factura para probar el gestor de bases por que a
+     * gerar se le ocurrio que seria buena idea tener una ArrayList dentro de un
+     * arraylist dentro del objeto y se quejan de mi menu :v
+     *
+     * @param master es la cadena maestra que contiene una linea del archivo de
+     * texto en que se guarda la informacion, ese registro contiene toda la
+     * informacion necesaria para recontruir una factura en memoria RAM
+     * @return factura
+     */
+    private Factura creadoFactura(String master) {
+        int idReserv;
+        float monto2;
+        Persona client2;
+        String fecha;
+        idReserv = Integer.parseInt(master.split(" ")[0]);
+        client2 = creadoPersona(master.split(" ")[1]);
+        monto2 = Float.parseFloat(master.split(" ")[2]);
+        fecha = master.split(" ")[3];
+        /*en el archivo los atributos de personas clientes se separan por #
+          este metodo devuelve el arreglo de cadenas con los diferentes
+          atributos del cliente en la reservacion
+         */
+        return new Factura(idReserv, client2, monto2, fecha);
+
+    }
+
+    /**
+     * este metodo convierte datos tipo String a EstadoHabitacion
+     *
+     * @param value cadena con el valor de 1, 2 o 3
+     * @return EstadoHabitacion abilitada, deshabilitada o en uso
+     */
     private EstadoHabitacion parseState(String value) {
         EstadoHabitacion aux;
         switch (Integer.parseInt(value)) {
@@ -150,8 +144,35 @@ public class GestorBase {
         return aux;
     }
 
+    public void printListHabitacion() {
+        int contador = 1;
+        for (Habitacion auxH : getListHabitacion()) {
+            System.out.println("<-------------- Habitacion " + contador + "-------------------->");
+            System.out.println("indicador de piso: " + auxH.indicadorDePiso);
+            System.out.println("estado de habitacion: " + auxH.habitacionEstado);
+            System.out.println("numero de habitacion: " + auxH.numeroHabitacion);
+            System.out.println("lista de huespedes");
+            for (Huesped auxhues : auxH.listaHuesped) {
+                System.out.println("\t" + auxhues.Nombre + " " + auxhues.Apellido);
+            }
+            contador++;
+        }
+    }
+
+    public void printListFacturas() {
+        int contador = 1;
+        for (Factura auxF : getListFactura()) {
+            System.out.println("<-------------- Factura " + contador + "-------------------->");
+            System.out.println("ID factura: " + auxF.reserv);
+            System.out.println("Cliente: " + auxF.cliente.Nombre+ " "+ auxF.cliente.Apellido);
+            System.out.println("Monto a pagar: " + auxF.monto);
+            System.out.println("Fecha: "+ auxF.fecha);
+            contador++;
+        }
+    }
+
     /**
-     * metodo de prueba para crear huespedes
+     * metodo crear huespedes
      *
      * @param huespedes sera un arreglo de cadenas y cada cadena lleva la
      * informacion nesesaria para poder crear un huesped, es decir Nombre,
@@ -159,9 +180,10 @@ public class GestorBase {
      * @return Un grupo de huespedes basadoes en el arreglo que se pasa como
      * parametro
      */
-    private ArrayList<Huesped> CrearHuesped(String[] huespedes) {
+    private ArrayList<Huesped> crearHuesped(String[] huespedes) {
         ArrayList<Huesped> listaAux = new ArrayList<>();
         String name, lastname, dui;
+        //en el archito de texto los atributos de cada huesped se separan con #
         for (String huespedIndex : huespedes) {
             name = huespedIndex.split("#")[0];
             lastname = huespedIndex.split("#")[1];
@@ -171,25 +193,39 @@ public class GestorBase {
         return listaAux;
     }
 
-    public ArrayList<Factura> GetListFactura() {
-        ArrayList<Factura> listaAux = new ArrayList<>();
-
+    public ArrayList<Habitacion> getListHabitacion() {
+        ArrayList<Habitacion> listaAux = new ArrayList<>();
+        System.out.println("Las habitaciones leidas desde archivo son: ");
+        for (String registro : getFileContent("habitacionTEST")) {
+            Habitacion currenthabitacion = creadoHabitacion(registro);
+            listaAux.add(currenthabitacion);
+        }
         return listaAux;
     }
 
-    public ArrayList<Reservacion> GetListReservacion() {
+    public ArrayList<Factura> getListFactura() {
+        ArrayList<Factura> listaAux = new ArrayList<>();
+        System.out.println("Las facturas leidas desde archivo son: ");
+        for (String registro : getFileContent("facturaTEST")) {
+            Factura currenFactura = creadoFactura(registro);
+            listaAux.add(currenFactura);
+        }
+        return listaAux;
+    }
+
+    public ArrayList<Reservacion> getListReservacion() {
         ArrayList<Reservacion> listaAux = new ArrayList<>();
 
         return listaAux;
     }
 
-    public ArrayList<Huesped> GetListHuespedesActivos() {
+    public ArrayList<Huesped> getListHuespedesActivos() {
         ArrayList<Huesped> listaAux = new ArrayList<>();
 
         return listaAux;
     }
 
-    public ArrayList<Administrador> GetListAdministradores() {
+    public ArrayList<Administrador> getListAdministradores() {
         ArrayList<Administrador> listaAux = new ArrayList<>();
 
         return listaAux;

@@ -223,7 +223,7 @@ public class Menu {
     }
 
     private void DB_Facturas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        archivador.printListFacturas();
     }
 
     private void DB_Reservas() {

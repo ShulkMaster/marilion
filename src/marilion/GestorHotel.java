@@ -21,11 +21,11 @@ public class GestorHotel {
     GestorBase base;
 
     public GestorHotel() {
-        this.ListaDeHabitacion = base.GetListHabitacion();
-        this.ListaDeHuespedes = base.GetListHuespedesActivos();
-        this.ListaDeReservas = base.GetListReservacion();
-        this.ListaDeFactura = base.GetListFactura();
-        this.ListaDeAdmins = base.GetListAdministradores();
+        this.ListaDeHabitacion = base.getListHabitacion();
+        this.ListaDeHuespedes = base.getListHuespedesActivos();
+        this.ListaDeReservas = base.getListReservacion();
+        this.ListaDeFactura = base.getListFactura();
+        this.ListaDeAdmins = base.getListAdministradores();
     }
     
     
