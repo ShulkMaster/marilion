@@ -207,44 +207,98 @@ public class Menu {
             }
         }
         
-        System.out.println("Ingrese el nombre: ");
+        System.out.println("Ingrese el nombre de la persona a pagar: ");
+            String nombrepagar = Reader.consola.next();
+            System.out.println("Ingrese el apellido: ");
+            String apellidopagar = Reader.consola.next();
+            System.out.println("Ingrese el dui: ");
+            String duipagar = Reader.consola.next();
+        
+    }
+
+    private void PagoReservacion() {
+        System.out.println("Ingrese el dui de la persona a pagar:");
+        String duiPago = Reader.consola.next();
+        //metodo del gestor de compra
+    }
+
+    private void CancelarReservacion() {
+        System.out.println("Ingrese el dui de la persona a pagar:");
+        String duiPago = Reader.consola.next();
+        //metodo del gestor de hotel
+    }
+    
+    private void CambioFecha()
+    {
+        System.out.println("Ingrese el dui de la persona a pagar:");
+        String duiPago = Reader.consola.next();
+        //aqui puede retornar una reservacion
+        while(true)
+        {
+             System.out.println("Ingrese la fecha:");
+            System.out.println("Ingrese el dia:");
+            int dia = Reader.consola.nextInt();
+            System.out.println("Ingrese el mes:");
+            int mes = Reader.consola.nextInt();
+            System.out.println("Ingrese el annio:");
+            int annio = Reader.consola.nextInt();
+            System.out.println("Ingrese los dias a quedarse ");
+            int dias = Reader.consola.nextInt();
+            //algun metodo que defina si puede hacer la reservacion y si hay habitaciones disponibles
+            if(true)//aquiva el metodo)
+            {
+                String fecha = dia +"/"+ mes + "/"+annio;
+                break;
+            }
+        }
+        //aca va el verdadero cambio de fecha
+        
+    }
+
+   /* private ArrayList<Reservacion> CambioFechaAlgo(int id ,ArrayList<Reservacion> listR,String fecha) {
+        listR=gestorHotel.cambioFecha(id, listR, fecha);
+        return listR;
+    }*/
+
+    private void cambioPrincipal() {
+        System.out.println("Ingrese el dui de la persona a pagar:");
+        String duiPago = Reader.consola.next();
+        
+        System.out.println("Ingrese el nombre del nuevo titular: ");
             String auxnombre = Reader.consola.next();
             System.out.println("Ingrese el apellido: ");
             String auxapellido = Reader.consola.next();
             System.out.println("Ingrese el dui: ");
             String auxdui = Reader.consola.next();
-        
-    }
-
-    private void PagoReservacion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void CancelarReservacion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    private void CambioFecha()
-    {
-        //aca va el verdadero cambio de fecha
-        
-    }
-
-    private ArrayList<Reservacion> CambioFechaAlgo(int id ,ArrayList<Reservacion> listR,String fecha) {
-        listR=gestorHotel.cambioFecha(id, listR, fecha);
-        return listR;
-    }
-
-    private void cambioPrincipal() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            Persona aux = new Persona(auxnombre,auxapellido,auxdui);
+        //aca el metodo del gestor que reciba esto y cambie todo en el gestor
     }
 
     private void CambioPaquete() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Ingrese el dui de la persona a pagar:");
+        String duiPago = Reader.consola.next();
+        System.out.println("Ingrese 1 basico,2 premium,3 ninguno");
+        int opcion = Reader.consola.nextInt();
+        switch(opcion)
+        {
+            case 1:
+                //aca va el cambio dentro de la reserva del tipo o el llamado a gestor de hotel
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                break;
+        }
     }
 
     private void CambioDias() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Ingrese el dui de la persona a pagar:");
+        String duiPago = Reader.consola.next();
+        
+        System.out.println("Ingrese la nueva cantidad de dias ");
+        int nuevosdias = Reader.consola.nextInt();
+        //aca metodo que verifique y notifique si se hizo el cambio
     }
 
     private void CambioDeAcompanniantes() {
@@ -252,31 +306,47 @@ public class Menu {
     }
 
     private void VerListaDeReservaciones() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        archivador.printListReservas();
     }
 
     private void EntregarHabitacion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Ingrese el dui de la persona a pagar:");
+        String duiPago = Reader.consola.next();
+        //aca el metodo del gestor de hotel si se puede efectuar la entrega o no
     }
 
     private void RetirarHabitacion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Ingrese el dui de la persona a pagar:");
+        String duiPago = Reader.consola.next();
+        //aca el metodo del gestor de hotel para retirar habitacion y los huespedes que estaban en ese reserva
     }
 
     private void habilitarHabitacion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //metodo para ver todas las habitaciones deshabilitadas;
+        System.out.println("Ingrese el id de la habitacion eje b3");
+        String habiHabilitar = Reader.consola.next();
+        // aca el metodo donde envie esa string y se cambie el estado de la habitacion
     }
 
     private void deshabilitarHabitacion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //metodo para ver todas las habitaciones habilitadas;
+        System.out.println("Ingrese el id de la habitacion eje b3");
+        String habideshabilitar = Reader.consola.next();
+        // aca el metodo donde envie esa string y se cambie el estado de la habitacion
     }
 
     private void HabilitarPiso() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       //metodo para ver todas los pisos deshabilitados
+        System.out.println("Ingrese el numero del piso");
+        int pisohabilitar = Reader.consola.nextInt();
+        // aca el metodo donde envie el int y el gestor se encarga de todo
     }
 
     private void deshaiblitarPiso() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //metodo para ver todos los pisos haabilitados
+        System.out.println("Ingrese el numero del piso");
+        int pisodeshabilitar = Reader.consola.nextInt();
+        // aca el metodo donde envie el int y el gestor se encarga de todo
     }
 
     private void DB_Facturas() {
