@@ -41,7 +41,7 @@ public class GestorHotel {
             }
         }
         base.Escribir("reservacion.txt", ListaDeReservas);
-
+        this.Actualizar();
     }
     
     public boolean FechaYhabitacion(String fecha,int id){
@@ -64,13 +64,13 @@ public class GestorHotel {
     public void CancelaReserva(String dui){
         ArrayList<Reservacion> listN = new ArrayList<>();
         for (Reservacion e : ListaDeReservas){
-            //hacer metodo que retorne el dui para poder dejarlo en privado siempre
             if(!dui.equals(e.PersonaAPagar.duiR())){
                 listN.add(e);
             }
         }
+        ListaDeReservas=listN;
         base.Escribir("reservacion.txt", listN);
-        
+        this.Actualizar();
     }
     
     public void cambioPack(String dui,PaqueteTipo tipo){
@@ -83,20 +83,36 @@ public class GestorHotel {
         }
         
         base.Escribir("reservacion.txt", ListaDeReservas);
-        
+        this.Actualizar();
     }
     
     public void cambioHabitacion(String dui,String habitacion){
-
-        for (Reservacion e : ListaDeReservas){
-            //hacer metodo que retorne el dui para poder dejarlo en privado siempre
-            if(dui.equals(e.PersonaAPagar.duiR())/*un metodo que diga que la habitacion no este en usoo deshabilitada*/){
-                e.Id_habitacion=habitacion;
+        
+        for(Habitacion p : ListaDeHabitacion){
+            for (Reservacion e : ListaDeReservas){
+                if(dui.equals(e.PersonaAPagar.duiR())&& p.habitacionEstado.equals(1)==true){
+                    e.Id_habitacion=habitacion;
+                }
             }
         }
-        
         base.Escribir("reservacion.txt", ListaDeReservas);
-        
+        this.Actualizar();
     }
     
+    public void Actualizar(){
+        this.ListaDeHabitacion = base.getListHabitacion();
+        this.ListaDeHuespedes = base.getListHuespedesActivos();
+        this.ListaDeReservas = base.getListReservacion();
+        this.ListaDeFactura = base.getListFactura();
+        this.ListaDeAdmins = base.getListAdministradores();
+    }
+    public void mostrarHabitacion(){
+
+        for(Habitacion p : ListaDeHabitacion){
+                if(p.habitacionEstado.equals(1)==true){
+                    System.out.println(p.toStringM());
+                }
+        }
+
+    }
 }

@@ -62,5 +62,12 @@ public class Habitacion {
         }
         return marker;
     }
+    
+    public String toStringM() {
+        String re;
 
+        re = indicadorDePiso + "\n" + numeroHabitacion + "\n" ;
+        
+        return re;
+    }
 }
