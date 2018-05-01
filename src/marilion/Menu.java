@@ -219,7 +219,9 @@ public class Menu {
     private void PagoReservacion() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
-        //metodo del gestor de compra
+        //metodo del gestor de compra, el gestor de compra crea factura necesito que me retornes costo segun reserva y la factura impresa
+        // en pantalla
+        
     }
 
     private void CancelarReservacion() {
@@ -232,7 +234,7 @@ public class Menu {
     {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
-        //aqui puede retornar una reservacion
+        //metodo para saber si existe la reservacion
         while(true)
         {
              System.out.println("Ingrese la fecha:");
@@ -263,7 +265,7 @@ public class Menu {
     private void cambioPrincipal() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
-        
+        // metodo para saber si existe la reserva
         System.out.println("Ingrese el nombre del nuevo titular: ");
             String auxnombre = Reader.consola.next();
             System.out.println("Ingrese el apellido: ");
@@ -277,6 +279,7 @@ public class Menu {
     private void CambioPaquete() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
+        // metodo para saber si existe la reserva
         System.out.println("Ingrese 1 basico,2 premium,3 ninguno");
         int opcion = Reader.consola.nextInt();
         switch(opcion)
@@ -302,7 +305,30 @@ public class Menu {
     }
 
     private void CambioDeAcompanniantes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       System.out.println("Ingrese el dui de la persona a pagar:");
+        String duiPago = Reader.consola.next();
+        // metodo para saber i existe la reserva
+        
+        ArrayList<Persona> personas = new ArrayList<Persona>();
+        
+        System.out.println("Ingrese acompanniantes:");
+        while(true)
+        {
+            System.out.println("Ingrese el nombre: ");
+            String auxnombre = Reader.consola.next();
+            System.out.println("Ingrese el apellido: ");
+            String auxapellido = Reader.consola.next();
+            System.out.println("Ingrese el dui: ");
+            String auxdui = Reader.consola.next();
+            Persona aux = new Persona(auxnombre,auxapellido,auxdui);
+            personas.add(aux);
+            System.out.println("end 1");
+            if(Reader.consola.nextInt() == 1)
+            {
+                break;
+            }
+        }
+        // metodo para mandar la lista y que el gestor de hotel los cambie 
     }
 
     private void VerListaDeReservaciones() {
