@@ -10,7 +10,7 @@ package marilion;
  * @author yury_
  */
 public class Persona {
-    
+
     public String Nombre;
     public String Apellido;
     private String Dui;
@@ -20,7 +20,16 @@ public class Persona {
         this.Apellido = Apellido;
         this.Dui = Dui;
     }
-    
-    
-    
+
+    public Persona(String Nombre, String Apellido) {
+        this.Nombre = Nombre;
+        this.Apellido = Apellido;
+    }
+
+    public String ToString() {
+        return Nombre + "#" + Apellido + "#" + Dui + ":";
+    }
+    public String duiR(){
+        return Dui;
+    }
 }

@@ -9,24 +9,65 @@ package marilion;
  *
  * @author mcdre
  */
-
 import java.util.ArrayList;
 
 public class Habitacion {
+
     public char indicadorDePiso;
     public int numeroHabitacion;
     public EstadoHabitacion habitacionEstado;
-    public TipoDeHabitacion Tipo;
-    public int piso;
-    public ArrayList<Huesped> listaHuesped; 
+    public ArrayList<Huesped> listaHuesped;
 
-    public Habitacion(char indicadorDePiso, int numeroHabitacion, EstadoHabitacion habitacionEstado, TipoDeHabitacion Tipo, int piso, ArrayList<Huesped> listaHuesped) {
+    public Habitacion() {
+
+    }
+
+    public Habitacion(char indicadorDePiso, int numeroHabitacion, EstadoHabitacion habitacionEstado, ArrayList<Huesped> listaHuesped) {
         this.indicadorDePiso = indicadorDePiso;
         this.numeroHabitacion = numeroHabitacion;
         this.habitacionEstado = habitacionEstado;
-        this.Tipo = Tipo;
-        this.piso = piso;
         this.listaHuesped = listaHuesped;
     }
+
+    @Override
+
+    //Devuelve una linea para la base de dato
+    public String toString() {
+        String re;
+
+        re = indicadorDePiso + " " + numeroHabitacion + " " + paserEstadoH(habitacionEstado) + " ";
+        for (Huesped h : listaHuesped) {
+            re = re + h.ToString();
+        }
+
+        return re;
+    }
+
+    private String paserEstadoH(EstadoHabitacion estate) {
+        String marker;
+        switch (estate) {
+            case Habilitada:
+                marker = "1";
+                break;
+            case Deshabilitada:
+                marker = "2";
+                break;
+            case EnUso:
+                marker = "3";
+                break;
+            default:
+                marker = "2";
+                System.err.println("Error desconocido: Estado mutante");
+                break;
+        }
+        return marker;
+    }
     
+    public String toStringM() {
+        String re;
+
+        re = indicadorDePiso + "\n" + numeroHabitacion + "\n" ;
+        
+        return re;
+    }
 }

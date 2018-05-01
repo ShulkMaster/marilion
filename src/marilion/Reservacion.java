@@ -5,22 +5,33 @@
  */
 package marilion;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 /**
  *
  * @author gerar
  */
 public class Reservacion {
-    ArrayList<Habitacion> ListaHabitacionR;
-    ArrayList<Persona> ListaPersonas;
-    int NumeroDeHabitacion;
-    EstadoReservacion Estado;
-    int Dias;
-    int Id_Reservacion;
-    Persona PersonaAPagar;
-    Date fechaIni;
+    public int dias, Id_reservacion, Id_factura, Id_huespedes;
+    String Id_habitacion;
+    public EstadoReservacion Estado;
+    public Persona PersonaAPagar;
+    public String fechaIni;
+    public PaqueteTipo tipo;
+
+    public Reservacion(int Id_reservacion, int Id_factura, int Id_huespedes, String Id_habitacion) {
+        this.Id_reservacion = Id_reservacion;
+        this.Id_factura = Id_factura;
+        this.Id_huespedes = Id_huespedes;
+        this.Id_habitacion = Id_habitacion;
+    }
+
+    @Override
+    public String toString() {
+        return Id_reservacion+" "+
+               Id_factura+" "+
+               Id_huespedes+" "+
+               Id_habitacion;
+    }
+    
     
     
     

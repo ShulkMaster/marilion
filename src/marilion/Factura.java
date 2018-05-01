@@ -12,8 +12,22 @@ import java.util.Date;
  * @author mcdre
  */
 public class Factura {
-    public Huesped cliente;
+
+    public int Id_factura;
+    public Persona cliente;
     public float monto;
-    public Date fecha;
-    
+    public String fecha;
+
+    public Factura(int reserv, Persona cliente, float monto, String fecha) {
+        this.Id_factura = reserv;
+        this.cliente = cliente;
+        this.monto = monto;
+        this.fecha = fecha;
+    }
+
+    @Override
+    public String toString() {
+        return Id_factura+" "+cliente.ToString()+" "+monto+" "+fecha;
+    }
+
 }

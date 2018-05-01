@@ -1,0 +1,40 @@
+1. Crear Reservacion
+    {VerHabitacionesDisponibles(fecha,dias),isvalidcrearreservacion(reservacion),crearreservacion(reservacion)}
+2. Pago de reservacion
+    gestordecompra.(resrvacion) retorna costo, gertordecomprapago retorna factura al gestor, se pago() retorna boolean;
+3. DB
+    3.1 Facturas
+    3.2 Reservas
+    3.3 Huespedes Actuales
+    3.4 Habitaciones
+4. Cancelar Reservacion
+    gestordehotel.cancelar(reservacion)
+5. Cambiar Reservacion
+    5.1 Cambio Fecha
+        gestordehotel.isvalidchangedate(fecha) retorna boolean,
+    5.2 Cambio de principal
+        gestordehotel.chageprincipal(reservacion,persona,new list de invitados)
+    5.3 Cambio de paquete
+        gestordehotel.chanque paquete(reservacion, paquete)
+    5.4 Cambio de dias
+        gestordehotel.changediasisvalid(resrvacion,nuvo dias) retorna boolean, gestordehotelchangedias2(reservacion, dias);
+    5.5 Cambio de acompanniantes
+        gestordechotelcambioacompanniiantes(listadepersonas);
+6. Ver Lista de Reservaciones
+    db options
+7. Entregar Habitacion
+    gestordehotel.entregarhabitacion(id reservacion);
+8. Retirar Habitacion
+    gestordehotel.entregarhabitacion(id reservacion)
+9. GestionDeHabitaciones
+    9.1 Habilitar habitacion
+        metodo para ver todas las habitaciones y otro metodo para deshabilitar y efecturarlo si 
+           la habitacion no esta en uso, y otro metodo que lo haga de cualquier forma
+    9.2 Deshabilitar habitacion
+            lo mismo que el anterior
+    9.3 habilitar piso
+lo mismo
+    9.4 deshabilitar piso
+lo mismo
+10. Exit
+

@@ -18,8 +18,9 @@ xd2
 public class Marilion {
 
     public static void main(String[] args) {
-        Menu.Init();
-        Menu.menu.Start();
+        // TODO code application logic here
+        Menu menu = new Menu();
+        menu.Iniciar();
     }
 
 }
