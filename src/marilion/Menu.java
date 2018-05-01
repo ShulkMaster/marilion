@@ -288,7 +288,7 @@ public class Menu {
     }
 
     private void DB_HuespedesActuales() {
-        archivador.printAdmin();
+        archivador.printListAdmin();
     }
 
     private void DB_Habitaciones() {
