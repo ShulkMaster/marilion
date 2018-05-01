@@ -14,6 +14,10 @@ public class Reservacion {
     String Id_habitacion;
     public EstadoReservacion Estado;
     public Persona PersonaAPagar;
+
+    public void setPersonaAPagar(Persona PersonaAPagar) {
+        this.PersonaAPagar = PersonaAPagar;
+    }
     public String fechaIni;
     public PaqueteTipo tipo;
 
