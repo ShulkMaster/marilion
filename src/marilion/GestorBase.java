@@ -182,9 +182,8 @@ public class GestorBase {
         for (Reservacion auxF : getListReservacion()) {
             System.out.println("<-------------- Reservacion " + contador + "-------------------->");
             System.out.println("ID reservacion: " + auxF.Id_reservacion);
-            System.out.println("ID : " + auxF.cliente.Nombre+ " "+ auxF.cliente.Apellido);
-            System.out.println("Monto a pagar: " + auxF.monto);
-            System.out.println("Fecha: "+ auxF.fecha);
+            System.out.println("ID Huespedes: " + auxF.Id_huespedes);
+            System.out.println("ID habitacion: " + auxF.Id_habitacion);
             contador++;
         }
     }
