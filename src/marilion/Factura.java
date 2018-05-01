@@ -13,13 +13,13 @@ import java.util.Date;
  */
 public class Factura {
 
-    public int reserv;
+    public int Id_factura;
     public Persona cliente;
     public float monto;
     public String fecha;
 
     public Factura(int reserv, Persona cliente, float monto, String fecha) {
-        this.reserv = reserv;
+        this.Id_factura = reserv;
         this.cliente = cliente;
         this.monto = monto;
         this.fecha = fecha;
@@ -27,7 +27,7 @@ public class Factura {
 
     @Override
     public String toString() {
-        return reserv+" "+cliente.ToString()+" "+monto+" "+fecha;
+        return Id_factura+" "+cliente.ToString()+" "+monto+" "+fecha;
     }
 
 }

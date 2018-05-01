@@ -230,7 +230,7 @@ public class Menu {
     }
 
     private void DB_Reservas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        archivador.printListReservas();
     }
 
     private void DB_HuespedesActuales() {

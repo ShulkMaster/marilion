@@ -19,9 +19,6 @@ public class GestorBase {
     //aqui deben ir los archivos de la base de datos, 4 archivos. 
     //Hay que cambiar y agregar la lista de factura
     private File archivoTXT;
-    private Huesped Db_HuespedesActivos;
-    private Huesped Db_ReservaHist;
-    private Reservacion reservacion;
 
     private ArrayList<String> getFileContent(String filename) {
         ArrayList<String> filecontent = new ArrayList<>();
@@ -102,11 +99,11 @@ public class GestorBase {
      * @return factura
      */
     private Factura creadoFactura(String master) {
-        int idReserv;
+        int Id_fact;
         float monto2;
         Persona client2;
         String fecha;
-        idReserv = Integer.parseInt(master.split(" ")[0]);
+        Id_fact = Integer.parseInt(master.split(" ")[0]);
         client2 = creadoPersona(master.split(" ")[1]);
         monto2 = Float.parseFloat(master.split(" ")[2]);
         fecha = master.split(" ")[3];
@@ -114,8 +111,18 @@ public class GestorBase {
           este metodo devuelve el arreglo de cadenas con los diferentes
           atributos del cliente en la reservacion
          */
-        return new Factura(idReserv, client2, monto2, fecha);
+        return new Factura(Id_fact, client2, monto2, fecha);
 
+    }
+    
+    private Reservacion creadoReservacion(String master){
+        int reserva, factura, huesped;
+        String Id_Habitacion;
+        reserva = Integer.parseInt(master.split(" ")[0]);
+        factura = Integer.parseInt(master.split(" ")[1]);
+        huesped = Integer.parseInt(master.split(" ")[2]);
+        Id_Habitacion = master.split(" ")[3];
+        return new Reservacion(reserva, factura, huesped, Id_Habitacion);
     }
 
     /**
@@ -163,8 +170,19 @@ public class GestorBase {
         int contador = 1;
         for (Factura auxF : getListFactura()) {
             System.out.println("<-------------- Factura " + contador + "-------------------->");
-            System.out.println("ID factura: " + auxF.reserv);
+            System.out.println("ID factura: " + auxF.Id_factura);
             System.out.println("Cliente: " + auxF.cliente.Nombre+ " "+ auxF.cliente.Apellido);
+            System.out.println("Monto a pagar: " + auxF.monto);
+            System.out.println("Fecha: "+ auxF.fecha);
+            contador++;
+        }
+    }
+    public void printListReservas() {
+        int contador = 1;
+        for (Reservacion auxF : getListReservacion()) {
+            System.out.println("<-------------- Reservacion " + contador + "-------------------->");
+            System.out.println("ID reservacion: " + auxF.Id_reservacion);
+            System.out.println("ID : " + auxF.cliente.Nombre+ " "+ auxF.cliente.Apellido);
             System.out.println("Monto a pagar: " + auxF.monto);
             System.out.println("Fecha: "+ auxF.fecha);
             contador++;
@@ -215,7 +233,11 @@ public class GestorBase {
 
     public ArrayList<Reservacion> getListReservacion() {
         ArrayList<Reservacion> listaAux = new ArrayList<>();
-
+        System.out.println("Las reservaciones obtenidas de archivo son : ");
+        for (String registro : getFileContent("reservacionTEST")) {
+            Reservacion currenReservacion = creadoReservacion(registro);
+            listaAux.add(currenReservacion);
+        }
         return listaAux;
     }
 
@@ -263,19 +285,10 @@ public class GestorBase {
             //aca va el verdadero codigo de escritura de DB
             for (Reservacion re : lista) {
 
-                for (Habitacion hab : re.ListaHabitacionR) {
-                    pw.print(hab.indicadorDePiso + "" + hab.numeroHabitacion + "$");
-                }
                 pw.print(" ");
 
-                for (Persona p : re.ListaPersonas) {
-                    pw.print(p.ToString() + ":");
-                }
                 pw.print(" ");
-                pw.print(re.NumeroDeHabitacion + " ");
                 pw.print(re.Estado + " ");
-                pw.print(re.Dias + " ");
-                pw.print(re.Id_Reservacion + " ");
                 pw.print(re.PersonaAPagar.ToString() + " ");
                 pw.print(re.fechaIni + " ");
                 pw.print(re.tipo);

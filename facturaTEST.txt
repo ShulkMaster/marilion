@@ -5,3 +5,6 @@
 5 sepermen#zaper#00017 228.95 10#5#2018
 6 mario#cordales#00069 578.95 11#5#2018
 7 zepeto#mareki#00078 78.95 11#5#2018
+8 frito#frodo#00062 134.48 12#5#2018
+9 trio#cuadro#00044 789.02 13#5#2018
+10 farruko#mario#00001 13.25 14#5#2018
