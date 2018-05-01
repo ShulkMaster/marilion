@@ -29,7 +29,17 @@ public class Persona {
     public String ToString() {
         return Nombre + "#" + Apellido + "#" + Dui + ":";
     }
+    public String nombre(){
+        return Nombre;
+    }
+    public String Apellido(){
+        return Apellido;
+    }
     public String duiR(){
         return Dui;
     }
+    public void cambioDui(String dui){
+        Dui=dui;
+    }
+    
 }

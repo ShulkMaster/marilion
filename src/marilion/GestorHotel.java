@@ -6,7 +6,6 @@
 package marilion;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  *
@@ -30,13 +29,10 @@ public class GestorHotel {
         this.ListaDeAdmins = base.getListAdministradores();
     }
     
-    public void cambioFecha(String fecha, int id){
-        Scanner leer = new Scanner(System.in);
-        fecha = leer.nextLine();
-        
-        
+    public void cambioFecha(String dui,String fecha){
+             
         for (Reservacion e : ListaDeReservas){
-            if(id==e.Id_reservacion){
+            if(dui.equals(e.PersonaAPagar.duiR())){
                 e.fechaIni=fecha;
             }
         }
@@ -44,12 +40,12 @@ public class GestorHotel {
         this.Actualizar();
     }
     
-    public boolean FechaYhabitacion(String fecha,int id){
+    public boolean FechaYhabitacion(String dui,String fecha){
         boolean bool=false;
         
         for(Habitacion p : ListaDeHabitacion){
             for(Reservacion e :ListaDeReservas){
-                if((fecha == null ? e.fechaIni != null : !fecha.equals(e.fechaIni)) && e.Id_reservacion == id){
+                if((fecha == null ? e.fechaIni != null : !fecha.equals(e.fechaIni)) && e.PersonaAPagar.duiR().equals(dui)){
                     if (p.habitacionEstado.equals(1)) {
                         bool=true;
                     }
@@ -114,5 +110,31 @@ public class GestorHotel {
                 }
         }
 
+    }
+    
+    public void CambioPersonaP(String dui,String dui2,String nombre,String Apellido){
+        
+        Persona nuevo;
+                
+        for (Reservacion e : ListaDeReservas){
+            if(dui.equals(e.PersonaAPagar.duiR())){
+                nuevo(e.PersonaAPagar.nombre() , e.PersonaAPagar.Apellido() , e.PersonaAPagar.duiR() );
+                e.PersonaAPagar.cambioDui(dui2);
+                e.PersonaAPagar.Nombre=nombre;
+                e.PersonaAPagar.Apellido=Apellido;
+            }
+        }
+        for(){
+            
+        }
+
+        base.Escribir("reservacion.txt", ListaDeReservas);
+        this.Actualizar();
+    }
+    
+    public void ReservaNueva(Reservacion res){
+        
+        ListaDeReservas.add(res);
+        base.Escribir("reservacion.txt", ListaDeReservas);
     }
 }
