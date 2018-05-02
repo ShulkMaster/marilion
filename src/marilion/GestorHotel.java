@@ -6,6 +6,7 @@
 package marilion;
 
 import java.util.ArrayList;
+import parserMax.StatadosX;
 
 /**
  *
@@ -132,15 +133,40 @@ public class GestorHotel {
         this.Actualizar();
     }
 
-    public void ReservaNueva(Reservacion res) {
-        ListaDeReservas.add(res);
+    public void ReservaNueva(String masterType) {
+        Reservacion Prototype = new Reservacion(GestorBase.lastIDReserva, GestorBase.lastIDFactura, GestorBase.lastIDHuesped, masterType.split(" ")[0]);
+        Prototype.setDias(Integer.parseInt(masterType.split(" ")[1]));
+        Prototype.setEstado(EstadoReservacion.Activa);
+        Prototype.setTipo(StatadosX.parseStatPack(masterType.split(" ")[4]));
+        Prototype.setFechaIni(masterType.split(" ")[0]);
+        ListaDeReservas.add(Prototype);
+        base.AutoIncrement();
+        base.Escribir("reservacion.txt", ListaDeReservas);
+    }
+
+    public void printListReservas() {
+        int contador = 1;
+        for (Reservacion auxF : ListaDeReservas) {
+            System.out.println("<-------------- Reservacion " + contador + "-------------------->");
+            System.out.println("ID reservacion: " + auxF.Id_reservacion);
+            System.out.println("ID factura: " + auxF.Id_factura);
+            System.out.println("ID huespedes: " + auxF.Id_huespedes);
+            System.out.println("ID habitacion: " + auxF.Id_habitacion);
+            System.out.println("ID Dias duracion: " + auxF.dias);
+            System.out.println("Estado : " + auxF.Estado);
+            System.out.println("Persona que paga: " + auxF.PersonaAPagar.nombre() + auxF.PersonaAPagar.Apellido());
+            System.out.println("DUI : " + auxF.PersonaAPagar.duiR());
+            System.out.println("Paquete : " + auxF.tipo);
+            System.out.println("Fecha inicial : " + auxF.fechaIni);
+            contador++;
+        }
         base.Escribir("reservacion.txt", ListaDeReservas);
     }
 
     public void pagarReserva(String dui, String fecha) {
         int contador = 0;
         for (Reservacion AuxRe : ListaDeReservas) {
-            System.out.println("Prosesadondo registro " + (contador+1) + " de " + (ListaDeReservas.size()+1));
+            System.out.println("Prosesadondo registro " + (contador + 1) + " de " + (ListaDeReservas.size() + 1));
             if (AuxRe.PersonaAPagar.duiR().equals(dui)) {
                 if (AuxRe.fechaIni.equals(fecha)) {
                     System.out.println(AuxRe.fechaIni);

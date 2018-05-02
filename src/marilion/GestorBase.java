@@ -24,9 +24,13 @@ import parserMax.StatadosX;
 public class GestorBase {
 
     //se cambiaro los 4 archivos por uno generico que lo carga 1 a la vez
+    public static int lastIDReserva = 0;
+    public static int lastIDFactura = 0;
+    public static int lastIDHuesped = 0;
     private File archivoTXT;
-    
-    public GestorBase(){}
+
+    public GestorBase() {
+    }
 
     private ArrayList<String> getFileContent(String filename) {
         ArrayList<String> filecontent = new ArrayList<>();
@@ -217,7 +221,7 @@ public class GestorBase {
             System.out.println("ID habitacion: " + auxF.Id_habitacion);
             System.out.println("ID Dias duracion: " + auxF.dias);
             System.out.println("Estado : " + auxF.Estado);
-            System.out.println("Persona que paga: " + auxF.PersonaAPagar.nombre()+auxF.PersonaAPagar.Apellido());
+            System.out.println("Persona que paga: " + auxF.PersonaAPagar.nombre() + auxF.PersonaAPagar.Apellido());
             System.out.println("DUI : " + auxF.PersonaAPagar.duiR());
             System.out.println("Paquete : " + auxF.tipo);
             System.out.println("Fecha inicial : " + auxF.fechaIni);
@@ -247,6 +251,34 @@ public class GestorBase {
             System.out.println("Dui: " + auxF.duiR());
             contador++;
         }
+    }
+
+    public void checkOutIds() {
+        for (Reservacion auxF : getListReservacion()) {
+            if (auxF.Id_reservacion > lastIDReserva) {
+                lastIDReserva = auxF.Id_reservacion;
+            }
+        }
+        for (Reservacion auxF : getListReservacion()) {
+            if (auxF.Id_factura > lastIDFactura) {
+                lastIDFactura = auxF.Id_factura;
+            }
+        }
+        for (Reservacion auxF : getListReservacion()) {
+            if (auxF.Id_huespedes > lastIDHuesped) {
+                lastIDHuesped = auxF.Id_huespedes;
+            }
+        }
+        AutoIncrement();
+        System.out.println(lastIDReserva + " " + lastIDFactura + " " + lastIDHuesped + " CheckOut");
+
+    }
+
+    public void AutoIncrement() {
+        lastIDReserva += 1;
+        lastIDFactura += 1;
+        lastIDHuesped += 1;
+
     }
 
     public ArrayList<Habitacion> getListHabitacion() {
@@ -298,11 +330,9 @@ public class GestorBase {
         ArrayList<Huesped> listaAux = new ArrayList<>();
         System.out.println("Las Huespedes obtenidos de archivo son: ");
         String registro = getFileContent("huespedesTEST").get(0);
-           listaAux = creadoHuesped(registro.split(" ")[1].split(":"));
+        listaAux = creadoHuesped(registro.split(" ")[1].split(":"));
         return listaAux;
-        }
-
-    
+    }
 
     public ArrayList<Habitacion> getListHabitacionesActivas() {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
