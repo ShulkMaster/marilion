@@ -65,7 +65,7 @@ public class GestorBase {
      * informacion necesaria para recontruir una habitacion en memoria RAM
      * @return Persona
      */
-    private Persona creadoPersona(String master) {
+    public Persona creadoPersona(String master) {
         String nombre, apellido, dui;
         nombre = master.split("#")[0];
         apellido = master.split("#")[1];
@@ -219,7 +219,7 @@ public class GestorBase {
             System.out.println("ID factura: " + auxF.Id_factura);
             System.out.println("ID huespedes: " + auxF.Id_huespedes);
             System.out.println("ID habitacion: " + auxF.Id_habitacion);
-            System.out.println("ID Dias duracion: " + auxF.dias);
+            System.out.println("Dias a hospedarse: " + auxF.dias);
             System.out.println("Estado : " + auxF.Estado);
             System.out.println("Persona que paga: " + auxF.PersonaAPagar.nombre() + auxF.PersonaAPagar.Apellido());
             System.out.println("DUI : " + auxF.PersonaAPagar.duiR());

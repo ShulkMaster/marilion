@@ -133,12 +133,20 @@ public class GestorHotel {
         this.Actualizar();
     }
 
+    /**
+     *
+     * @param masterType String whit the following format
+     * IDreserva,IDfactura,IDhuespedes,IDhabitacion,
+     * dias,estado, pagador, tipo,
+     * fechaini
+     */
     public void ReservaNueva(String masterType) {
         Reservacion Prototype = new Reservacion(GestorBase.lastIDReserva, GestorBase.lastIDFactura, GestorBase.lastIDHuesped, masterType.split(" ")[0]);
         Prototype.setDias(Integer.parseInt(masterType.split(" ")[1]));
         Prototype.setEstado(EstadoReservacion.Activa);
+        Prototype.setPersonaAPagar(base.creadoPersona(masterType.split(" ")[3]));
         Prototype.setTipo(StatadosX.parseStatPack(masterType.split(" ")[4]));
-        Prototype.setFechaIni(masterType.split(" ")[0]);
+        Prototype.setFechaIni(masterType.split(" ")[5]);
         ListaDeReservas.add(Prototype);
         base.AutoIncrement();
         base.Escribir("reservacion.txt", ListaDeReservas);

@@ -7,12 +7,12 @@ package marilion;
 
 /**
  *
- * @author gerar
- * IDreserva,IDfactura,IDhuespedes,IDhabitacion,
- * dias,estado, pagador, tipo, fechaini
+ * @author gerar IDreserva,IDfactura,IDhuespedes,IDhabitacion, dias,estado,
+ * pagador, tipo, fechaini
  */
 public class Reservacion {
-    public int dias, Id_reservacion, Id_factura, Id_huespedes;
+
+    public int Id_reservacion, Id_factura, Id_huespedes, dias;
     String Id_habitacion;
     public EstadoReservacion Estado;
     public Persona PersonaAPagar;
@@ -32,10 +32,15 @@ public class Reservacion {
 
     @Override
     public String toString() {
-        return Id_reservacion+" "+
-               Id_factura+" "+
-               Id_huespedes+" "+
-               Id_habitacion;
+        return Id_reservacion + " "
+                + Id_factura + " "
+                + Id_huespedes + " "
+                + Id_habitacion + " "
+                + dias + " "
+                + Estado + " "
+                + PersonaAPagar.toString() + " "
+                + tipo + " "
+                + fechaIni;
     }
 
     public void setDias(int dias) {
@@ -57,9 +62,5 @@ public class Reservacion {
     public void setTipo(PaqueteTipo tipo) {
         this.tipo = tipo;
     }
-    
-    
-    
-    
-    
+
 }

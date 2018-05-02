@@ -12,19 +12,19 @@ import java.util.ArrayList;
  * @author yury_
  */
 public class Menu {
-    
+
     private final ArrayList<Administrador> admins;
     private final GestorHotel gestorHotel;
     private final GestorBase archivador;
     boolean Finalizado;
-    
+
     public Menu() {
         gestorHotel = new GestorHotel();
         admins = gestorHotel.ListaDeAdmins;
         archivador = GestorHotel.base;
         Finalizado = false;
     }
-    
+
     public boolean login(String Username, String Pass) {
         for (Administrador admin : admins) {
             if (admin.Username.equals(Username)) {
@@ -33,10 +33,10 @@ public class Menu {
                 }
             }
         }
-        
+
         return false;
     }
-    
+
     public void Opciones(int elect) {
         String StrMenu = "| 1. Crear Reservacion   | 2. pagar Reservacion  | 3. Cancelar Reservacion  | 4. Cambiar Reservacion | 5. Ver lista de Reservacion |\n"
                 + "| 6. Entregar Habitacion | 7. Retirar Habitacion | 8. Gestion de Habitacion | 9. DB options          | 10. Exit                    |";
@@ -58,14 +58,14 @@ public class Menu {
                 break;
         }
     }
-    
+
     public void Iniciar() {
         int opcion;
         archivador.checkOutIds();
         while (!Finalizado) {
             this.Opciones(1);
             opcion = Reader.consola.nextInt();
-            
+
             switch (opcion) {
                 case 1:
                     //crear reservacion
@@ -146,12 +146,12 @@ public class Menu {
                 case 10:
                     Finalizado = !Finalizado;
                     break;
-                
+
             }
-            
+
         }
     }
-    
+
     private void CrearReservacion() {
         String master;
         //limpiando Buffer
@@ -166,7 +166,7 @@ public class Menu {
         System.out.println("Ingrese el apellido: ");
         master += ("#" + Reader.consola.nextLine());
         System.out.println("Ingrese el dui: ");
-        master += ("#" + Reader.consola.nextLine() + " ");
+        master += ("#" + Reader.consola.nextLine());
         System.out.println("Ingrese tipo de paquete: ");
         System.out.println("1 = Basico 2 = Primium 3 = Ninguno");
         master += (" " + Reader.consola.nextLine());
@@ -194,9 +194,8 @@ public class Menu {
             }
         }
          */
-        gestorHotel.ReservaNueva(master);
     }
-    
+
     private void PagoReservacion() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         //Limpiando Buffer antes de seguir o el dui queda nulo
@@ -208,15 +207,15 @@ public class Menu {
         //metodo del gestor de compra, el gestor de compra crea factura necesito que me retornes costo segun reserva y la factura impresa
         // en pantalla
         gestorHotel.pagarReserva(duiPago, fecha);
-        
+
     }
-    
+
     private void CancelarReservacion() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
         //metodo del gestor de hotel
     }
-    
+
     private void CambioFecha() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
@@ -259,7 +258,7 @@ public class Menu {
         Persona aux = new Persona(auxnombre, auxapellido, auxdui);
         //aca el metodo del gestor que reciba esto y cambie todo en el gestor
     }
-    
+
     private void CambioPaquete() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
@@ -271,29 +270,29 @@ public class Menu {
                 //aca va el cambio dentro de la reserva del tipo o el llamado a gestor de hotel
                 break;
             case 2:
-                
+
                 break;
             case 3:
                 break;
         }
     }
-    
+
     private void CambioDias() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
-        
+
         System.out.println("Ingrese la nueva cantidad de dias ");
         int nuevosdias = Reader.consola.nextInt();
         //aca metodo que verifique y notifique si se hizo el cambio
     }
-    
+
     private void CambioDeAcompanniantes() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
         // metodo para saber i existe la reserva
 
         ArrayList<Persona> personas = new ArrayList<Persona>();
-        
+
         System.out.println("Ingrese acompanniantes:");
         while (true) {
             System.out.println("Ingrese el nombre: ");
@@ -311,65 +310,65 @@ public class Menu {
         }
         // metodo para mandar la lista y que el gestor de hotel los cambie 
     }
-    
+
     private void VerListaDeReservaciones() {
         archivador.printListReservas();
     }
-    
+
     private void EntregarHabitacion() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
         //aca el metodo del gestor de hotel si se puede efectuar la entrega o no
     }
-    
+
     private void RetirarHabitacion() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
         //aca el metodo del gestor de hotel para retirar habitacion y los huespedes que estaban en ese reserva
     }
-    
+
     private void habilitarHabitacion() {
         //metodo para ver todas las habitaciones deshabilitadas;
         System.out.println("Ingrese el id de la habitacion eje b3");
         String habiHabilitar = Reader.consola.next();
         // aca el metodo donde envie esa string y se cambie el estado de la habitacion
     }
-    
+
     private void deshabilitarHabitacion() {
         //metodo para ver todas las habitaciones habilitadas;
         System.out.println("Ingrese el id de la habitacion eje b3");
         String habideshabilitar = Reader.consola.next();
         // aca el metodo donde envie esa string y se cambie el estado de la habitacion
     }
-    
+
     private void HabilitarPiso() {
         //metodo para ver todas los pisos deshabilitados
         System.out.println("Ingrese el numero del piso");
         int pisohabilitar = Reader.consola.nextInt();
         // aca el metodo donde envie el int y el gestor se encarga de todo
     }
-    
+
     private void deshaiblitarPiso() {
         //metodo para ver todos los pisos haabilitados
         System.out.println("Ingrese el numero del piso");
         int pisodeshabilitar = Reader.consola.nextInt();
         // aca el metodo donde envie el int y el gestor se encarga de todo
     }
-    
+
     private void DB_Facturas() {
         archivador.printListFacturas();
     }
-    
+
     private void DB_Reservas() {
         gestorHotel.printListReservas();
     }
-    
+
     private void DB_HuespedesActuales() {
         archivador.printListAdmin();
     }
-    
+
     private void DB_Habitaciones() {
         archivador.printListHabitacion();
     }
-    
+
 }
