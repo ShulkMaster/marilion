@@ -13,25 +13,26 @@ import parserMax.StatadosX;
  * @author gerar
  */
 public class GestorHotel {
-
+    
     ArrayList<Habitacion> ListaDeHabitacion;
     ArrayList<Huesped> ListaDeHuespedes;
     ArrayList<Reservacion> ListaDeReservas;
     ArrayList<Factura> ListaDeFactura;
     ArrayList<Administrador> ListaDeAdmins;
-
+    
     public static GestorBase base = new GestorBase();
-
+    
     public GestorHotel() {
         this.ListaDeHabitacion = base.getListHabitacion();
         this.ListaDeHuespedes = base.getListHuespedesActivos();
         this.ListaDeReservas = base.getListReservacion();
         this.ListaDeFactura = base.getListFactura();
         this.ListaDeAdmins = base.getListAdministradores();
+        base.checkOutIds(ListaDeReservas);
     }
-
+    
     public void cambioFecha(String dui, String fecha) {
-
+        
         for (Reservacion e : ListaDeReservas) {
             if (dui.equals(e.PersonaAPagar.duiR())) {
                 e.fechaIni = fecha;
@@ -40,10 +41,10 @@ public class GestorHotel {
         base.Escribir("reservacion.txt", ListaDeReservas);
         this.Actualizar();
     }
-
+    
     public boolean FechaYhabitacion(String dui, String fecha) {
         boolean bool = false;
-
+        
         for (Habitacion p : ListaDeHabitacion) {
             for (Reservacion e : ListaDeReservas) {
                 if ((fecha == null ? e.fechaIni != null : !fecha.equals(e.fechaIni)) && e.PersonaAPagar.duiR().equals(dui)) {
@@ -53,10 +54,10 @@ public class GestorHotel {
                 }
             }
         }
-
+        
         return bool;
     }
-
+    
     public void CancelaReserva(String dui) {
         ArrayList<Reservacion> listN = new ArrayList<>();
         for (Reservacion e : ListaDeReservas) {
@@ -68,22 +69,22 @@ public class GestorHotel {
         base.Escribir("reservacion.txt", listN);
         this.Actualizar();
     }
-
+    
     public void cambioPack(String dui, PaqueteTipo tipo) {
-
+        
         for (Reservacion e : ListaDeReservas) {
             //hacer metodo que retorne el dui para poder dejarlo en privado siempre
             if (dui.equals(e.PersonaAPagar.duiR())) {
                 e.tipo = tipo;
             }
         }
-
+        
         base.Escribir("reservacion.txt", ListaDeReservas);
         this.Actualizar();
     }
-
+    
     public void cambioHabitacion(String dui, String habitacion) {
-
+        
         for (Habitacion p : ListaDeHabitacion) {
             for (Reservacion e : ListaDeReservas) {
                 if (dui.equals(e.PersonaAPagar.duiR()) && p.habitacionEstado.equals(1) == true) {
@@ -94,7 +95,7 @@ public class GestorHotel {
         base.Escribir("reservacion.txt", ListaDeReservas);
         this.Actualizar();
     }
-
+    
     public void Actualizar() {
         this.ListaDeHabitacion = base.getListHabitacion();
         this.ListaDeHuespedes = base.getListHuespedesActivos();
@@ -102,21 +103,21 @@ public class GestorHotel {
         this.ListaDeFactura = base.getListFactura();
         this.ListaDeAdmins = base.getListAdministradores();
     }
-
+    
     public void mostrarHabitacion() {
-
+        
         for (Habitacion p : ListaDeHabitacion) {
             if (p.habitacionEstado.equals(1) == true) {
                 System.out.println(p.toStringM());
             }
         }
-
+        
     }
-
+    
     public void CambioPersonaP(String dui, String dui2, String nombre, String Apellido) {
-
+        
         Persona aux;
-
+        
         for (Reservacion e : ListaDeReservas) {
             if (dui.equals(e.PersonaAPagar.duiR())) {
                 aux = e.PersonaAPagar;
@@ -128,7 +129,7 @@ public class GestorHotel {
         /*for(){
             
         }*/
-
+        
         base.Escribir("reservacion.txt", ListaDeReservas);
         this.Actualizar();
     }
@@ -136,8 +137,7 @@ public class GestorHotel {
     /**
      *
      * @param masterType String whit the following format
-     * IDreserva,IDfactura,IDhuespedes,IDhabitacion,
-     * dias,estado, pagador, tipo,
+     * IDreserva,IDfactura,IDhuespedes,IDhabitacion, dias,estado, pagador, tipo,
      * fechaini
      */
     public void ReservaNueva(String masterType) {
@@ -151,7 +151,7 @@ public class GestorHotel {
         base.AutoIncrement();
         base.Escribir("reservacion.txt", ListaDeReservas);
     }
-
+    
     public void printListReservas() {
         int contador = 1;
         for (Reservacion auxF : ListaDeReservas) {
@@ -170,7 +170,7 @@ public class GestorHotel {
         }
         base.Escribir("reservacion.txt", ListaDeReservas);
     }
-
+    
     public void pagarReserva(String dui, String fecha) {
         int contador = 0;
         for (Reservacion AuxRe : ListaDeReservas) {

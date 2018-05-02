@@ -253,25 +253,20 @@ public class GestorBase {
         }
     }
 
-    public void checkOutIds() {
-        for (Reservacion auxF : getListReservacion()) {
+    public void checkOutIds(ArrayList<Reservacion> masterRay) {
+        for (Reservacion auxF : masterRay) {
             if (auxF.Id_reservacion > lastIDReserva) {
                 lastIDReserva = auxF.Id_reservacion;
             }
-        }
-        for (Reservacion auxF : getListReservacion()) {
             if (auxF.Id_factura > lastIDFactura) {
                 lastIDFactura = auxF.Id_factura;
             }
-        }
-        for (Reservacion auxF : getListReservacion()) {
             if (auxF.Id_huespedes > lastIDHuesped) {
                 lastIDHuesped = auxF.Id_huespedes;
             }
         }
         AutoIncrement();
         System.out.println(lastIDReserva + " " + lastIDFactura + " " + lastIDHuesped + " CheckOut");
-
     }
 
     public void AutoIncrement() {
@@ -402,7 +397,7 @@ public class GestorBase {
             fichero = new FileWriter(ficheroe);
             pw = new PrintWriter(fichero);
             for (Administrador admin : arrayList) {
-                pw.print(admin.ToString() + " ");
+                pw.print(admin.toString() + " ");
                 pw.print(admin.Username + " ");
                 pw.print(admin.getPassword() + " ");
                 pw.print("\n");

@@ -61,7 +61,6 @@ public class Menu {
 
     public void Iniciar() {
         int opcion;
-        archivador.checkOutIds();
         while (!Finalizado) {
             this.Opciones(1);
             opcion = Reader.consola.nextInt();

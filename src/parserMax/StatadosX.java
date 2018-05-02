@@ -51,17 +51,17 @@ public class StatadosX {
      */
     public static EstadoReservacion parseStateReserva(String value) {
         EstadoReservacion aux;
-        switch (Integer.parseInt(value)) {
-            case 1:
+        switch (value) {
+            case "Activa":
                 aux = EstadoReservacion.Activa;
                 break;
-            case 2:
+            case "Cancelada":
                 aux = EstadoReservacion.Cancelada;
                 break;
-            case 3:
+            case "EnUso":
                 aux = EstadoReservacion.EnUso;
                 break;
-            case 4:
+            case "Finalizada":
                 aux = EstadoReservacion.Finalizada;
                 break;
             default:
@@ -73,22 +73,31 @@ public class StatadosX {
     }
 
     /**
-     * este metodo convierte datos tipo String a PaqueteTipo
-     * default si no funciona PaqueteTipo.ninguno
+     * este metodo convierte datos tipo String a PaqueteTipo default si no
+     * funciona PaqueteTipo.ninguno
      *
      * @param value cadena con el valor de 1, 2 o 3
      * @return PaqueteTipo basico, premium y ninguno
      */
     public static PaqueteTipo parseStatPack(String value) {
         PaqueteTipo aux;
-        switch (Integer.parseInt(value)) {
-            case 1:
+        switch (value) {
+            case "basico":
                 aux = PaqueteTipo.basico;
                 break;
-            case 2:
+            case "1":
+                aux = PaqueteTipo.basico;
+                break;
+            case "premium":
                 aux = PaqueteTipo.premium;
                 break;
-            case 3:
+            case "2":
+                aux = PaqueteTipo.premium;
+                break;
+            case "ninguno":
+                aux = PaqueteTipo.ninguno;
+                break;
+            case "3":
                 aux = PaqueteTipo.ninguno;
                 break;
             default:

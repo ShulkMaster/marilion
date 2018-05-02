@@ -20,9 +20,8 @@ public class Huesped extends Persona {
      * @return String lo mismo que persona solo que las personas son inicas
      * y los huespedes no xd
      */
-    @Override
     public String ToString() {
-        return super.ToString() + ":";
+        return (toString()+":");
     }
 
 }
