@@ -114,19 +114,19 @@ public class GestorHotel {
     
     public void CambioPersonaP(String dui,String dui2,String nombre,String Apellido){
         
-        Persona nuevo;
+        Persona aux;
                 
         for (Reservacion e : ListaDeReservas){
             if(dui.equals(e.PersonaAPagar.duiR())){
-                nuevo(e.PersonaAPagar.nombre() , e.PersonaAPagar.Apellido() , e.PersonaAPagar.duiR() );
+                aux=e.PersonaAPagar;
                 e.PersonaAPagar.cambioDui(dui2);
                 e.PersonaAPagar.Nombre=nombre;
                 e.PersonaAPagar.Apellido=Apellido;
             }
         }
-        for(){
+        /*for(){
             
-        }
+        }*/
 
         base.Escribir("reservacion.txt", ListaDeReservas);
         this.Actualizar();
