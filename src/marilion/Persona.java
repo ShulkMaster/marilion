@@ -27,7 +27,7 @@ public class Persona {
     }
 
     public String ToString() {
-        return Nombre + "#" + Apellido + "#" + Dui + ":";
+        return Nombre + "#" + Apellido + "#" + Dui;
     }
     public String nombre(){
         return Nombre;

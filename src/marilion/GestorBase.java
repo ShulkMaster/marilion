@@ -24,6 +24,8 @@ public class GestorBase {
 
     //se cambiaro los 4 archivos por uno generico que lo carga 1 a la vez
     private File archivoTXT;
+    
+    public GestorBase(){}
 
     private ArrayList<String> getFileContent(String filename) {
         ArrayList<String> filecontent = new ArrayList<>();
@@ -77,9 +79,9 @@ public class GestorBase {
      */
     private Huesped creadoHuesped(String master) {
         String nombre, apellido, dui;
-        nombre = master.split(" ")[0];
-        apellido = master.split(" ")[1];
-        dui = master.split(" ")[2];
+        nombre = master.split("#")[0];
+        apellido = master.split("#")[1];
+        dui = master.split("#")[2];
         return new Huesped(nombre, apellido, dui);
     }
 
@@ -113,7 +115,7 @@ public class GestorBase {
         EstadoHabitacion estado;
         indicadorDePiso = master.split(" ")[0].charAt(0);
         numeroDeHabitacion = Integer.parseInt(master.split(" ")[1]);
-        estado = parseState(master.split(" ")[2]);
+        estado = parseStateHabitacion(master.split(" ")[2]);
         huespedes = master.split(" ")[3].split(":");
         /*en el archivo los nombre de huespedes se separan por :
           este metodo devuelve el arreglo de cadenas con los diferentes
@@ -157,7 +159,13 @@ public class GestorBase {
         factura = Integer.parseInt(master.split(" ")[1]);
         huesped = Integer.parseInt(master.split(" ")[2]);
         Id_Habitacion = master.split(" ")[3];
-        return new Reservacion(reserva, factura, huesped, Id_Habitacion);
+        Reservacion auxReser = new Reservacion(reserva, factura, huesped, Id_Habitacion);
+        auxReser.setDias(Integer.parseInt(master.split(" ")[4]));
+        auxReser.setEstado(parseStateReserva(master.split(" ")[5]));
+        auxReser.setPersonaAPagar(creadoHuesped(master.split(" ")[6]));
+        auxReser.setTipo(parseStatPack(master.split(" ")[7]));
+        auxReser.setFechaIni(master.split(" ")[8]);
+        return auxReser;
     }
 
     private Administrador creadoAdmin(String master) {
@@ -176,7 +184,7 @@ public class GestorBase {
      * @param value cadena con el valor de 1, 2 o 3
      * @return EstadoHabitacion abilitada, deshabilitada o en uso
      */
-    private EstadoHabitacion parseState(String value) {
+    private EstadoHabitacion parseStateHabitacion(String value) {
         EstadoHabitacion aux;
         switch (Integer.parseInt(value)) {
             case 1:
@@ -191,6 +199,47 @@ public class GestorBase {
             default:
                 System.err.println("Archivo potencialemte corrupto, estado desconocido");
                 aux = EstadoHabitacion.Deshabilitada;
+                break;
+        }
+        return aux;
+    }
+    private EstadoReservacion parseStateReserva(String value) {
+        EstadoReservacion aux;
+        switch (Integer.parseInt(value)) {
+            case 1:
+                aux = EstadoReservacion.Activa;
+                break;
+            case 2:
+                aux = EstadoReservacion.Cancelada;
+                break;
+            case 3:
+                aux = EstadoReservacion.EnUso;
+                break;
+            case 4:
+                aux = EstadoReservacion.Finalizada;
+                break;
+            default:
+                System.err.println("Archivo potencialemte corrupto, estado desconocido");
+                aux = EstadoReservacion.Cancelada;
+                break;
+        }
+        return aux;
+    }
+    private PaqueteTipo parseStatPack(String value) {
+        PaqueteTipo aux;
+        switch (Integer.parseInt(value)) {
+            case 1:
+                aux = PaqueteTipo.basico;
+                break;
+            case 2:
+                aux = PaqueteTipo.premium;
+                break;
+            case 3:
+                aux = PaqueteTipo.ninguno;
+                break;
+            default:
+                System.err.println("Archivo potencialemte corrupto, estado desconocido");
+                aux = PaqueteTipo.ninguno;
                 break;
         }
         return aux;
@@ -229,8 +278,15 @@ public class GestorBase {
         for (Reservacion auxF : getListReservacion()) {
             System.out.println("<-------------- Reservacion " + contador + "-------------------->");
             System.out.println("ID reservacion: " + auxF.Id_reservacion);
-            System.out.println("ID Huespedes: " + auxF.Id_huespedes);
+            System.out.println("ID factura: " + auxF.Id_factura);
+            System.out.println("ID huespedes: " + auxF.Id_huespedes);
             System.out.println("ID habitacion: " + auxF.Id_habitacion);
+            System.out.println("ID Dias duracion: " + auxF.dias);
+            System.out.println("Estado : " + auxF.Estado);
+            System.out.println("Persona que paga: " + auxF.PersonaAPagar.nombre()+auxF.PersonaAPagar.Apellido());
+            System.out.println("DUI : " + auxF.PersonaAPagar.duiR());
+            System.out.println("Paquete : " + auxF.tipo);
+            System.out.println("Fecha inicial : " + auxF.fechaIni);
             contador++;
         }
         EscribirReservacion(getListReservacion(), "reservacion.txt");

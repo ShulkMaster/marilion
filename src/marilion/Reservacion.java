@@ -8,6 +8,8 @@ package marilion;
 /**
  *
  * @author gerar
+ * IDreserva,IDfactura,IDhuespedes,IDhabitacion,
+ * dias,estado, pagador, tipo, fechaini
  */
 public class Reservacion {
     public int dias, Id_reservacion, Id_factura, Id_huespedes;

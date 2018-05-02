@@ -1,10 +1,9 @@
-1 1 1 a1
-2 2 2 b2
-3 3 3 c3
-4 4 4 d4
-5 5 5 e5
-6 6 6 f6
-7 7 7 g7
-8 8 8 h8
-9 9 9 i9
-10 10 10 j10
+1 1 1 a1 7 3 jamico1#mimico1#00089 1 1#5#2018
+2 2 2 b2 6 1 jamico2#mimico1#00090 1 2#5#2018
+3 3 3 c3 5 1 jamico3#mimico1#00091 1 3#5#2018
+4 4 4 d4 4 1 jamico4#mimico1#00092 1 4#5#2018
+5 5 5 e5 3 1 jamico5#mimico1#00093 1 5#5#2018
+6 6 6 f6 2 2 jamico6#mimico1#00094 1 6#5#2018
+7 7 7 g7 1 1 jamico7#mimico1#00095 1 7#5#2018
+8 8 8 h8 2 1 jamico8#mimico1#00096 1 8#5#2018
+9 9 9 i9 3 1 jamico9#mimico1#00097 1 9#5#2018

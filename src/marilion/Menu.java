@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Menu {
 
     ArrayList<Administrador> admins;
-    GestorHotel gestorHotel;
+    GestorHotel gestorHotel = new GestorHotel();
     private final GestorBase archivador = new GestorBase();
     boolean Finalizado;
 
@@ -222,9 +222,12 @@ public class Menu {
 
     private void PagoReservacion() {
         System.out.println("Ingrese el dui de la persona a pagar:");
-        String duiPago = Reader.consola.next();
+        String duiPago = Reader.consola.nextLine();
+        System.out.println("Ingrese la fecha de la reserva:");
+        String fecha = Reader.consola.nextLine();
         //metodo del gestor de compra, el gestor de compra crea factura necesito que me retornes costo segun reserva y la factura impresa
         // en pantalla
+        gestorHotel.pagarReserva("00091","3#5#2018");
         
     }
 
