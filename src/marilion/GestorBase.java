@@ -301,11 +301,6 @@ public class GestorBase {
 
     public ArrayList<Huesped> getListHuespedesActivos() {
         ArrayList<Huesped> listaAux = new ArrayList<>();
-        System.out.println("Las Huespedes obtenidos de archivo son: ");
-        for (String registro : getFileContent("huespedesTEST")) {
-            Huesped huesped = creadoHuesped(registro);
-            listaAux.add(huesped);
-        }
         return listaAux;
     }
 
