@@ -32,12 +32,12 @@ public class GestorBase {
         FileReader lectorArchivo;
         try {
             lectorArchivo = new FileReader(archivoTXT);
-            BufferedReader lectorLines = new BufferedReader(lectorArchivo);
-            while ((cadenaAux = lectorLines.readLine()) != null) {
-                System.out.println(cadenaAux);
-                filecontent.add(cadenaAux);
+            try (BufferedReader lectorLines = new BufferedReader(lectorArchivo)) {
+                while ((cadenaAux = lectorLines.readLine()) != null) {
+                    System.out.println(cadenaAux);
+                    filecontent.add(cadenaAux);
+                }
             }
-            lectorLines.close();
             lectorArchivo.close();
             archivoTXT = null;
         } catch (FileNotFoundException ex) {
@@ -67,6 +67,36 @@ public class GestorBase {
     }
 
     /**
+     * metodo crear huespedes
+     *
+     * @param huespedes sera un arreglo de cadenas y cada cadena lleva la
+     * informacion nesesaria para poder crear un huesped, es decir Nombre,
+     * Apellido, Dui
+     * @return Un grupo de huespedes basadoes en el arreglo que se pasa como
+     * parametro
+     */
+    private Huesped creadoHuesped(String master) {
+        String nombre, apellido, dui;
+        nombre = master.split(" ")[0];
+        apellido = master.split(" ")[1];
+        dui = master.split(" ")[2];
+        return new Huesped(nombre, apellido, dui);
+    }
+
+    private ArrayList<Huesped> creadoHuesped(String[] huespedes) {
+        ArrayList<Huesped> listaAux = new ArrayList<>();
+        String name, lastname, dui;
+        //en el archito de texto los atributos de cada huesped se separan con #
+        for (String huespedIndex : huespedes) {
+            name = huespedIndex.split("#")[0];
+            lastname = huespedIndex.split("#")[1];
+            dui = huespedIndex.split("#")[2];
+            listaAux.add(new Huesped(name, lastname, dui));
+        }
+        return listaAux;
+    }
+
+    /**
      * este metodo crea habitacion para probar el gestor de bases por que a
      * gerar se le ocurrio que seria buena idea tener una ArrayList dentro de un
      * arraylist dentro del objeto y se quejan de mi menu :v
@@ -89,7 +119,7 @@ public class GestorBase {
           este metodo devuelve el arreglo de cadenas con los diferentes
           nombres de los huespedes en la Habitacion
          */
-        return new Habitacion(indicadorDePiso, numeroDeHabitacion, estado, crearHuesped(huespedes));
+        return new Habitacion(indicadorDePiso, numeroDeHabitacion, estado, creadoHuesped(huespedes));
 
     }
 
@@ -218,26 +248,15 @@ public class GestorBase {
         }
     }
 
-    /**
-     * metodo crear huespedes
-     *
-     * @param huespedes sera un arreglo de cadenas y cada cadena lleva la
-     * informacion nesesaria para poder crear un huesped, es decir Nombre,
-     * Apellido, Dui
-     * @return Un grupo de huespedes basadoes en el arreglo que se pasa como
-     * parametro
-     */
-    private ArrayList<Huesped> crearHuesped(String[] huespedes) {
-        ArrayList<Huesped> listaAux = new ArrayList<>();
-        String name, lastname, dui;
-        //en el archito de texto los atributos de cada huesped se separan con #
-        for (String huespedIndex : huespedes) {
-            name = huespedIndex.split("#")[0];
-            lastname = huespedIndex.split("#")[1];
-            dui = huespedIndex.split("#")[2];
-            listaAux.add(new Huesped(name, lastname, dui));
+    public void printListHusped() {
+        int contador = 1;
+        for (Huesped auxF : getListHuespedes()) {
+            System.out.println("<-------------- Huespedes: " + contador + "-------------------->");
+            System.out.println("Nombre: " + auxF.Nombre);
+            System.out.println("Apellido: " + auxF.Apellido);
+            System.out.println("Dui: " + auxF.duiR());
+            contador++;
         }
-        return listaAux;
     }
 
     public ArrayList<Habitacion> getListHabitacion() {
@@ -282,14 +301,29 @@ public class GestorBase {
 
     public ArrayList<Huesped> getListHuespedesActivos() {
         ArrayList<Huesped> listaAux = new ArrayList<>();
+        System.out.println("Las Huespedes obtenidos de archivo son: ");
+        for (String registro : getFileContent("huespedesTEST")) {
+            Huesped huesped = creadoHuesped(registro);
+            listaAux.add(huesped);
+        }
         return listaAux;
     }
 
+    public ArrayList<Huesped> getListHuespedes() {
+        ArrayList<Huesped> listaAux = new ArrayList<>();
+        System.out.println("Las Huespedes obtenidos de archivo son: ");
+        String registro = getFileContent("huespedesTEST").get(0);
+           listaAux = creadoHuesped(registro.split(" ")[1].split(":"));
+        return listaAux;
+        }
+
+    
+
     public ArrayList<Habitacion> getListHabitacionesActivas() {
-         ArrayList<Habitacion> listaAux = new ArrayList<>();
+        ArrayList<Habitacion> listaAux = new ArrayList<>();
         for (Habitacion auxH : getListHabitacion()) {
-            if(auxH.habitacionEstado.equals(EstadoHabitacion.Habilitada)){
-                System.out.println("\033[32mHabitacion "+ auxH.indicadorDePiso+auxH.numeroHabitacion+ " esta habilitada");
+            if (auxH.habitacionEstado.equals(EstadoHabitacion.Habilitada)) {
+                System.out.println("\033[32mHabitacion " + auxH.indicadorDePiso + auxH.numeroHabitacion + " esta habilitada");
                 listaAux.add(auxH);
             }
 
