@@ -13,35 +13,27 @@ import java.util.ArrayList;
  */
 public class Menu {
 
-    ArrayList<Administrador> admins;
-    GestorHotel gestorHotel = new GestorHotel();
-    private final GestorBase archivador = new GestorBase();
+    private final ArrayList<Administrador> admins;
+    private final GestorHotel gestorHotel;
+    private final GestorBase archivador;
     boolean Finalizado;
 
     public Menu() {
-        //quitar comentario cuando se cree el gestor de base de datos
-        
-        admins = new ArrayList<Administrador>();
-        //admins = gestorHotel.ListaDeAdmins;
+        gestorHotel = new GestorHotel();
+        admins = gestorHotel.ListaDeAdmins;
+        archivador = GestorHotel.base;
         Finalizado = false;
-
     }
-    
-    public boolean login(String Username, String Pass)
-    {
-        for(Administrador admin: admins)
-        {
-            if(admin.Username.equals(Username))
-            {
-                if(admin.getPassword().equals(Pass))
-                {
+
+    public boolean login(String Username, String Pass) {
+        for (Administrador admin : admins) {
+            if (admin.Username.equals(Username)) {
+                if (admin.getPassword().equals(Pass)) {
                     return true;
                 }
             }
         }
-        
-        
-        
+
         return false;
     }
 
@@ -69,8 +61,8 @@ public class Menu {
 
     public void Iniciar() {
         int opcion;
-        String fecha="30#4#2018";
-        int id=0353715;
+        String fecha = "2#5#2018";
+        int id = 0353715;
         while (!Finalizado) {
             this.Opciones(1);
             opcion = Reader.consola.nextInt();
@@ -89,7 +81,7 @@ public class Menu {
                 case 4:
                     this.Opciones(4);
                     opcion = Reader.consola.nextInt();
-                    switch(opcion){
+                    switch (opcion) {
                         case 1:
                             //this.CambioFecha(id,this.DB_Reservas(),fecha);
                             break;
@@ -119,8 +111,7 @@ public class Menu {
                 case 8:
                     this.Opciones(8);
                     opcion = Reader.consola.nextInt();
-                    switch(opcion)
-                    {
+                    switch (opcion) {
                         case 1:
                             this.habilitarHabitacion();
                             break;
@@ -138,8 +129,7 @@ public class Menu {
                 case 9:
                     this.Opciones(9);
                     opcion = Reader.consola.nextInt();
-                    switch(opcion)
-                    {
+                    switch (opcion) {
                         case 1:
                             this.DB_Facturas();
                             break;
@@ -157,7 +147,6 @@ public class Menu {
                 case 10:
                     Finalizado = !Finalizado;
                     break;
-                    
 
             }
 
@@ -166,69 +155,64 @@ public class Menu {
 
     private void CrearReservacion() {
         int dias;
-        String fecha;
-        ArrayList<Persona> personas = new ArrayList<Persona>();
+        String fecha, habitax;
+        ArrayList<Huesped> acompanante = new ArrayList<>();
         Persona perpagar;
-        
-        while(true)
-        {
-            System.out.println("Ingrese la fecha:");
-            System.out.println("Ingrese el dia:");
-            int dia = Reader.consola.nextInt();
-            System.out.println("Ingrese el mes:");
-            int mes = Reader.consola.nextInt();
-            System.out.println("Ingrese el annio:");
-            int annio = Reader.consola.nextInt();
-            System.out.println("Ingrese los dias a quedarse ");
+
+        while (true) {
+            //limpiando Buffer
+            Reader.consola.nextLine();
+            System.out.println("Ingrese la fecha formato d#M#yyyy:");
+            System.out.println("Por ejemplo la fecha de hoy seria: "+ parserMax.FechaX.fechaEjemplo());
+            //System.out.println("O presione enter para llenarlo por parte");
+            parserMax.FechaX.paser(Reader.consola.nextLine());
+            System.out.println("Ingrese el numero de dias para hospedarse: ");
             dias = Reader.consola.nextInt();
             //algun metodo que defina si puede hacer la reservacion y si hay habitaciones disponibles
             //aqui adentro voy a crear las habitaciones cuando haya metodo que devvuelva habitaciones
             System.out.println("Ingrese id habitaciones:");
             String habitaciones_ids = Reader.consola.next();
-            if(true)//aquiva el metodo)
-            {
-                fecha = dia +"/"+ mes + "/"+annio;
-                
+            if (true){//aquiva el metodo)
                 break;
             }
         }
-        
+
         System.out.println("Ingrese acompanniantes:");
-        while(true)
-        {
+        while (true) {
             System.out.println("Ingrese el nombre: ");
             String auxnombre = Reader.consola.next();
             System.out.println("Ingrese el apellido: ");
             String auxapellido = Reader.consola.next();
             System.out.println("Ingrese el dui: ");
             String auxdui = Reader.consola.next();
-            Persona aux = new Persona(auxnombre,auxapellido,auxdui);
-            personas.add(aux);
+            Persona aux = new Persona(auxnombre, auxapellido, auxdui);
             System.out.println("end 1");
-            if(Reader.consola.nextInt() == 1)
-            {
+            if (Reader.consola.nextInt() == 1) {
                 break;
             }
         }
-        
+
         System.out.println("Ingrese el nombre de la persona a pagar: ");
-            String nombrepagar = Reader.consola.next();
-            System.out.println("Ingrese el apellido: ");
-            String apellidopagar = Reader.consola.next();
-            System.out.println("Ingrese el dui: ");
-            String duipagar = Reader.consola.next();
-        
+        String nombrepagar = Reader.consola.next();
+        System.out.println("Ingrese el apellido: ");
+        String apellidopagar = Reader.consola.next();
+        System.out.println("Ingrese el dui: ");
+        String duipagar = Reader.consola.next();
+
     }
 
     private void PagoReservacion() {
         System.out.println("Ingrese el dui de la persona a pagar:");
+        //Limpiando Buffer antes de seguir o el dui queda nulo
+        Reader.consola.nextLine();
         String duiPago = Reader.consola.nextLine();
         System.out.println("Ingrese la fecha de la reserva:");
         String fecha = Reader.consola.nextLine();
+        System.out.println(duiPago + " " + fecha);
         //metodo del gestor de compra, el gestor de compra crea factura necesito que me retornes costo segun reserva y la factura impresa
         // en pantalla
-        gestorHotel.pagarReserva("00091","3#5#2018");
-        
+        gestorHotel.pagarReserva(duiPago, fecha);
+
     }
 
     private void CancelarReservacion() {
@@ -236,15 +220,13 @@ public class Menu {
         String duiPago = Reader.consola.next();
         //metodo del gestor de hotel
     }
-    
-    private void CambioFecha()
-    {
+
+    private void CambioFecha() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
         //metodo para saber si existe la reservacion
-        while(true)
-        {
-             System.out.println("Ingrese la fecha:");
+        while (true) {
+            System.out.println("Ingrese la fecha:");
             System.out.println("Ingrese el dia:");
             int dia = Reader.consola.nextInt();
             System.out.println("Ingrese el mes:");
@@ -254,32 +236,31 @@ public class Menu {
             System.out.println("Ingrese los dias a quedarse ");
             int dias = Reader.consola.nextInt();
             //algun metodo que defina si puede hacer la reservacion y si hay habitaciones disponibles
-            if(true)//aquiva el metodo)
+            if (true)//aquiva el metodo)
             {
-                String fecha = dia +"/"+ mes + "/"+annio;
+                String fecha = dia + "/" + mes + "/" + annio;
                 break;
             }
         }
         //aca va el verdadero cambio de fecha
-        
+
     }
 
-   /* private ArrayList<Reservacion> CambioFechaAlgo(int id ,ArrayList<Reservacion> listR,String fecha) {
+    /* private ArrayList<Reservacion> CambioFechaAlgo(int id ,ArrayList<Reservacion> listR,String fecha) {
         listR=gestorHotel.cambioFecha(id, listR, fecha);
         return listR;
     }*/
-
     private void cambioPrincipal() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
         // metodo para saber si existe la reserva
         System.out.println("Ingrese el nombre del nuevo titular: ");
-            String auxnombre = Reader.consola.next();
-            System.out.println("Ingrese el apellido: ");
-            String auxapellido = Reader.consola.next();
-            System.out.println("Ingrese el dui: ");
-            String auxdui = Reader.consola.next();
-            Persona aux = new Persona(auxnombre,auxapellido,auxdui);
+        String auxnombre = Reader.consola.next();
+        System.out.println("Ingrese el apellido: ");
+        String auxapellido = Reader.consola.next();
+        System.out.println("Ingrese el dui: ");
+        String auxdui = Reader.consola.next();
+        Persona aux = new Persona(auxnombre, auxapellido, auxdui);
         //aca el metodo del gestor que reciba esto y cambie todo en el gestor
     }
 
@@ -289,13 +270,12 @@ public class Menu {
         // metodo para saber si existe la reserva
         System.out.println("Ingrese 1 basico,2 premium,3 ninguno");
         int opcion = Reader.consola.nextInt();
-        switch(opcion)
-        {
+        switch (opcion) {
             case 1:
                 //aca va el cambio dentro de la reserva del tipo o el llamado a gestor de hotel
                 break;
             case 2:
-                
+
                 break;
             case 3:
                 break;
@@ -305,33 +285,31 @@ public class Menu {
     private void CambioDias() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
-        
+
         System.out.println("Ingrese la nueva cantidad de dias ");
         int nuevosdias = Reader.consola.nextInt();
         //aca metodo que verifique y notifique si se hizo el cambio
     }
 
     private void CambioDeAcompanniantes() {
-       System.out.println("Ingrese el dui de la persona a pagar:");
+        System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
         // metodo para saber i existe la reserva
-        
+
         ArrayList<Persona> personas = new ArrayList<Persona>();
-        
+
         System.out.println("Ingrese acompanniantes:");
-        while(true)
-        {
+        while (true) {
             System.out.println("Ingrese el nombre: ");
             String auxnombre = Reader.consola.next();
             System.out.println("Ingrese el apellido: ");
             String auxapellido = Reader.consola.next();
             System.out.println("Ingrese el dui: ");
             String auxdui = Reader.consola.next();
-            Persona aux = new Persona(auxnombre,auxapellido,auxdui);
+            Persona aux = new Persona(auxnombre, auxapellido, auxdui);
             personas.add(aux);
             System.out.println("end 1");
-            if(Reader.consola.nextInt() == 1)
-            {
+            if (Reader.consola.nextInt() == 1) {
                 break;
             }
         }
@@ -369,7 +347,7 @@ public class Menu {
     }
 
     private void HabilitarPiso() {
-       //metodo para ver todas los pisos deshabilitados
+        //metodo para ver todas los pisos deshabilitados
         System.out.println("Ingrese el numero del piso");
         int pisohabilitar = Reader.consola.nextInt();
         // aca el metodo donde envie el int y el gestor se encarga de todo

@@ -19,7 +19,7 @@ public class GestorHotel {
     ArrayList<Factura> ListaDeFactura;
     ArrayList<Administrador> ListaDeAdmins;
 
-    public GestorBase base = new GestorBase();
+    public static GestorBase base = new GestorBase();
 
     public GestorHotel() {
         this.ListaDeHabitacion = base.getListHabitacion();
@@ -133,7 +133,6 @@ public class GestorHotel {
     }
 
     public void ReservaNueva(Reservacion res) {
-
         ListaDeReservas.add(res);
         base.Escribir("reservacion.txt", ListaDeReservas);
     }
@@ -150,7 +149,6 @@ public class GestorHotel {
                     System.out.println("Se pagan solas hasta que gestor de pago este activo");
                     break;
                 }
-
             }
             contador++;
         }

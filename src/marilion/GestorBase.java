@@ -15,6 +15,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import parserMax.StatadosX;
 
 /**
  *
@@ -115,7 +116,7 @@ public class GestorBase {
         EstadoHabitacion estado;
         indicadorDePiso = master.split(" ")[0].charAt(0);
         numeroDeHabitacion = Integer.parseInt(master.split(" ")[1]);
-        estado = parseStateHabitacion(master.split(" ")[2]);
+        estado = StatadosX.parseStateHabitacion(master.split(" ")[2]);
         huespedes = master.split(" ")[3].split(":");
         /*en el archivo los nombre de huespedes se separan por :
           este metodo devuelve el arreglo de cadenas con los diferentes
@@ -161,9 +162,9 @@ public class GestorBase {
         Id_Habitacion = master.split(" ")[3];
         Reservacion auxReser = new Reservacion(reserva, factura, huesped, Id_Habitacion);
         auxReser.setDias(Integer.parseInt(master.split(" ")[4]));
-        auxReser.setEstado(parseStateReserva(master.split(" ")[5]));
+        auxReser.setEstado(StatadosX.parseStateReserva(master.split(" ")[5]));
         auxReser.setPersonaAPagar(creadoHuesped(master.split(" ")[6]));
-        auxReser.setTipo(parseStatPack(master.split(" ")[7]));
+        auxReser.setTipo(StatadosX.parseStatPack(master.split(" ")[7]));
         auxReser.setFechaIni(master.split(" ")[8]);
         return auxReser;
     }
@@ -176,73 +177,6 @@ public class GestorBase {
         apellido = master.split(" ")[3];
         dui = master.split(" ")[4];
         return new Administrador(username, password, nombre, apellido, dui);
-    }
-
-    /**
-     * este metodo convierte datos tipo String a EstadoHabitacion
-     *
-     * @param value cadena con el valor de 1, 2 o 3
-     * @return EstadoHabitacion abilitada, deshabilitada o en uso
-     */
-    private EstadoHabitacion parseStateHabitacion(String value) {
-        EstadoHabitacion aux;
-        switch (Integer.parseInt(value)) {
-            case 1:
-                aux = EstadoHabitacion.Habilitada;
-                break;
-            case 2:
-                aux = EstadoHabitacion.Deshabilitada;
-                break;
-            case 3:
-                aux = EstadoHabitacion.EnUso;
-                break;
-            default:
-                System.err.println("Archivo potencialemte corrupto, estado desconocido");
-                aux = EstadoHabitacion.Deshabilitada;
-                break;
-        }
-        return aux;
-    }
-    private EstadoReservacion parseStateReserva(String value) {
-        EstadoReservacion aux;
-        switch (Integer.parseInt(value)) {
-            case 1:
-                aux = EstadoReservacion.Activa;
-                break;
-            case 2:
-                aux = EstadoReservacion.Cancelada;
-                break;
-            case 3:
-                aux = EstadoReservacion.EnUso;
-                break;
-            case 4:
-                aux = EstadoReservacion.Finalizada;
-                break;
-            default:
-                System.err.println("Archivo potencialemte corrupto, estado desconocido");
-                aux = EstadoReservacion.Cancelada;
-                break;
-        }
-        return aux;
-    }
-    private PaqueteTipo parseStatPack(String value) {
-        PaqueteTipo aux;
-        switch (Integer.parseInt(value)) {
-            case 1:
-                aux = PaqueteTipo.basico;
-                break;
-            case 2:
-                aux = PaqueteTipo.premium;
-                break;
-            case 3:
-                aux = PaqueteTipo.ninguno;
-                break;
-            default:
-                System.err.println("Archivo potencialemte corrupto, estado desconocido");
-                aux = PaqueteTipo.ninguno;
-                break;
-        }
-        return aux;
     }
 
     public void printListHabitacion() {
