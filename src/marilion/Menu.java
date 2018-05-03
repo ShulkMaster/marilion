@@ -220,7 +220,7 @@ public class Menu {
     private void CancelarReservacion() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
-        //metodo del gestor de hotel
+        gestorHotel.CancelaReserva(duiPago);
     }
 
     private void CambioFecha() {
@@ -263,7 +263,7 @@ public class Menu {
         System.out.println("Ingrese el dui: ");
         String auxdui = Reader.consola.next();
         Persona aux = new Persona(auxnombre, auxapellido, auxdui);
-        //aca el metodo del gestor que reciba esto y cambie todo en el gestor
+        gestorHotel.CambioPersonaP(duiPago, auxdui, auxnombre, auxapellido);
     }
 
     private void CambioPaquete() {

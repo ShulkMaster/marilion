@@ -88,7 +88,7 @@ public class GestorHotel {
                 }
             }
         }
-        base.Escribir("reservacion.txt", ListaDeReservas);
+        base.EscribirReservacion(ListaDeReservas, "reservacionTEST.txt");
     }
 
     public void Actualizar() {
