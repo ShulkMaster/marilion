@@ -226,8 +226,9 @@ public class Menu {
     private void CambioFecha() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
-        //metodo para saber si existe la reservacion
-        while (true) {
+        boolean bool=gestorHotel.Comprobador(duiPago);
+        
+        while (bool==true) {
             System.out.println("Ingrese la fecha:");
             System.out.println("Ingrese el dia:");
             int dia = Reader.consola.nextInt();
