@@ -10,8 +10,30 @@ package marilion;
  * @author mcdre
  */
 public class GestorCompra {
-    private int tipoPago;
+    /*private int tipoPago;
     private float monto;
     public Persona cliente;
-    public boolean Realizado;
+    public boolean Realizado;*/
+    
+    public float PrecioDoble;
+    public float PrecioSencilla;
+    
+    public GestorCompra()
+    {
+        PrecioDoble = 120;
+        PrecioSencilla = 70;
+    }
+    
+    public float RegresarPrecio(Reservacion re)
+    {
+        float costo = 0;
+        
+        String habitaciones = re.getId_habitacion();
+        
+        
+        
+        
+        return costo;
+    }
+    
 }
