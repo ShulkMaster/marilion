@@ -40,7 +40,6 @@ public class GestorHotel {
             }
         }
         base.Escribir("reservacion.txt", ListaDeReservas);
-        this.Actualizar();
     }
 
     public boolean FechaYhabitacion(String dui, String fecha) {
@@ -61,27 +60,23 @@ public class GestorHotel {
 
     public void CancelaReserva(String dui) {
         ArrayList<Reservacion> listN = new ArrayList<>();
-        for (Reservacion e : ListaDeReservas) {
+        for (Reservacion e : this.ListaDeReservas) {
             if (!dui.equals(e.PersonaAPagar.duiR())) {
                 listN.add(e);
             }
         }
         ListaDeReservas = listN;
         base.Escribir("reservacion.txt", listN);
-        this.Actualizar();
     }
 
     public void cambioPack(String dui, PaqueteTipo tipo) {
-        System.out.print("Duis"+"\n");
-        for (Reservacion e : ListaDeReservas) {
-            System.out.print(e.PersonaAPagar.duiR()+"\n");
-            if (dui.equals(e.PersonaAPagar.duiR())) {
+        for (Reservacion e : this.ListaDeReservas) {
+            if (e.PersonaAPagar.duiR().equals(dui)) {
                 e.tipo = tipo;
             }
         }
 
         base.Escribir("reservacion.txt", ListaDeReservas);
-        this.Actualizar();
     }
 
     public void cambioHabitacion(String dui, String habitacion) {
@@ -94,7 +89,6 @@ public class GestorHotel {
             }
         }
         base.Escribir("reservacion.txt", ListaDeReservas);
-        this.Actualizar();
     }
 
     public void Actualizar() {
@@ -132,7 +126,6 @@ public class GestorHotel {
         }*/
 
         base.Escribir("reservacion.txt", ListaDeReservas);
-        this.Actualizar();
     }
 
     /**
@@ -153,9 +146,9 @@ public class GestorHotel {
         base.Escribir("reservacion.txt", ListaDeReservas);
     }
 
-    public void printListReservas(ArrayList<Reservacion> arrayan) {
+    public void printListReservas() {
         int contador = 1;
-        for (Reservacion auxF : arrayan) {
+        for (Reservacion auxF : ListaDeReservas) {
             System.out.println("<-------------- Reservacion " + contador + "-------------------->");
             System.out.println("ID reservacion: " + auxF.Id_reservacion);
             System.out.println("ID factura: " + auxF.Id_factura);

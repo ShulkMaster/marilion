@@ -322,7 +322,7 @@ public class Menu {
     }
 
     private void VerListaDeReservaciones() {
-        archivador.printListReservas();
+        gestorHotel.printListReservas();
     }
 
     private void EntregarHabitacion() {
@@ -370,7 +370,7 @@ public class Menu {
     }
 
     private void DB_Reservas() {
-        gestorHotel.printListReservas(gestorHotel.ListaDeReservas);
+        archivador.printListReservas();
     }
 
     private void DB_HuespedesActuales() {
