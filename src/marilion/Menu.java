@@ -153,8 +153,16 @@ public class Menu {
 
     private void CrearReservacion() {
         String master;
-        //limpiando Buffer
+        /**
+         * mantene el mismo formato de archvo al final en la cadena master
+         * IDhabitacion, dias, persona a pagar, tipo de packete, fechaini los
+         * demas IDs son autogenerados por la base y el estado cuando creas una
+         * reservacion por defecto es activa, para mas info mira la clase reservacion
+         */
+        //limpiando Buffer podes cambiar el orden que se ejecuta el menu solo
         Reader.consola.nextLine();
+        System.out.println("Habitaciones disponibles: ");
+        gestorHotel.showListHabitDispo("3", "5#5#2018");//dias fecha
         System.out.println("Ingrese las habitaciones:");
         master = Reader.consola.nextLine();//split[0]
         System.out.println("Ingrese el numero de dias para hospedarse: ");
@@ -359,7 +367,7 @@ public class Menu {
     }
 
     private void DB_Reservas() {
-        gestorHotel.printListReservas();
+        gestorHotel.printListReservas(gestorHotel.ListaDeReservas);
     }
 
     private void DB_HuespedesActuales() {
@@ -367,7 +375,7 @@ public class Menu {
     }
 
     private void DB_Habitaciones() {
-        archivador.printListHabitacion();
+        archivador.printListHabitacion(gestorHotel.ListaDeHabitacion);
     }
 
 }

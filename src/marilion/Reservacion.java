@@ -30,6 +30,10 @@ public class Reservacion {
         this.Id_habitacion = Id_habitacion;
     }
 
+    public String getId_habitacion() {
+        return Id_habitacion;
+    }
+    
     @Override
     public String toString() {
         return Id_reservacion + " "

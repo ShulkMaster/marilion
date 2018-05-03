@@ -183,9 +183,9 @@ public class GestorBase {
         return new Administrador(username, password, nombre, apellido, dui);
     }
 
-    public void printListHabitacion() {
+    public void printListHabitacion(ArrayList<Habitacion> param) {
         int contador = 1;
-        for (Habitacion auxH : getListHabitacion()) {
+        for (Habitacion auxH : param) {
             System.out.println("<-------------- Habitacion " + contador + "-------------------->");
             System.out.println("indicador de piso: " + auxH.indicadorDePiso);
             System.out.println("estado de habitacion: " + auxH.habitacionEstado);
@@ -196,7 +196,6 @@ public class GestorBase {
             }
             contador++;
         }
-        getListHabitacionesActivas();
     }
 
     public void printListFacturas() {
@@ -316,28 +315,11 @@ public class GestorBase {
         return listaAux;
     }
 
-    public ArrayList<Huesped> getListHuespedesActivos() {
-        ArrayList<Huesped> listaAux = new ArrayList<>();
-        return listaAux;
-    }
-
     public ArrayList<Huesped> getListHuespedes() {
-        ArrayList<Huesped> listaAux = new ArrayList<>();
+        ArrayList<Huesped> listaAux;
         System.out.println("Las Huespedes obtenidos de archivo son: ");
         String registro = getFileContent("huespedesTEST").get(0);
         listaAux = creadoHuesped(registro.split(" ")[1].split(":"));
-        return listaAux;
-    }
-
-    public ArrayList<Habitacion> getListHabitacionesActivas() {
-        ArrayList<Habitacion> listaAux = new ArrayList<>();
-        for (Habitacion auxH : getListHabitacion()) {
-            if (auxH.habitacionEstado.equals(EstadoHabitacion.Habilitada)) {
-                System.out.println("\033[32mHabitacion " + auxH.indicadorDePiso + auxH.numeroHabitacion + " esta habilitada");
-                listaAux.add(auxH);
-            }
-
-        }
         return listaAux;
     }
 
