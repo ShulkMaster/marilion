@@ -210,9 +210,9 @@ public class GestorBase {
         }
     }
 
-    public void printListReservas() {
+    public void printListReservas(ArrayList<Reservacion> master) {
         int contador = 1;
-        for (Reservacion auxF : getListReservacion()) {
+        for (Reservacion auxF : master) {
             System.out.println("<-------------- Reservacion " + contador + "-------------------->");
             System.out.println("ID reservacion: " + auxF.Id_reservacion);
             System.out.println("ID factura: " + auxF.Id_factura);
@@ -229,9 +229,9 @@ public class GestorBase {
         EscribirReservacion(getListReservacion(), "reservacion.txt");
     }
 
-    public void printListAdmin() {
+    public void printListAdmin( ArrayList<Administrador> master ) {
         int contador = 1;
-        for (Administrador auxF : getListAdministradores()) {
+        for (Administrador auxF : master) {
             System.out.println("<-------------- Administrador " + contador + "-------------------->");
             System.out.println("Username: " + auxF.Username);
             System.out.println("password: " + auxF.getPassword());
