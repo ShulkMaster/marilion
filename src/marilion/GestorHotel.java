@@ -7,6 +7,7 @@ package marilion;
 
 import java.util.ArrayList;
 import parserMax.StatadosX;
+import parserMax.FechaX;
 
 /**
  *
@@ -170,25 +171,20 @@ public class GestorHotel {
     }
 
     public void showListHabitDispo(String fecha, String days) {
-        ArrayList<Habitacion> listaAux = new ArrayList<>();
-        for (Habitacion auxH : ListaDeHabitacion) {
-            if (auxH.habitacionEstado.equals(EstadoHabitacion.Habilitada)) {
-                System.out.println("\033[32mHabitacion " + auxH.indicadorDePiso + auxH.numeroHabitacion + " esta habilitada");
-                listaAux.add(auxH);
-            }
-
-        }
+        ArrayList<Habitacion> listaAux = getListHabitDispo(fecha, days);
+        base.printListHabitacion(listaAux);
     }
 
     public ArrayList<Habitacion> getListHabitDispo(String fecha, String days) {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
         for (Habitacion auxH : getListHabitaReady()) {
-            
-           // listaAux.add();getListReserChox(auxH.getHabId());
-
+            if (FechaX.doMatch(fecha, days, getListReserChox(auxH.getHabId()))) {
+                System.err.println("Que raro?");
+            } else {
+                listaAux.add(auxH);
+            }
         }
         return listaAux;
-
     }
 
     private ArrayList<Habitacion> getListHabitaReady() {
@@ -204,9 +200,10 @@ public class GestorHotel {
     }
 
     /**
-     * 
-     * @param CurrenHabiID id de llas habitacion a buscar en las reservas problematcas
-     * este ID sera el iterador para las 60 o N habitaciones que haya que revisar
+     *
+     * @param CurrenHabiID id de llas habitacion a buscar en las reservas
+     * problematcas este ID sera el iterador para las 60 o N habitaciones que
+     * haya que revisar
      * @return Reservaciones con posible conflicto cronologico
      */
     private ArrayList<Reservacion> getListReserChox(String CurrenHabiID) {
@@ -221,8 +218,10 @@ public class GestorHotel {
     }
 
     /**
-     * Filtra todas las reservaciones para solo leer las que estan activas o en uso
-     * que logicamente son las unicas que podrian tener conflicto con nuevas Reservas
+     * Filtra todas las reservaciones para solo leer las que estan activas o en
+     * uso que logicamente son las unicas que podrian tener conflicto con nuevas
+     * Reservas
+     *
      * @return Reservaciones con posible conflicto espacial
      */
     private ArrayList<Reservacion> getListReserX() {
