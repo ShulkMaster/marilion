@@ -73,7 +73,6 @@ public class GestorHotel {
     public void cambioPack(String dui, PaqueteTipo tipo) {
 
         for (Reservacion e : ListaDeReservas) {
-            //hacer metodo que retorne el dui para poder dejarlo en privado siempre
             if (dui.equals(e.PersonaAPagar.duiR())) {
                 e.tipo = tipo;
             }

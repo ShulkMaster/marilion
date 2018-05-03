@@ -274,12 +274,13 @@ public class Menu {
         int opcion = Reader.consola.nextInt();
         switch (opcion) {
             case 1:
-                //aca va el cambio dentro de la reserva del tipo o el llamado a gestor de hotel
+                gestorHotel.cambioPack(duiPago, PaqueteTipo.basico);
                 break;
             case 2:
-
+                gestorHotel.cambioPack(duiPago, PaqueteTipo.premium);
                 break;
             case 3:
+                gestorHotel.cambioPack(duiPago, PaqueteTipo.ninguno);
                 break;
         }
     }
