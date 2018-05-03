@@ -52,12 +52,19 @@ public class FechaX {
             long deltaDeseo = fechaReservFin.getTime() - fechaReserv.getTime();
             System.out.println(deltaDeseo);
             for (Reservacion problem : problematica) {
-                STANDARFORMAT.parse(problem.fechaIni);
-
+                Date fechaRev2 = STANDARFORMAT.parse(problem.fechaIni);
+                Date fechaRevFin2 = getFechafinal(fechaRev2, problem.dias);
+                long mayor = getmayor(fechaReserv.getTime(), fechaReservFin.getTime(), fechaRev2.getTime(), fechaRevFin2.getTime());
+                long menor = getmenor(fechaReserv.getTime(), fechaReservFin.getTime(), fechaRev2.getTime(), fechaRevFin2.getTime());
+                if ((restar(fechaReservFin.getTime(), fechaReserv.getTime()))-(restar(fechaRevFin2.getTime(), fechaRev2.getTime())) <= (mayor - menor)) {
+                    System.out.println((restar(fechaReservFin.getTime(), fechaReserv.getTime()))-(restar(fechaRevFin2.getTime(), fechaRev2.getTime())) <= (mayor - menor));
+                    return true;
+                }
             }
             return false;
         } catch (ParseException ex) {
             Logger.getLogger(FechaX.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Incapas de analizar las reservas");
             return false;
         }
     }
@@ -74,6 +81,32 @@ public class FechaX {
         CALENTAR.setTime(fechaINI);
         CALENTAR.add(CALENTAR.DAY_OF_YEAR, newday);
         return CALENTAR.getTime();
+    }
+
+    public static long getmayor(long param1, long param2, long param3, long param4) {
+        long[] karray = {param1, param2, param3, param4};
+        long aux = karray[0];
+        for (long numero : karray) {
+            if (aux < numero) {
+                aux = numero;
+            }
+        }
+        return aux;
+    }
+
+    public static long getmenor(long param1, long param2, long param3, long param4) {
+        long[] karray = {param1, param2, param3, param4};
+        long aux = karray[0];
+        for (long numero : karray) {
+            if (aux > numero) {
+                aux = numero;
+            }
+        }
+        return aux;
+    }
+
+    public static long restar(long x, long y) {
+        return x - y;
     }
 
     public static String fechaEjemplo() {
