@@ -7,4 +7,4 @@
 7 7 7 g7 1 EnUso jamico7#mimico1#00095 ninguno 7#5#2018
 8 8 8 h8 2 Activa jamico8#mimico1#00096 basico 8#5#2018
 9 9 9 a2 3 Activa jamico9#mimico1#00097 ninguno 9#5#2018
-10 10 10 15 21 Activa 96#15#963 premium 2#5#2018
+10 10 10 10 7 Activa mario#leon#00097 premium 5#5#2018
