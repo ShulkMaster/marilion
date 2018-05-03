@@ -58,10 +58,10 @@ public class FechaX {
                 long menor = getmenor(fechaReserv.getTime(), fechaReservFin.getTime(), fechaRev2.getTime(), fechaRevFin2.getTime());
                 if ((restar(fechaReservFin.getTime(), fechaReserv.getTime()))-(restar(fechaRevFin2.getTime(), fechaRev2.getTime())) <= (mayor - menor)) {
                     System.out.println((restar(fechaReservFin.getTime(), fechaReserv.getTime()))-(restar(fechaRevFin2.getTime(), fechaRev2.getTime())) <= (mayor - menor));
-                    return true;
+                    return false;
                 }
             }
-            return false;
+            return true;
         } catch (ParseException ex) {
             Logger.getLogger(FechaX.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println("Incapas de analizar las reservas");

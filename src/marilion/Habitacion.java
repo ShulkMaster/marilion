@@ -19,7 +19,6 @@ public class Habitacion {
     public ArrayList<Huesped> listaHuesped;
 
     public Habitacion() {
-
     }
 
     public Habitacion(char indicadorDePiso, int numeroHabitacion, EstadoHabitacion habitacionEstado, ArrayList<Huesped> listaHuesped) {
