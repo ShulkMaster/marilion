@@ -8,6 +8,7 @@ package parserMax;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +21,7 @@ import marilion.Reservacion;
 public class FechaX {
 
     private static final SimpleDateFormat STANDARFORMAT = new SimpleDateFormat("d#M#yyyy");
+    private static final Calendar CALENTAR = Calendar.getInstance();
 
     public static String paser(String param) {
         String provisional;
@@ -41,19 +43,37 @@ public class FechaX {
         }
     }
 
-    public static boolean doMatch(String fechaIni, String days1, ArrayList<Reservacion> problematica) {
+    public static boolean doMatch(String fechaDeseada, int days1, ArrayList<Reservacion> problematica) {
         try {
-            Date fechaProhibida1 = STANDARFORMAT.parse(fechaIni);
-            for(Reservacion problem : problematica){
-                
-            
-            
+            Date fechaReserv = STANDARFORMAT.parse(fechaDeseada);
+            Date fechaReservFin = getFechafinal(fechaReserv, days1);
+            System.out.println(fechaReserv);
+            System.out.println(fechaReservFin);
+            long deltaDeseo = fechaReservFin.getTime() - fechaReserv.getTime();
+            System.out.println(deltaDeseo);
+            for (Reservacion problem : problematica) {
+                STANDARFORMAT.parse(problem.fechaIni);
+
             }
             return false;
         } catch (ParseException ex) {
             Logger.getLogger(FechaX.class.getName()).log(Level.SEVERE, null, ex);
-             return false;
-        }        
+            return false;
+        }
+    }
+
+    public static void StartCalendar(String fechaDeseada) {
+        try {
+            CALENTAR.setTime(STANDARFORMAT.parse(fechaDeseada));
+        } catch (ParseException ex) {
+            Logger.getLogger(FechaX.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static Date getFechafinal(Date fechaINI, int newday) {
+        CALENTAR.setTime(fechaINI);
+        CALENTAR.add(CALENTAR.DAY_OF_YEAR, newday);
+        return CALENTAR.getTime();
     }
 
     public static String fechaEjemplo() {

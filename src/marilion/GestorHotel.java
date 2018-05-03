@@ -164,16 +164,16 @@ public class GestorHotel {
         }
     }
 
-    public void showListHabitDispo(String fecha, String days) {
+    public void showListHabitDispo(String fecha, int days) {
         ArrayList<Habitacion> listaAux = getListHabitDispo(fecha, days);
         base.printListHabitacion(listaAux);
     }
 
-    public ArrayList<Habitacion> getListHabitDispo(String fecha, String days) {
+    public ArrayList<Habitacion> getListHabitDispo(String fecha, int days) {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
         for (Habitacion auxH : getListHabitaReady()) {
             if (FechaX.doMatch(fecha, days, getListReserChox(auxH.getHabId()))) {
-                System.err.println("Que raro?");
+                System.err.println("Hay reservas interfiriendo");
             } else {
                 listaAux.add(auxH);
             }
