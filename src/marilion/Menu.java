@@ -366,15 +366,15 @@ public class Menu {
     }
 
     private void DB_Facturas() {
-        archivador.printListFacturas();
+        archivador.printListFacturas(gestorHotel.ListaDeFactura);
     }
 
     private void DB_Reservas() {
-        archivador.printListReservas();
+        archivador.printListReservas(gestorHotel.ListaDeReservas);
     }
 
     private void DB_HuespedesActuales() {
-        archivador.printListAdmin();
+        archivador.printListAdmin(gestorHotel.ListaDeAdmins);
     }
 
     private void DB_Habitaciones() {
