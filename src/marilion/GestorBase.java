@@ -345,7 +345,7 @@ public class GestorBase {
     }
 
     //aca estan todos los metodos de escritura
-    private void EscribirReservacion(ArrayList<Reservacion> lista, String ficheroe) {
+    public void EscribirReservacion(ArrayList<Reservacion> lista, String ficheroe) {
         FileWriter fichero = null;
         PrintWriter pw = null;
         try {
