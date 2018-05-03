@@ -299,12 +299,12 @@ public class Menu {
     private void CambioDeAcompanniantes() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
-        // metodo para saber i existe la reserva
+        boolean bool=gestorHotel.Comprobador(duiPago);
 
         ArrayList<Persona> personas = new ArrayList<Persona>();
 
         System.out.println("Ingrese acompanniantes:");
-        while (true) {
+        while (bool==true) {
             System.out.println("Ingrese el nombre: ");
             String auxnombre = Reader.consola.next();
             System.out.println("Ingrese el apellido: ");

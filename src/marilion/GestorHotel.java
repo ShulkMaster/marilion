@@ -246,4 +246,15 @@ public class GestorHotel {
             contador++;
         }
     }
+    
+    public boolean Comprobador(String dui){
+        boolean bool=false;
+        for(Reservacion e:ListaDeReservas){
+            if(e.PersonaAPagar.duiR().equals(dui)){
+                bool=true;
+            }
+        }
+        
+        return bool;
+    }
 }
