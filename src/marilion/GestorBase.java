@@ -198,9 +198,9 @@ public class GestorBase {
         }
     }
 
-    public void printListFacturas() {
+    public void printListFacturas(ArrayList<Factura> master ) {
         int contador = 1;
-        for (Factura auxF : getListFactura()) {
+        for (Factura auxF : master) {
             System.out.println("<-------------- Factura " + contador + "-------------------->");
             System.out.println("ID factura: " + auxF.Id_factura);
             System.out.println("Cliente: " + auxF.cliente.Nombre + " " + auxF.cliente.Apellido);
@@ -226,7 +226,6 @@ public class GestorBase {
             System.out.println("Fecha inicial : " + auxF.fechaIni);
             contador++;
         }
-        EscribirReservacion(getListReservacion(), "reservacion.txt");
     }
 
     public void printListAdmin( ArrayList<Administrador> master ) {

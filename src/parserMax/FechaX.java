@@ -42,8 +42,18 @@ public class FechaX {
     }
 
     public static boolean doMatch(String fechaIni, String days1, ArrayList<Reservacion> problematica) {
-
-        return false;
+        try {
+            Date fechaProhibida1 = STANDARFORMAT.parse(days1);
+            for(Reservacion problem : problematica){
+                
+            
+            
+            }
+            return false;
+        } catch (ParseException ex) {
+            Logger.getLogger(FechaX.class.getName()).log(Level.SEVERE, null, ex);
+             return false;
+        }        
     }
 
     public static String fechaEjemplo() {
