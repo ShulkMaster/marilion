@@ -34,6 +34,10 @@ public class Reservacion {
         return Id_habitacion;
     }
     
+    private String[] parseID(){
+        return Id_habitacion.split("#");
+    }
+    
     @Override
     public String toString() {
         return Id_reservacion + " "

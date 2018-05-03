@@ -68,7 +68,7 @@ public class Menu {
             switch (opcion) {
                 case 1:
                     //crear reservacion
-                    this.CrearReservacion();
+                    gestorHotel.CrearReservacion();
                     break;
                 case 2:
                     this.PagoReservacion();
@@ -149,58 +149,6 @@ public class Menu {
             }
 
         }
-    }
-
-    private void CrearReservacion() {
-        String master;
-        /**
-         * mantene el mismo formato de archvo al final en la cadena master
-         * IDhabitacion, dias, persona a pagar, tipo de packete, fechaini los
-         * demas IDs son autogenerados por la base y el estado cuando creas una
-         * reservacion por defecto es activa, para mas info mira la clase reservacion
-         */
-        //limpiando Buffer podes cambiar el orden que se ejecuta el menu solo
-        Reader.consola.nextLine();
-        System.out.println("Habitaciones disponibles: ");
-        gestorHotel.showListHabitDispo("5#5#2018",3);//fecha dia
-        System.out.println("Ingrese las habitaciones:");
-        master = Reader.consola.nextLine();//split[0]
-        System.out.println("Ingrese el numero de dias para hospedarse: ");
-        master += (" " + Reader.consola.nextLine());//split[1]
-        master += " 1";
-        System.out.println("Ingrese el nombre de la persona a pagar: ");
-        master += (" " + Reader.consola.nextLine());
-        System.out.println("Ingrese el apellido: ");
-        master += ("#" + Reader.consola.nextLine());
-        System.out.println("Ingrese el dui: ");
-        master += ("#" + Reader.consola.nextLine());
-        System.out.println("Ingrese tipo de paquete: ");
-        System.out.println("1 = Basico 2 = Primium 3 = Ninguno");
-        master += (" " + Reader.consola.nextLine());
-        System.out.println("Ingrese la fecha formato d#M#yyyy:");
-        System.out.println("Por ejemplo la fecha de hoy seria: " + parserMax.FechaX.fechaEjemplo());
-        master += (" " + parserMax.FechaX.paser(Reader.consola.nextLine()));//split[1]
-        System.out.println(master + " Debug");
-        //algun metodo que defina si puede hacer la reservacion y si hay habitaciones disponibles
-        //aqui adentro voy a crear las habitaciones cuando haya metodo que devvuelva habitaciones
-        gestorHotel.ReservaNueva(master);
-        /*
-        System.out.println("Ingrese acompanniantes:");
-        boolean anadex = true;
-        while (anadex) {
-            System.out.println("Ingrese el nombre: ");
-            master += (Reader.consola.next());
-            System.out.println("Ingrese el apellido: ");
-            //master += ("#" + Reader.consola.next();
-            System.out.println("Ingrese el dui: ");
-            String auxdui = Reader.consola.next();
-            //Persona aux = new Persona(auxnombre, auxapellido, auxdui);
-            System.out.println("end 1");
-            if (Reader.consola.nextInt() == 1) {
-                anadex = false;
-            }
-        }
-         */
     }
 
     private void PagoReservacion() {

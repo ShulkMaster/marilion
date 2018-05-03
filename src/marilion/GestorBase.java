@@ -27,6 +27,9 @@ public class GestorBase {
     public static int lastIDReserva = 0;
     public static int lastIDFactura = 0;
     public static int lastIDHuesped = 0;
+    public static final String RESERVAS = "reservas";
+    public static final String FACTURAS = "facturas";
+    public static final String HABITACIONES = "habitaciones";
     private File archivoTXT;
 
     public GestorBase() {
@@ -50,6 +53,8 @@ public class GestorBase {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GestorBase.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println("No se encontro el archivo " + archivoTXT.getName());
+            System.out.println("\033[34mCreando nuevo;");
+
         } catch (IOException ex) {
             Logger.getLogger(GestorBase.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println("No se puede leer el archivo " + archivoTXT.getName());
@@ -113,20 +118,16 @@ public class GestorBase {
      * informacion necesaria para recontruir una habitacion en memoria RAM
      * @return Habitacion
      */
-    private Habitacion creadoHabitacion(String master) {
-        char indicadorDePiso;
-        int numeroDeHabitacion;
-        String[] huespedes;
-        EstadoHabitacion estado;
-        indicadorDePiso = master.split(" ")[0].charAt(0);
-        numeroDeHabitacion = Integer.parseInt(master.split(" ")[1]);
-        estado = StatadosX.parseStateHabitacion(master.split(" ")[2]);
-        huespedes = master.split(" ")[3].split(":");
-        /*en el archivo los nombre de huespedes se separan por :
+    private Habitacion creadoHabitacion(String[] master) {
+        char indica = master[0].split("#")[0].charAt(0);
+        int index = Integer.parseInt(master[0].split("#")[1]);
+        EstadoHabitacion estado = StatadosX.parseStateHabitacion(master[1]);
+        /*
+        en el archivo los nombre de huespedes se separan por :
           este metodo devuelve el arreglo de cadenas con los diferentes
-          nombres de los huespedes en la Habitacion
+        nombres de los huespedes en la Habitacion
          */
-        return new Habitacion(indicadorDePiso, numeroDeHabitacion, estado, creadoHuesped(huespedes));
+        return new Habitacion(indica, index, estado);
 
     }
 
@@ -198,7 +199,7 @@ public class GestorBase {
         }
     }
 
-    public void printListFacturas(ArrayList<Factura> master ) {
+    public void printListFacturas(ArrayList<Factura> master) {
         int contador = 1;
         for (Factura auxF : master) {
             System.out.println("<-------------- Factura " + contador + "-------------------->");
@@ -228,7 +229,7 @@ public class GestorBase {
         }
     }
 
-    public void printListAdmin( ArrayList<Administrador> master ) {
+    public void printListAdmin(ArrayList<Administrador> master) {
         int contador = 1;
         for (Administrador auxF : master) {
             System.out.println("<-------------- Administrador " + contador + "-------------------->");
@@ -278,8 +279,8 @@ public class GestorBase {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
         System.out.println("Las habitaciones leidas desde archivo son: ");
         for (String registro : getFileContent("habitacionTEST")) {
-            Habitacion currenthabitacion = creadoHabitacion(registro);
-            listaAux.add(currenthabitacion);
+            System.out.println(registro);
+            listaAux.add(creadoHabitacion(registro.split(" ")));
         }
         return listaAux;
     }
@@ -297,7 +298,7 @@ public class GestorBase {
     public ArrayList<Reservacion> getListReservacion() {
         ArrayList<Reservacion> listaAux = new ArrayList<>();
         System.out.println("Las reservaciones obtenidas de archivo son : ");
-        for (String registro : getFileContent("reservacionTEST")) {
+        for (String registro : getFileContent(RESERVAS)) {
             Reservacion currenReservacion = creadoReservacion(registro);
             listaAux.add(currenReservacion);
         }
@@ -323,158 +324,45 @@ public class GestorBase {
     }
 
     //metodo para escribir las listas universal 
-    public <E> void Escribir(String fichero, ArrayList<E> lista) {
-        switch (fichero) {
-            case "reservacion.txt":
-                this.EscribirReservacion((ArrayList<Reservacion>) lista, fichero);
-                break;
-            case "admins.txt":
-                this.EscribirAdmins((ArrayList<Administrador>) lista, fichero);
-                break;
-            case "habitaciones.txt":
-                this.EscribirHabitaciones((ArrayList<Habitacion>) lista, fichero);
-                break;
-            case "huespedes.txt":
-                this.EscribirHuespedesActuales((ArrayList<Huesped>) lista, fichero);
-                break;
-            case "facturas.txt":
-                this.EscribirFacturas((ArrayList<Factura>) lista, fichero);
-                break;
+    public <E> void Escribir(ArrayList<E> lista, String filename) {
+        FileWriter fichero;
+        PrintWriter pw;
+        int breakerBox;
+        archivoTXT = new File(filename);
+        try {
+            fichero = new FileWriter(archivoTXT);
+            pw = new PrintWriter(fichero);
+            for (E elemento : lista) {
+                pw.print(elemento.toString() + "\n");
+            }
+            pw.close();
+            fichero.close();
+            archivoTXT = null;
+        } catch (IOException e) {
+            System.err.println("Imposible escribir a " + archivoTXT.getName() + "correctamente");
         }
     }
 
-    //aca estan todos los metodos de escritura
-    public void EscribirReservacion(ArrayList<Reservacion> lista, String ficheroe) {
+    /*escribe las 60 habitaciones bacias en un txt*/
+    public void refractorhabitaciones() {
+        int iterador;
+        char indicador;
+        archivoTXT = new File("habitaciones.txt");
         FileWriter fichero = null;
         PrintWriter pw = null;
         try {
-            fichero = new FileWriter(ficheroe);
+            fichero = new FileWriter(archivoTXT);
             pw = new PrintWriter(fichero);
-
-            //aca va el verdadero codigo de escritura de DB
-            for (Reservacion re : lista) {
-                pw.println(re.toString());
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                // Nuevamente aprovechamos el finally para 
-                // asegurarnos que se cierra el fichero.
-                if (null != fichero) {
-                    fichero.close();
+            for (indicador = 'a'; indicador < ('f' + 1); indicador++) {
+                for (iterador = 1; iterador < 11; iterador++) {
+                    String parser = (indicador + "#" + iterador);
+                    pw.println(parser);
                 }
-            } catch (Exception e2) {
-                e2.printStackTrace();
             }
+            pw.close();
+            fichero.close();
+        } catch (IOException e) {
+            System.err.println("Imposible escribir a " + archivoTXT.getName() + "correctamente");
         }
     }
-
-    private void EscribirAdmins(ArrayList<Administrador> arrayList, String ficheroe) {
-        FileWriter fichero = null;
-        PrintWriter pw = null;
-        try {
-            fichero = new FileWriter(ficheroe);
-            pw = new PrintWriter(fichero);
-            for (Administrador admin : arrayList) {
-                pw.print(admin.toString() + " ");
-                pw.print(admin.Username + " ");
-                pw.print(admin.getPassword() + " ");
-                pw.print("\n");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                // Nuevamente aprovechamos el finally para 
-                // asegurarnos que se cierra el fichero.
-                if (null != fichero) {
-                    fichero.close();
-                }
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
-    }
-
-    //Metodo para escribir el archivo a utilizar de base para las habitaciones donde se tendra una habitacion por linea
-    private void EscribirHabitaciones(ArrayList<Habitacion> arrayList, String ficheroe) {
-        FileWriter fichero = null;
-        PrintWriter pw = null;
-        try {
-            fichero = new FileWriter(ficheroe);
-            pw = new PrintWriter(fichero);
-            for (Habitacion h : arrayList) {
-                pw.println(h.toString());
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                // Nuevamente aprovechamos el finally para 
-                // asegurarnos que se cierra el fichero.
-                if (null != fichero) {
-                    fichero.close();
-                }
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
-    }
-
-    private void EscribirHuespedesActuales(ArrayList<Huesped> arrayList, String ficheroe) {
-        FileWriter fichero = null;
-        PrintWriter pw = null;
-        try {
-            fichero = new FileWriter(ficheroe);
-            pw = new PrintWriter(fichero);
-
-            for (Huesped h : arrayList) {
-                pw.println(h.ToString());
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                // Nuevamente aprovechamos el finally para 
-                // asegurarnos que se cierra el fichero.
-                if (null != fichero) {
-                    fichero.close();
-                }
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
-    }
-
-    private void EscribirFacturas(ArrayList<Factura> arrayList, String ficheroe) {
-        FileWriter fichero = null;
-        PrintWriter pw = null;
-        try {
-            fichero = new FileWriter(ficheroe);
-            pw = new PrintWriter(fichero);
-
-            for (Factura f : arrayList) {
-                pw.println(f.toString() + "\n");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                // Nuevamente aprovechamos el finally para 
-                // asegurarnos que se cierra el fichero.
-                if (null != fichero) {
-                    fichero.close();
-                }
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
-    }
-
 }

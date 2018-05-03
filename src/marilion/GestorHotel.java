@@ -24,12 +24,79 @@ public class GestorHotel {
     public static GestorBase base = new GestorBase();
 
     public GestorHotel() {
+        // base.escribirHabitacion();
         this.ListaDeHabitacion = base.getListHabitacion();
         //this.ListaDeHuespedes = base.getListHuespedesActivos();
         this.ListaDeReservas = base.getListReservacion();
         this.ListaDeFactura = base.getListFactura();
         this.ListaDeAdmins = base.getListAdministradores();
         base.checkOutIds(ListaDeReservas);
+    }
+
+    /* old New reservation
+        System.out.println("Ingrese acompanniantes:");
+        boolean anadex = true;
+        while (anadex) {
+            System.out.println("Ingrese el nombre: ");
+            master += (Reader.consola.next());
+            System.out.println("Ingrese el apellido: ");
+            //master += ("#" + Reader.consola.next();
+            System.out.println("Ingrese el dui: ");
+            String auxdui = Reader.consola.next();
+            //Persona aux = new Persona(auxnombre, auxapellido, auxdui);
+            System.out.println("end 1");
+            if (Reader.consola.nextInt() == 1) {
+                anadex = false;
+            }
+        }
+     */
+    public void CrearReservacion() {
+        //limpiando Buffer podes cambiar el orden que se ejecuta el menu solo
+        Reader.consola.nextLine();
+
+        String master;
+        /**
+         * mantene el mismo formato de archvo al final en la cadena master
+         * IDhabitacion, dias, persona a pagar, tipo de packete, fechaini los
+         * demas IDs son autogenerados por la base y el estado cuando creas una
+         * reservacion por defecto es activa, para mas info mira la clase
+         * reservacion
+         */
+
+        //Datos del cliente partial string NAME#LASTNAME#DUI[ESPACE]
+        System.out.println("Ingrese el nombre de la persona a pagar: ");
+        master = Reader.consola.nextLine();
+        System.out.println("Ingrese el apellido: ");
+        master += ("#" + Reader.consola.nextLine());
+        System.out.println("Ingrese el dui: ");
+        master += ("#" + Reader.consola.nextLine());//on [0]
+
+        //Datos de la Reserva
+        System.out.println("Ingrese el numero de dias para hospedarse: ");
+        master += (" " + Reader.consola.nextLine());//split[1]
+        System.out.println("Ingrese la fecha formato d#M#yyyy:");
+        System.out.println("Por ejemplo la fecha de hoy seria: " + parserMax.FechaX.fechaEjemplo());
+        master += (" " + parserMax.FechaX.paser(Reader.consola.nextLine()));//split[2]
+        System.out.println("Habitaciones disponibles: ");
+        System.out.println("\033[35m" + master.split(" ")[2] + " Dias: " + Integer.parseInt(master.split(" ")[1]));
+        showListHabitDispo(master.split(" ")[2], Integer.parseInt(master.split(" ")[1]));//fecha dia
+        System.out.println("Ingrese las habitaciones:");
+        master += (" " + Reader.consola.nextLine());
+        System.out.println("¿Desea agregar la segunda Habitacion?");
+        System.out.println("1 = SI \t 2 = NO");
+        if (Reader.consola.nextInt() == 1) {
+            System.out.println("nueva habitacion");
+            master += (":" + Reader.consola.nextLine());
+        }
+        //limpiando Buffer podes
+        Reader.consola.nextLine();
+        System.out.println("Ingrese tipo de paquete: ");
+        System.out.println("1 = Basico 2 = Primium 3 = Ninguno");
+        master += (" " + Reader.consola.nextLine());
+        //algun metodo que defina si puede hacer la reservacion y si hay habitaciones disponibles
+        //aqui adentro voy a crear las habitaciones cuando haya metodo que devvuelva habitaciones
+        System.out.println("\033[35m" + master + " Debug");
+        ReservaNueva(master.split(" "));
     }
 
     public void cambioFecha(String dui, String fecha) {
@@ -39,7 +106,7 @@ public class GestorHotel {
                 e.fechaIni = fecha;
             }
         }
-        base.Escribir("reservacion.txt", ListaDeReservas);
+        base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
 
     public boolean FechaYhabitacion(String dui, String fecha) {
@@ -54,19 +121,18 @@ public class GestorHotel {
                 }
             }
         }
-
         return bool;
     }
 
     public void CancelaReserva(String dui) {
         ArrayList<Reservacion> listN = new ArrayList<>();
-        for (Reservacion e : this.ListaDeReservas) {
+        for (Reservacion e : ListaDeReservas) {
             if (!dui.equals(e.PersonaAPagar.duiR())) {
                 listN.add(e);
             }
         }
         ListaDeReservas = listN;
-        base.Escribir("reservacion.txt", listN);
+        base.Escribir(listN, GestorBase.RESERVAS);
     }
 
     public void cambioPack(String dui, PaqueteTipo tipo) {
@@ -76,7 +142,7 @@ public class GestorHotel {
             }
         }
 
-        base.Escribir("reservacion.txt", ListaDeReservas);
+        base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
 
     public void cambioHabitacion(String dui, String habitacion) {
@@ -88,15 +154,7 @@ public class GestorHotel {
                 }
             }
         }
-        base.EscribirReservacion(ListaDeReservas, "reservacionTEST.txt");
-    }
-
-    public void Actualizar() {
-        this.ListaDeHabitacion = base.getListHabitacion();
-        //this.ListaDeHuespedes = base.getListHuespedesActivos();
-        this.ListaDeReservas = base.getListReservacion();
-        this.ListaDeFactura = base.getListFactura();
-        this.ListaDeAdmins = base.getListAdministradores();
+        base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
 
     public void mostrarHabitacion() {
@@ -125,7 +183,7 @@ public class GestorHotel {
             
         }*/
 
-        base.Escribir("reservacion.txt", ListaDeReservas);
+        base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
 
     /**
@@ -134,16 +192,17 @@ public class GestorHotel {
      * IDreserva,IDfactura,IDhuespedes,IDhabitacion, dias,estado, pagador, tipo,
      * fechaini
      */
-    public void ReservaNueva(String masterType) {
-        Reservacion Prototype = new Reservacion(GestorBase.lastIDReserva, GestorBase.lastIDFactura, GestorBase.lastIDHuesped, masterType.split(" ")[0]);
-        Prototype.setDias(Integer.parseInt(masterType.split(" ")[1]));
+    public void ReservaNueva(String[] masterType) {
+        System.out.println(masterType[3]);
+        Reservacion Prototype = new Reservacion(GestorBase.lastIDReserva, GestorBase.lastIDFactura, GestorBase.lastIDHuesped, masterType[3]);
+        Prototype.setDias(Integer.parseInt(masterType[1]));
         Prototype.setEstado(EstadoReservacion.Activa);
-        Prototype.setPersonaAPagar(base.creadoPersona(masterType.split(" ")[3]));
-        Prototype.setTipo(StatadosX.parseStatPack(masterType.split(" ")[4]));
-        Prototype.setFechaIni(masterType.split(" ")[5]);
+        Prototype.setPersonaAPagar(base.creadoPersona(masterType[0]));
+        Prototype.setTipo(StatadosX.parseStatPack(masterType[4]));
+        Prototype.setFechaIni(masterType[2]);
         ListaDeReservas.add(Prototype);
         base.AutoIncrement();
-        base.Escribir("reservacion.txt", ListaDeReservas);
+        base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
 
     public void printListReservas() {
@@ -172,9 +231,10 @@ public class GestorHotel {
     public ArrayList<Habitacion> getListHabitDispo(String fecha, int days) {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
         for (Habitacion auxH : getListHabitaReady()) {
+            System.out.println("\033[32mHabitacion " + auxH.indicadorDePiso + auxH.numeroHabitacion);
+            System.out.println(auxH.getHabId());
             if (FechaX.doMatch(fecha, days, getListReserChox(auxH.getHabId()))) {
-                System.err.println("Hay reservas interfiriendo");
-            } else {
+                System.err.println("Esta limpio");
                 listaAux.add(auxH);
             }
         }
@@ -185,10 +245,8 @@ public class GestorHotel {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
         for (Habitacion auxH : ListaDeHabitacion) {
             if (auxH.habitacionEstado.equals(EstadoHabitacion.Habilitada) || auxH.habitacionEstado.equals(EstadoHabitacion.EnUso)) {
-                System.out.println("\033[32mHabitacion " + auxH.indicadorDePiso + auxH.numeroHabitacion);
                 listaAux.add(auxH);
             }
-
         }
         return listaAux;
     }
@@ -222,7 +280,6 @@ public class GestorHotel {
         ArrayList<Reservacion> listaAux = new ArrayList<>();
         for (Reservacion auxH : ListaDeReservas) {
             if (auxH.Estado.equals(EstadoReservacion.Activa) || auxH.Estado.equals(EstadoReservacion.EnUso)) {
-                System.out.println("\033[34mReservas Activas y EnUso :" + auxH.Id_reservacion);
                 listaAux.add(auxH);
             }
 
@@ -246,15 +303,15 @@ public class GestorHotel {
             contador++;
         }
     }
-    
-    public boolean Comprobador(String dui){
-        boolean bool=false;
-        for(Reservacion e:ListaDeReservas){
-            if(e.PersonaAPagar.duiR().equals(dui)){
-                bool=true;
+
+    public boolean Comprobador(String dui) {
+        boolean bool = false;
+        for (Reservacion e : ListaDeReservas) {
+            if (e.PersonaAPagar.duiR().equals(dui)) {
+                bool = true;
             }
         }
-        
+
         return bool;
     }
 }

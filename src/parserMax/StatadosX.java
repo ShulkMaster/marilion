@@ -24,14 +24,14 @@ public class StatadosX {
      */
     public static EstadoHabitacion parseStateHabitacion(String value) {
         EstadoHabitacion aux;
-        switch (Integer.parseInt(value)) {
-            case 1:
+        switch (value) {
+            case "Habilitada":
                 aux = EstadoHabitacion.Habilitada;
                 break;
-            case 2:
+            case "Deshabilitada":
                 aux = EstadoHabitacion.Deshabilitada;
                 break;
-            case 3:
+            case "EnUso":
                 aux = EstadoHabitacion.EnUso;
                 break;
             default:
@@ -107,5 +107,5 @@ public class StatadosX {
         }
         return aux;
     }
-
+    
 }

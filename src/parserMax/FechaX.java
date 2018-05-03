@@ -47,17 +47,13 @@ public class FechaX {
         try {
             Date fechaReserv = STANDARFORMAT.parse(fechaDeseada);
             Date fechaReservFin = getFechafinal(fechaReserv, days1);
-            System.out.println(fechaReserv);
-            System.out.println(fechaReservFin);
-            long deltaDeseo = fechaReservFin.getTime() - fechaReserv.getTime();
-            System.out.println(deltaDeseo);
             for (Reservacion problem : problematica) {
                 Date fechaRev2 = STANDARFORMAT.parse(problem.fechaIni);
                 Date fechaRevFin2 = getFechafinal(fechaRev2, problem.dias);
-                long mayor = getmayor(fechaReserv.getTime(), fechaReservFin.getTime(), fechaRev2.getTime(), fechaRevFin2.getTime());
+                long mayor = getmayor(fechaReserv, fechaReservFin, fechaRev2, fechaRevFin2);
                 long menor = getmenor(fechaReserv.getTime(), fechaReservFin.getTime(), fechaRev2.getTime(), fechaRevFin2.getTime());
-                if ((restar(fechaReservFin.getTime(), fechaReserv.getTime()))-(restar(fechaRevFin2.getTime(), fechaRev2.getTime())) <= (mayor - menor)) {
-                    System.out.println((restar(fechaReservFin.getTime(), fechaReserv.getTime()))-(restar(fechaRevFin2.getTime(), fechaRev2.getTime())) <= (mayor - menor));
+                if ((restar(fechaReservFin, fechaReserv))-(restar(fechaRevFin2, fechaRev2)) <= (mayor - menor)) {
+                    System.out.println((restar(fechaReservFin, fechaReserv))-(restar(fechaRevFin2, fechaRev2)) <= (mayor - menor));
                     return false;
                 }
             }
@@ -79,16 +75,16 @@ public class FechaX {
 
     public static Date getFechafinal(Date fechaINI, int newday) {
         CALENTAR.setTime(fechaINI);
-        CALENTAR.add(CALENTAR.DAY_OF_YEAR, newday);
+        CALENTAR.add(Calendar.DAY_OF_YEAR, newday);
         return CALENTAR.getTime();
     }
 
-    public static long getmayor(long param1, long param2, long param3, long param4) {
-        long[] karray = {param1, param2, param3, param4};
-        long aux = karray[0];
-        for (long numero : karray) {
-            if (aux < numero) {
-                aux = numero;
+    public static long getmayor(Date param1, Date param2, Date param3, Date param4) {
+        Date[] karray = {param1, param2, param3, param4};
+        long aux = karray[0].getTime();
+        for (Date numero : karray) {
+            if (aux < numero.getTime()) {
+                aux = numero.getTime();
             }
         }
         return aux;
@@ -105,8 +101,8 @@ public class FechaX {
         return aux;
     }
 
-    public static long restar(long x, long y) {
-        return x - y;
+    public static long restar(Date x, Date y) {
+        return x.getTime() - y.getTime();
     }
 
     public static String fechaEjemplo() {
