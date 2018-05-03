@@ -5,5 +5,5 @@
 5 5 5 e5 3 Activa jamico5#mimico1#00093 premium 5#5#2018
 6 6 6 a2 2 Activa jamico6#mimico1#00094 basico 6#5#2018
 7 7 7 g7 1 EnUso jamico7#mimico1#00095 ninguno 7#5#2018
-8 8 8 h8 2 Activa Mario#De#Leon basico 8#5#2018
-9 9 9 a2 3 Activa jamico9#mimico1#00097 ninguno 9#5#2018
+8 8 8 h8 2 Activa jamico8#mimico1#00096 basico 8#5#2018
+9 9 9 a2 3 Activa jamico9#mimico1#00097 premium 9#5#2018

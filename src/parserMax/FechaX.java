@@ -43,7 +43,7 @@ public class FechaX {
 
     public static boolean doMatch(String fechaIni, String days1, ArrayList<Reservacion> problematica) {
         try {
-            Date fechaProhibida1 = STANDARFORMAT.parse(days1);
+            Date fechaProhibida1 = STANDARFORMAT.parse(fechaIni);
             for(Reservacion problem : problematica){
                 
             
