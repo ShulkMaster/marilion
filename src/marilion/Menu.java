@@ -267,8 +267,10 @@ public class Menu {
     }
 
     private void CambioPaquete() {
+        Reader.consola.nextLine();
         System.out.println("Ingrese el dui de la persona a pagar:");
-        String duiPago = Reader.consola.next();
+        String duiPago = Reader.consola.nextLine();
+        System.out.print(duiPago+"\n");
         // metodo para saber si existe la reserva
         System.out.println("Ingrese 1 basico,2 premium,3 ninguno");
         int opcion = Reader.consola.nextInt();

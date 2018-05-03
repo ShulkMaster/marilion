@@ -72,8 +72,9 @@ public class GestorHotel {
     }
 
     public void cambioPack(String dui, PaqueteTipo tipo) {
-
+        System.out.print("Duis"+"\n");
         for (Reservacion e : ListaDeReservas) {
+            System.out.print(e.PersonaAPagar.duiR()+"\n");
             if (dui.equals(e.PersonaAPagar.duiR())) {
                 e.tipo = tipo;
             }
