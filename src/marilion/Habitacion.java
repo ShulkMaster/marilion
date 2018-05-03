@@ -18,8 +18,11 @@ public class Habitacion {
     public EstadoHabitacion habitacionEstado;
     public ArrayList<Huesped> listaHuesped;
 
-    public Habitacion() {
-
+    public Habitacion(char indicadorDePiso, int numeroHabitacion, EstadoHabitacion habitacionEstado) {
+        this.indicadorDePiso = indicadorDePiso;
+        this.numeroHabitacion = numeroHabitacion;
+        this.habitacionEstado = habitacionEstado;
+        this.listaHuesped = new ArrayList<>();
     }
 
     public Habitacion(char indicadorDePiso, int numeroHabitacion, EstadoHabitacion habitacionEstado, ArrayList<Huesped> listaHuesped) {
@@ -29,41 +32,36 @@ public class Habitacion {
         this.listaHuesped = listaHuesped;
     }
 
-    @Override
-
     //Devuelve una linea para la base de dato
+    @Override
     public String toString() {
         String re;
-
-        re = indicadorDePiso + " " + numeroHabitacion + " " + paserEstadoH(habitacionEstado) + " ";
+        re = indicadorDePiso + "#" + numeroHabitacion + " " + habitacionEstado + " ";
         for (Huesped h : listaHuesped) {
-            re = re + h.ToString();
+            re += h.ToString();
         }
-
         return re;
     }
 
-    private String paserEstadoH(EstadoHabitacion estate) {
-        String marker;
-        switch (estate) {
-            case Habilitada:
-                marker = "1";
-                break;
-            case Deshabilitada:
-                marker = "2";
-                break;
-            case EnUso:
-                marker = "3";
-                break;
-            default:
-                marker = "2";
-                System.err.println("Error desconocido: Estado mutante");
-                break;
-        }
-        return marker;
-    }
-    
     public String getHabId() {
-        return  indicadorDePiso+numeroHabitacion+"";
+        String aux = String.valueOf(indicadorDePiso)+numeroHabitacion;
+        return aux;
     }
+
+    public void setIndicadorDePiso(char indicadorDePiso) {
+        this.indicadorDePiso = indicadorDePiso;
+    }
+
+    public void setNumeroHabitacion(int numeroHabitacion) {
+        this.numeroHabitacion = numeroHabitacion;
+    }
+
+    public void setHabitacionEstado(EstadoHabitacion habitacionEstado) {
+        this.habitacionEstado = habitacionEstado;
+    }
+
+    public void setListaHuesped(ArrayList<Huesped> listaHuesped) {
+        this.listaHuesped = listaHuesped;
+    }
+
 }
