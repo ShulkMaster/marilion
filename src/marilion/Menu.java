@@ -321,28 +321,29 @@ public class Menu {
         //metodo para ver todas las habitaciones deshabilitadas;
         System.out.println("Ingrese el id de la habitacion eje b3");
         String habiHabilitar = Reader.consola.next();
-        // aca el metodo donde envie esa string y se cambie el estado de la habitacion
+        gestorHotel.HabilitarHabitacionC(habiHabilitar);
+        
     }
 
     private void deshabilitarHabitacion() {
         //metodo para ver todas las habitaciones habilitadas;
         System.out.println("Ingrese el id de la habitacion eje b3");
         String habideshabilitar = Reader.consola.next();
-        // aca el metodo donde envie esa string y se cambie el estado de la habitacion
+        gestorHotel.DeshabilitarHabitacion(habideshabilitar);
     }
 
     private void HabilitarPiso() {
         //metodo para ver todas los pisos deshabilitados
         System.out.println("Ingrese el numero del piso");
         int pisohabilitar = Reader.consola.nextInt();
-        // aca el metodo donde envie el int y el gestor se encarga de todo
+        gestorHotel.HabilitarPiso(pisohabilitar);
     }
 
     private void deshaiblitarPiso() {
         //metodo para ver todos los pisos haabilitados
         System.out.println("Ingrese el numero del piso");
         int pisodeshabilitar = Reader.consola.nextInt();
-        // aca el metodo donde envie el int y el gestor se encarga de todo
+        gestorHotel.DeshabilitarPiso(pisodeshabilitar);
     }
 
     private void DB_Facturas() {
