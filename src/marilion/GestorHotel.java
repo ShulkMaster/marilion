@@ -314,4 +314,20 @@ public class GestorHotel {
 
         return bool;
     }
+    
+    public void PagarReservacion(String dui) {
+        ArrayList<Reservacion> listN=getListReserX();
+        base.printListReservas(listN);
+        ArrayList<Reservacion> listNa=new ArrayList<>();
+        for(Reservacion e : listN){
+            if(e.PersonaAPagar.duiR().equals(dui)){
+                listNa.add(e);
+            }
+        }
+        base.printListReservas(listNa);
+        System.out.println("Ingrese la fecha de la reserva con el formato:");
+        String fecha=Reader.consola.next();
+        pagarReserva(dui, fecha);
+    }
+    
 }
