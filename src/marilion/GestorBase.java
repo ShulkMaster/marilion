@@ -144,6 +144,7 @@ public class GestorBase {
     }
 
     private Reservacion creadoReservacion(String master) {
+        System.out.println(master);
         int reserva, factura, huesped;
         String Id_Habitacion;
         reserva = Integer.parseInt(master.split(" ")[0]);
@@ -151,7 +152,7 @@ public class GestorBase {
         huesped = Integer.parseInt(master.split(" ")[2]);
         Id_Habitacion = master.split(" ")[3];
         Reservacion auxReser = new Reservacion(reserva, factura, huesped, Id_Habitacion);
-        auxReser.Id_reservacion = (Integer.parseInt(master.split(" ")[4]));
+        auxReser.dias = Integer.parseInt(master.split(" ")[4]);
         auxReser.setEstado(StatadosX.parseStateReserva(master.split(" ")[5]));
         auxReser.setPersonaAPagar(creadoHuesped(master.split(" ")[6]));
         auxReser.setTipo(StatadosX.parseStatPack(master.split(" ")[7]));

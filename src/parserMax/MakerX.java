@@ -15,7 +15,7 @@ public class MakerX {
 
     /**
      * este metodo crea personas con el formato estandar leido desde archivo
-     *
+     *@param personadetail
      * es la cadena maestra que contiene una linea del archivo de
      * texto en que se guarda la informacion, ese registro contiene toda la
      * informacion necesaria para recontruir una habitacion en memoria RAM
