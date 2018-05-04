@@ -81,7 +81,7 @@ public class Menu {
                     opcion = Reader.consola.nextInt();
                     switch (opcion) {
                         case 1:
-                            //this.CambioFecha(id,this.DB_Reservas(),fecha);
+                            
                             break;
                         case 2:
                             this.cambioPrincipal();
@@ -156,12 +156,8 @@ public class Menu {
         //Limpiando Buffer antes de seguir o el dui queda nulo
         Reader.consola.nextLine();
         String duiPago = Reader.consola.nextLine();
-        System.out.println("Ingrese la fecha de la reserva:");
-        String fecha = Reader.consola.nextLine();
-        System.out.println(duiPago + " " + fecha);
-        //metodo del gestor de compra, el gestor de compra crea factura necesito que me retornes costo segun reserva y la factura impresa
-        // en pantalla
-        gestorHotel.pagarReserva(duiPago, fecha);
+        gestorHotel.PagarReservacion(duiPago);
+        
 
     }
 
@@ -174,8 +170,9 @@ public class Menu {
     private void CambioFecha() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
-        //metodo para saber si existe la reservacion
-        while (true) {
+        boolean bool=gestorHotel.Comprobador(duiPago);
+        
+        while (bool==true) {
             System.out.println("Ingrese la fecha:");
             System.out.println("Ingrese el dia:");
             int dia = Reader.consola.nextInt();

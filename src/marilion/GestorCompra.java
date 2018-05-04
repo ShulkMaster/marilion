@@ -28,12 +28,18 @@ public class GestorCompra {
     {
         float costo = 0;
         
-        String habitaciones = re.getId_habitacion();
+        
         
         
         
         
         return costo;
     }
+    
+    public Factura RegresarFactura(Reservacion re)
+    {
+        
+    }
+    
     
 }
