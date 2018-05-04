@@ -30,6 +30,7 @@ public class GestorBase {
     public static final String RESERVAS = "reservas";
     public static final String FACTURAS = "facturas";
     public static final String HABITACIONES = "habitaciones";
+    public static final String HUESPEDES = "huespedes";
     private File archivoTXT;
 
     public GestorBase() {
