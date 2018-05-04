@@ -30,7 +30,7 @@ public class Reservacion {
         this.Id_reservacion = Id_reservacion;
         this.Id_factura = Id_factura;
         this.Id_huespedes = Id_huespedes;
-        this.Id_habitacion = Id_habitacion;
+        this.Id_habitacion = (Id_habitacion+":");
     }
 
     public String getId_habitacion() {
@@ -59,7 +59,7 @@ public class Reservacion {
     }
 
     public void setXtraHabitacion(String Id_habitacion) {
-        this.Id_habitacion += (":" + Id_habitacion);
+        this.Id_habitacion += (Id_habitacion);
     }
 
     public void setEstado(EstadoReservacion Estado) {
@@ -111,6 +111,7 @@ public class Reservacion {
     }
 
     public String[] getHIDs() {
+        System.out.println("Usted invoco la habitacion ID; " + Id_habitacion.split(":"));
         return Id_habitacion.split(":");
     }
 

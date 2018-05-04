@@ -178,7 +178,6 @@ public class GestorHotel {
         Prototype.setPersonaAPagar(MakerX.creadoPersona(masterType[0]));
         Prototype.setTipo(StatadosX.parseStatPack(masterType[4]));
         Prototype.setFechaIni(masterType[2]);
-        ListaDeReservas.add(Prototype);
         base.AutoIncrement();
         base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
