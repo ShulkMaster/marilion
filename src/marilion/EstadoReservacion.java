@@ -10,5 +10,5 @@ package marilion;
  * @author gerar
  */
 public enum EstadoReservacion {
-    Activa,Cancelada,EnUso,Finalizada
+    Activa,Cancelada,EnUso,Finalizada,pagada
 }

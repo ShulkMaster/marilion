@@ -79,40 +79,38 @@ public class GestorHotel {
         base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
 
-    public void cambioFecha(String dui,String fecha1 , String fecha2) {
-        int aux=0;
-        ArrayList<Habitacion> listN=new ArrayList<>();
-        
+    public void cambioFecha(String dui, String fecha1, String fecha2) {
+        int aux = 0;
+        ArrayList<Habitacion> listN = new ArrayList<>();
+
         for (Reservacion e : ListaDeReservas) {
-            
-            if (dui.equals(e.PersonaAPagar.duiR())&&fecha1.equals(e.fechaIni)) {
-                listN = getListHabitDispo(fecha2,e.dias);
+
+            if (dui.equals(e.PersonaAPagar.duiR()) && fecha1.equals(e.fechaIni)) {
+                listN = getListHabitDispo(fecha2, e.dias);
             }
         }
-        for(Habitacion e:listN){
-            if(e!=null){
-            aux++;
-            System.out.print(e.getHabId()+"\n");
+        for (Habitacion e : listN) {
+            if (e != null) {
+                aux++;
+                System.out.print(e.getHabId() + "\n");
             }
         }
-        if(aux!=0){
+        if (aux != 0) {
             System.out.print("Escoja una de las habitaciones anteriores o la misma si se puede:");
-            String hab=Reader.consola.next();
+            String hab = Reader.consola.next();
             for (Reservacion e : ListaDeReservas) {
-                if (dui.equals(e.PersonaAPagar.duiR())&&fecha1.equals(e.fechaIni)) {
-                    e.fechaIni=fecha2;
-                    e.Id_habitacion=hab;
+                if (dui.equals(e.PersonaAPagar.duiR()) && fecha1.equals(e.fechaIni)) {
+                    e.fechaIni = fecha2;
+                    e.Id_habitacion = hab;
                 }
             }
-            
-        }
-        else{
+
+        } else {
             System.out.print("No hay ninguna avitacion que se acople a la fecha a hospedarse");
         }
-        
+
         base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
-
 
     public void CancelaReserva(String dui, String fecha) {
         ArrayList<Reservacion> listN = new ArrayList<>();
@@ -282,8 +280,9 @@ public class GestorHotel {
                 if (AuxRe.fechaIni.equals(fecha)) {
                     System.out.println(AuxRe.fechaIni);
                     System.out.println("Reserva ID: " + AuxRe.Id_reservacion + " Ha sido pagada");
-                    System.out.println("Detalles: " + AuxRe.toString());
-                    System.out.println("Se pagan solas hasta que gestor de pago este activo");
+                    Factura fac = GestorCompra.getFactura(AuxRe);
+                    ListaDeFactura.add(fac);
+                    AuxRe.Estado = EstadoReservacion.pagada;
                     break;
                 }
             }
@@ -316,71 +315,105 @@ public class GestorHotel {
         String fecha = Reader.consola.next();
         pagarReserva(dui, fecha);
     }
-    
-    public void cambioDias(String dui,String fecha,int num) {
-        int aux=0;
-        ArrayList<Habitacion> listN=new ArrayList<>();
-        
+
+    public void cambioDias(String dui, String fecha, int num) {
+        int aux = 0;
+        ArrayList<Habitacion> listN = new ArrayList<>();
+
         for (Reservacion e : ListaDeReservas) {
-            
-            if (dui.equals(e.PersonaAPagar.duiR())&&fecha.equals(e.fechaIni)) {
-                listN = getListHabitDispo(fecha,num);
+
+            if (dui.equals(e.PersonaAPagar.duiR()) && fecha.equals(e.fechaIni)) {
+                listN = getListHabitDispo(fecha, num);
             }
         }
-        for(Habitacion e:listN){
-            if(e!=null){
-            aux++;
-            System.out.print(e.getHabId()+"\n");
+        for (Habitacion e : listN) {
+            if (e != null) {
+                aux++;
+                System.out.print(e.getHabId() + "\n");
             }
         }
-        if(aux!=0){
+        if (aux != 0) {
             System.out.print("Escoja una de las habitaciones anteriores o la misma si se puede:");
-            String hab=Reader.consola.next();
+            String hab = Reader.consola.next();
             for (Reservacion e : ListaDeReservas) {
-                if (dui.equals(e.PersonaAPagar.duiR())&&fecha.equals(e.fechaIni)) {
-                    e.dias=num;
-                    e.Id_habitacion=hab;
+                if (dui.equals(e.PersonaAPagar.duiR()) && fecha.equals(e.fechaIni)) {
+                    e.dias = num;
+                    e.Id_habitacion = hab;
                 }
             }
-            
-        }
-        else{
+
+        } else {
             System.out.print("No hay ninguna avitacion que se acople a los dias deseados a hospedarse en la misma fecha");
         }
-        
+
         base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
-    
-    public void cambioFechaYDias(String dui,String fecha1 , String fecha2 , int num) {
-        int aux=0;
-        ArrayList<Habitacion> listN=new ArrayList<>();
-        
+
+    public void cambioFechaYDias(String dui, String fecha1, String fecha2, int num) {
+        int aux = 0;
+        ArrayList<Habitacion> listN = new ArrayList<>();
+
         for (Reservacion e : ListaDeReservas) {
-            
-            if (dui.equals(e.PersonaAPagar.duiR())&&fecha1.equals(e.fechaIni)) {
-                listN = getListHabitDispo(fecha2,num);
+
+            if (dui.equals(e.PersonaAPagar.duiR()) && fecha1.equals(e.fechaIni)) {
+                listN = getListHabitDispo(fecha2, num);
             }
         }
-        for(Habitacion e:listN){
-            if(e!=null){
-            aux++;
-            System.out.print(e.getHabId()+"\n");
+        for (Habitacion e : listN) {
+            if (e != null) {
+                aux++;
+                System.out.print(e.getHabId() + "\n");
             }
         }
-        if(aux!=0){
+        if (aux != 0) {
             System.out.print("Escoja una de las habitaciones anteriores o la misma si se puede:");
-            String hab=Reader.consola.next();
+            String hab = Reader.consola.next();
             for (Reservacion e : ListaDeReservas) {
-                if (dui.equals(e.PersonaAPagar.duiR())&&fecha1.equals(e.fechaIni)) {
-                    e.fechaIni=fecha2;
-                    e.dias=num;
-                    e.Id_habitacion=hab;
+                if (dui.equals(e.PersonaAPagar.duiR()) && fecha1.equals(e.fechaIni)) {
+                    e.fechaIni = fecha2;
+                    e.dias = num;
+                    e.Id_habitacion = hab;
                 }
             }
-            
-        }
-        else{
+
+        } else {
             System.out.print("No hay ninguna avitacion que se acople a la fecha nueva y dias nuevo a hospedarse");
         }
+
     }
+
+    public void HabilitarHabitacionC(String id_habitacion) {
+        for (Habitacion ha : ListaDeHabitacion) {
+            if (ha.getHabId().equals(id_habitacion) && ha.habitacionEstado != EstadoHabitacion.EnUso) {
+                ha.habitacionEstado = EstadoHabitacion.Habilitada;
+            }
+        }
+    }
+
+    public void DeshabilitarHabitacion(String id_habitacion) {
+        for (Habitacion ha : ListaDeHabitacion) {
+            if (ha.getHabId().equals(id_habitacion) && ha.habitacionEstado != EstadoHabitacion.EnUso) {
+                ha.habitacionEstado = EstadoHabitacion.Deshabilitada;
+            }
+        }
+    }
+
+    public void HabilitarPiso(int pisoNumero) {
+        String pisos = "abcdef";
+        for (Habitacion ha : ListaDeHabitacion) {
+            if (pisos.charAt(pisoNumero - 1) == ha.indicadorDePiso && ha.habitacionEstado != EstadoHabitacion.EnUso) {
+                ha.habitacionEstado = EstadoHabitacion.Habilitada;
+            }
+        }
+    }
+    
+    public void DeshabilitarPiso(int pisoNumero) {
+        String pisos = "abcdef";
+        for (Habitacion ha : ListaDeHabitacion) {
+            if (pisos.charAt(pisoNumero - 1) == ha.indicadorDePiso && ha.habitacionEstado != EstadoHabitacion.EnUso) {
+                ha.habitacionEstado = EstadoHabitacion.Deshabilitada;
+            }
+        }
+    }
+
 }

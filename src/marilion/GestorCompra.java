@@ -67,7 +67,7 @@ public class GestorCompra {
         return costo;
     }
     
-    public Factura getFactura(Reservacion re)
+    public static Factura getFactura(Reservacion re)
     {
         return new Factura(re.Id_reservacion, re.PersonaAPagar,GestorCompra.RegresarPrecio(re),FechaX.fechaEjemplo());
     }
