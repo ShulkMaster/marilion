@@ -37,8 +37,11 @@ public class GestorCompra {
                 break;
             case premium:
                 add = 150f;
+                break;
+                
             case ninguno:
                 add = 0f;
+                break;
         }
         for (String str : re.getHIDs()) {
             if (str.charAt(0) == 'e' || str.charAt(0) == 'f') {
