@@ -283,6 +283,7 @@ public class GestorHotel {
                     Factura fac = GestorCompra.getFactura(AuxRe);
                     ListaDeFactura.add(fac);
                     AuxRe.Estado = EstadoReservacion.pagada;
+                    System.out.println("El costo es: " + GestorCompra.RegresarPrecio(AuxRe) + " Dolares");
                     base.Escribir(ListaDeFactura, GestorBase.FACTURAS);
                     base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
                     break;
