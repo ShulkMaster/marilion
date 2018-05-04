@@ -45,7 +45,6 @@ public class GestorBase {
             lectorArchivo = new FileReader(archivoTXT);
             try (BufferedReader lectorLines = new BufferedReader(lectorArchivo)) {
                 while ((cadenaAux = lectorLines.readLine()) != null) {
-                    System.out.println(cadenaAux);
                     filecontent.add(cadenaAux);
                 }
             }
@@ -263,7 +262,6 @@ public class GestorBase {
 
     public ArrayList<Habitacion> getListHabitacion() {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
-        System.out.println("Las habitaciones leidas desde archivo son: ");
         for (String registro : getFileContent("habitacionTEST")) {
             System.out.println(registro);
             listaAux.add(creadoHabitacion(registro.split(" ")));
@@ -273,7 +271,6 @@ public class GestorBase {
 
     public ArrayList<Factura> getListFactura() {
         ArrayList<Factura> listaAux = new ArrayList<>();
-        System.out.println("Las facturas leidas desde archivo son: ");
         for (String registro : getFileContent("facturaTEST")) {
             Factura currenFactura = creadoFactura(registro);
             listaAux.add(currenFactura);
@@ -283,7 +280,6 @@ public class GestorBase {
 
     public ArrayList<Reservacion> getListReservacion() {
         ArrayList<Reservacion> listaAux = new ArrayList<>();
-        System.out.println("Las reservaciones obtenidas de archivo son : ");
         for (String registro : getFileContent(RESERVAS)) {
             Reservacion currenReservacion = creadoReservacion(registro);
             listaAux.add(currenReservacion);
@@ -293,7 +289,6 @@ public class GestorBase {
 
     public ArrayList<Administrador> getListAdministradores() {
         ArrayList<Administrador> listaAux = new ArrayList<>();
-        System.out.println("Las administradores obtenidos de archivo son : ");
         for (String registro : getFileContent("adminTEST")) {
             Administrador currenAdmin = creadoAdmin(registro);
             listaAux.add(currenAdmin);
@@ -303,7 +298,6 @@ public class GestorBase {
 
     public ArrayList<Huesped> getListHuespedes() {
         ArrayList<Huesped> listaAux;
-        System.out.println("Las Huespedes obtenidos de archivo son: ");
         String registro = getFileContent("huespedesTEST").get(0);
         listaAux = creadoHuesped(registro.split(" ")[1].split(":"));
         return listaAux;
@@ -313,8 +307,7 @@ public class GestorBase {
     public <E> void Escribir(ArrayList<E> lista, String filename) {
         FileWriter fichero;
         PrintWriter pw;
-        int breakerBox;
-        archivoTXT = new File(filename);
+        archivoTXT = new File(filename+"txt");
         try {
             fichero = new FileWriter(archivoTXT);
             pw = new PrintWriter(fichero);

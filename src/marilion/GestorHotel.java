@@ -55,17 +55,18 @@ public class GestorHotel {
         System.out.println("¿Desea agregar la segunda Habitacion?");
         System.out.println("1 = SI \t 2 = NO");
         if (Reader.consola.nextInt() == 1) {
+            Reader.consola.nextLine();
             System.out.println("nueva habitacion");
             reservMaz.setXtraHabitacion(Reader.consola.nextLine());
         }
         System.out.println("Ingrese tipo de paquete: ");
         System.out.println("1 = Basico 2 = Primium 3 = Ninguno");
         reservMaz.setTipo(StatadosX.parseStatPack(Reader.consola.nextLine()));//ON 5
-
-        //datos de los huespedes
+        //datos de los huespedes hasta aqui bien
         System.out.println("Desea agregar mas Huespedes: ");
         System.out.println("1 = Si, 2 = No");
         if (Reader.consola.nextInt() == 1) {
+            Reader.consola.nextLine();
             int aux = reservMaz.getMaxHuesped();
             for (int j = 0; j < aux; j++) {
                 //Datos del huesped partial string NAME#LASTNAME#DUI[ESPACE] ON 6
@@ -76,10 +77,10 @@ public class GestorHotel {
         ListaDeReservas.add(reservMaz);
     }
 
-    public void cambioFecha(String dui, String fecha1,String fecha2) {
+    public void cambioFecha(String dui, String fecha1, String fecha2) {
 
         for (Reservacion e : ListaDeReservas) {
-            if (dui.equals(e.PersonaAPagar.duiR())&&fecha1.equals(e.fechaIni)) {
+            if (dui.equals(e.PersonaAPagar.duiR()) && fecha1.equals(e.fechaIni)) {
                 e.fechaIni = fecha2;
             }
         }
@@ -101,10 +102,10 @@ public class GestorHotel {
         return bool;
     }
 
-    public void CancelaReserva(String dui,String fecha) {
+    public void CancelaReserva(String dui, String fecha) {
         ArrayList<Reservacion> listN = new ArrayList<>();
         for (Reservacion e : ListaDeReservas) {
-            if (!dui.equals(e.PersonaAPagar.duiR())&&!fecha.equals(e.fechaIni)) {
+            if (!dui.equals(e.PersonaAPagar.duiR()) && !fecha.equals(e.fechaIni)) {
                 listN.add(e);
             }
         }
@@ -112,9 +113,9 @@ public class GestorHotel {
         base.Escribir(listN, GestorBase.RESERVAS);
     }
 
-    public void cambioPack(String dui,String fecha ,PaqueteTipo tipo) {
+    public void cambioPack(String dui, String fecha, PaqueteTipo tipo) {
         for (Reservacion e : this.ListaDeReservas) {
-            if (e.PersonaAPagar.duiR().equals(dui)&&e.fechaIni.equals(fecha)) {
+            if (e.PersonaAPagar.duiR().equals(dui) && e.fechaIni.equals(fecha)) {
                 e.tipo = tipo;
             }
         }
@@ -122,7 +123,7 @@ public class GestorHotel {
         base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
 
-    public void cambioHabitacion(String dui, String habitacion,String fecha) {
+    public void cambioHabitacion(String dui, String habitacion, String fecha) {
 
         for (Habitacion p : ListaDeHabitacion) {
             for (Reservacion e : ListaDeReservas) {
@@ -144,12 +145,12 @@ public class GestorHotel {
 
     }
 
-    public void CambioPersonaP(String dui, String dui2, String nombre, String Apellido,String fecha) {
+    public void CambioPersonaP(String dui, String dui2, String nombre, String Apellido, String fecha) {
 
         Persona aux;
 
         for (Reservacion e : ListaDeReservas) {
-            if (dui.equals(e.PersonaAPagar.duiR())&&fecha.equals(e.fechaIni)) {
+            if (dui.equals(e.PersonaAPagar.duiR()) && fecha.equals(e.fechaIni)) {
                 aux = e.PersonaAPagar;
                 e.PersonaAPagar.cambioDui(dui2);
                 e.PersonaAPagar.Nombre = nombre;
@@ -208,10 +209,8 @@ public class GestorHotel {
     public ArrayList<Habitacion> getListHabitDispo(String fecha, int days) {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
         for (Habitacion auxH : getListHabitaReady()) {
-            System.out.println("\033[32mHabitacion " + auxH.indicadorDePiso + auxH.numeroHabitacion);
             System.out.println(auxH.getHabId());
             if (FechaX.doMatch(fecha, days, getListReserChox(auxH.getHabId()))) {
-                System.err.println("Esta limpio");
                 listaAux.add(auxH);
             }
         }

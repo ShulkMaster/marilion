@@ -53,7 +53,6 @@ public class FechaX {
                 long mayor = getmayor(fechaReserv, fechaReservFin, fechaRev2, fechaRevFin2);
                 long menor = getmenor(fechaReserv.getTime(), fechaReservFin.getTime(), fechaRev2.getTime(), fechaRevFin2.getTime());
                 if ((restar(fechaReservFin, fechaReserv))-(restar(fechaRevFin2, fechaRev2)) <= (mayor - menor)) {
-                    System.out.println((restar(fechaReservFin, fechaReserv))-(restar(fechaRevFin2, fechaRev2)) <= (mayor - menor));
                     return false;
                 }
             }

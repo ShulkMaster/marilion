@@ -76,11 +76,15 @@ public class Reservacion {
 
     public int getMaxHuesped() {
         int medida = Id_habitacion.split(":").length;
-        int base = Integer.parseInt(Id_habitacion.split(":")[0].substring(2));
+        System.out.println(medida);
+        System.out.println(Id_habitacion);
+        System.out.println(Id_habitacion.split(":")[0]);
+        System.out.println(Id_habitacion.split(":")[0].substring(1));
+        int base = Integer.parseInt(Id_habitacion.split(":")[0].substring(1));
         int base2;
-        System.out.println(base);
+        System.out.println(base );
         if (medida < 2) {
-            base2 = Integer.parseInt(Id_habitacion.split(":")[1].substring(2));
+            base2 = Integer.parseInt(Id_habitacion.split(":")[1].substring(1));
             System.out.println(base2);
             base = base % 2;
             if (base == 0) {
