@@ -5,8 +5,6 @@
  */
 package marilion;
 
-import java.util.Date;
-
 /**
  *
  * @author mcdre
@@ -25,9 +23,13 @@ public class Factura {
         this.fecha = fecha;
     }
 
+    Factura() {
+       
+    }
+
     @Override
     public String toString() {
-        return Id_factura+" "+cliente.ToString()+" "+monto+" "+fecha;
+        return Id_factura+" "+cliente.toString()+" "+monto+" "+fecha;
     }
 
 }

@@ -7,8 +7,8 @@ package marilion;
 
 /**
  *
- * @author gerar
+ * @author Amadeo_09
  */
-public enum EstadoReservacion {
-    Activa,Cancelada,EnUso,Finalizada,pagada
+public enum TipoPago {
+    Efectivo,Tarjeta,Cheque,Ninguno
 }

@@ -9,9 +9,19 @@ package marilion;
  *
  * @author mcdre
  */
-public class Huesped extends Persona{
+public class Huesped extends Persona {
 
     public Huesped(String Nombre, String Apellido, String Dui) {
         super(Nombre, Apellido, Dui);
     }
+
+    /**
+     *
+     * @return String lo mismo que persona solo que las personas son inicas
+     * y los huespedes no xd
+     */
+    public String ToString() {
+        return (toString()+":");
+    }
+
 }

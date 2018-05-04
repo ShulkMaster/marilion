@@ -26,10 +26,25 @@ public class Persona {
         this.Apellido = Apellido;
     }
 
-    public String ToString() {
-        return Nombre + "#" + Apellido + "#" + Dui + ":";
+    @Override
+    public String toString() {
+        return Nombre + "#" + Apellido + "#" + Dui;
     }
-    public String duiR(){
+
+    public String nombre() {
+        return Nombre;
+    }
+
+    public String Apellido() {
+        return Apellido;
+    }
+
+    public String duiR() {
         return Dui;
     }
+
+    public void cambioDui(String dui) {
+        Dui = dui;
+    }
+
 }
