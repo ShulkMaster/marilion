@@ -77,30 +77,41 @@ public class GestorHotel {
         ListaDeReservas.add(reservMaz);
     }
 
-    public void cambioFecha(String dui, String fecha1, String fecha2) {
+    public void cambioFecha(String dui,String fecha2,int dias) {
+        int aux=0;
+        ArrayList<Habitacion> listN=new ArrayList<>();
+        Reservacion auxR = null;
 
         for (Reservacion e : ListaDeReservas) {
-            if (dui.equals(e.PersonaAPagar.duiR()) && fecha1.equals(e.fechaIni)) {
-                e.fechaIni = fecha2;
+            
+            if (dui.equals(e.PersonaAPagar.duiR()) ) {
+                auxR=e;
+                if(dias==-1){
+                    dias=e.dias;
+                }
+                
+                listN = getListHabitDispo(fecha2,dias);
             }
         }
+        for(Habitacion e:listN){
+            if(e!=null){
+            aux++;
+            System.out.print(e.toString()+"\n");
+            }
+        }
+        if(aux!=0){
+            System.out.print("Escoja una de las habitaciones anteriores o la misma si se puede:");
+            String hab=Reader.consola.next();
+            auxR.fechaIni=fecha2;
+            auxR.Id_habitacion=hab;
+        }
+        else{
+            System.out.print("No hay ninguna avitacion que se acople a la fecha y dias deseados a hospedarse");
+        }
+        
         base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
 
-    public boolean FechaYhabitacion(String dui, String fecha) {
-        boolean bool = false;
-
-        for (Habitacion p : ListaDeHabitacion) {
-            for (Reservacion e : ListaDeReservas) {
-                if ((fecha == null ? e.fechaIni != null : !fecha.equals(e.fechaIni)) && e.PersonaAPagar.duiR().equals(dui)) {
-                    if (p.habitacionEstado.equals(1)) {
-                        bool = true;
-                    }
-                }
-            }
-        }
-        return bool;
-    }
 
     public void CancelaReserva(String dui, String fecha) {
         ArrayList<Reservacion> listN = new ArrayList<>();
