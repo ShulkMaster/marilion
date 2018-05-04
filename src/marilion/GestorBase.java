@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import parserMax.StatadosX;
+import parserMax.MakerX;
 
 /**
  *
@@ -30,7 +31,6 @@ public class GestorBase {
     public static final String RESERVAS = "reservas";
     public static final String FACTURAS = "facturas";
     public static final String HABITACIONES = "habitaciones";
-    public static final String HUESPEDES = "huespedes";
     private File archivoTXT;
 
     public GestorBase() {
@@ -63,21 +63,6 @@ public class GestorBase {
         return filecontent;
     }
 
-    /**
-     * este metodo crea personas con el formato estandar leido desde archivo
-     *
-     * @param master es la cadena maestra que contiene una linea del archivo de
-     * texto en que se guarda la informacion, ese registro contiene toda la
-     * informacion necesaria para recontruir una habitacion en memoria RAM
-     * @return Persona
-     */
-    public Persona creadoPersona(String master) {
-        String nombre, apellido, dui;
-        nombre = master.split("#")[0];
-        apellido = master.split("#")[1];
-        dui = master.split("#")[2];
-        return new Persona(nombre, apellido, dui);
-    }
 
     /**
      * metodo crear huespedes
@@ -148,7 +133,7 @@ public class GestorBase {
         Persona client2;
         String fecha;
         Id_fact = Integer.parseInt(master.split(" ")[0]);
-        client2 = creadoPersona(master.split(" ")[1]);
+        client2 = MakerX.creadoPersona(master.split(" ")[1]);
         monto2 = Float.parseFloat(master.split(" ")[2]);
         fecha = master.split(" ")[3];
         /*en el archivo los atributos de personas clientes se separan por #
@@ -167,7 +152,7 @@ public class GestorBase {
         huesped = Integer.parseInt(master.split(" ")[2]);
         Id_Habitacion = master.split(" ")[3];
         Reservacion auxReser = new Reservacion(reserva, factura, huesped, Id_Habitacion);
-        auxReser.setDias(Integer.parseInt(master.split(" ")[4]));
+        auxReser.Id_reservacion = (Integer.parseInt(master.split(" ")[4]));
         auxReser.setEstado(StatadosX.parseStateReserva(master.split(" ")[5]));
         auxReser.setPersonaAPagar(creadoHuesped(master.split(" ")[6]));
         auxReser.setTipo(StatadosX.parseStatPack(master.split(" ")[7]));

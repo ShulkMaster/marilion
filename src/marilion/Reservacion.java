@@ -13,7 +13,7 @@ package marilion;
 public class Reservacion {
 
     public int Id_reservacion, Id_factura, Id_huespedes, dias;
-    String Id_habitacion;
+    public String Id_habitacion;
     public EstadoReservacion Estado;
     public Persona PersonaAPagar;
 
@@ -22,6 +22,9 @@ public class Reservacion {
     }
     public String fechaIni;
     public PaqueteTipo tipo;
+
+    public Reservacion() {
+    }
 
     public Reservacion(int Id_reservacion, int Id_factura, int Id_huespedes, String Id_habitacion) {
         this.Id_reservacion = Id_reservacion;
@@ -33,11 +36,11 @@ public class Reservacion {
     public String getId_habitacion() {
         return Id_habitacion;
     }
-    
-    public String[] parseID(){
+
+    public String[] parseID() {
         return Id_habitacion.split("#");
     }
-    
+
     @Override
     public String toString() {
         return Id_reservacion + " "
@@ -51,12 +54,12 @@ public class Reservacion {
                 + fechaIni;
     }
 
-    public void setDias(int dias) {
-        this.dias = dias;
+    public void setId_huespedes(int Id_huespedes) {
+        this.Id_huespedes = Id_huespedes;
     }
 
-    public void setId_habitacion(String Id_habitacion) {
-        this.Id_habitacion = Id_habitacion;
+    public void setXtraHabitacion(String Id_habitacion) {
+        this.Id_habitacion += (":" + Id_habitacion);
     }
 
     public void setEstado(EstadoReservacion Estado) {
@@ -69,6 +72,38 @@ public class Reservacion {
 
     public void setTipo(PaqueteTipo tipo) {
         this.tipo = tipo;
+    }
+
+    public int getMaxHuesped() {
+        int medida = Id_habitacion.split(":").length;
+        int base = Integer.parseInt(Id_habitacion.split(":")[0].substring(2));
+        int base2;
+        System.out.println(base);
+        if (medida < 2) {
+            base2 = Integer.parseInt(Id_habitacion.split(":")[1].substring(2));
+            System.out.println(base2);
+            base = base % 2;
+            if (base == 0) {
+                base = 3;
+            } else {
+                base = 2;
+            }
+            base2 = base2 % 2;
+            if (base2 == 0) {
+                base2 = 3;
+            } else {
+                base2 = 2;
+            }
+            base += base2;
+        } else {
+            base = base % 2;
+            if (base == 0) {
+                base = 3;
+            } else {
+                base = 2;
+            }
+        }
+        return base;
     }
 
 }

@@ -36,10 +36,10 @@ public class GestorCompra {
         return costo;
     }
     
-    public Factura RegresarFactura(Reservacion re)
+   /* public Factura RegresarFactura(Reservacion re)
     {
         
     }
     
-    
+    */
 }

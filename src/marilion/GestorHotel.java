@@ -6,8 +6,11 @@
 package marilion;
 
 import java.util.ArrayList;
-import parserMax.StatadosX;
 import parserMax.FechaX;
+import parserMax.Asker;
+import parserMax.MakerX;
+import parserMax.Reader;
+import parserMax.StatadosX;
 
 /**
  *
@@ -24,7 +27,6 @@ public class GestorHotel {
     public static GestorBase base = new GestorBase();
 
     public GestorHotel() {
-        // base.escribirHabitacion();
         this.ListaDeHabitacion = base.getListHabitacion();
         this.ListaDeHuespedes = base.getListHuespedes();
         this.ListaDeReservas = base.getListReservacion();
@@ -33,72 +35,45 @@ public class GestorHotel {
         base.checkOutIds(ListaDeReservas);
     }
 
-    /* old New reservation
-        System.out.println("Ingrese acompanniantes:");
-        boolean anadex = true;
-        while (anadex) {
-            System.out.println("Ingrese el nombre: ");
-            master += (Reader.consola.next());
-            System.out.println("Ingrese el apellido: ");
-            //master += ("#" + Reader.consola.next();
-            System.out.println("Ingrese el dui: ");
-            String auxdui = Reader.consola.next();
-            //Persona aux = new Persona(auxnombre, auxapellido, auxdui);
-            System.out.println("end 1");
-            if (Reader.consola.nextInt() == 1) {
-                anadex = false;
-            }
-        }
-     */
     public void CrearReservacion() {
-        //limpiando Buffer podes cambiar el orden que se ejecuta el menu solo
+        Reservacion reservMaz = new Reservacion();
+        reservMaz.Id_factura = GestorBase.lastIDReserva;
+        reservMaz.Id_factura = GestorBase.lastIDFactura;
+        reservMaz.Estado = EstadoReservacion.Activa;
         Reader.consola.nextLine();
-
-        String master;
-        /**
-         * mantene el mismo formato de archvo al final en la cadena master
-         * IDhabitacion, dias, persona a pagar, tipo de packete, fechaini los
-         * demas IDs son autogenerados por la base y el estado cuando creas una
-         * reservacion por defecto es activa, para mas info mira la clase
-         * reservacion
-         */
-
-        //Datos del cliente partial string NAME#LASTNAME#DUI[ESPACE]
-        System.out.println("Ingrese el nombre de la persona a pagar: ");
-        master = Reader.consola.nextLine();
-        System.out.println("Ingrese el apellido: ");
-        master += ("#" + Reader.consola.nextLine());
-        System.out.println("Ingrese el dui: ");
-        master += ("#" + Reader.consola.nextLine());//on [0]
-
-        //Datos de la Reserva
+        reservMaz.PersonaAPagar = MakerX.creadoPersona(Asker.askPerson());
         System.out.println("Ingrese el numero de dias para hospedarse: ");
-        master += (" " + Reader.consola.nextLine());//split[1]
+        reservMaz.dias = Reader.consola.nextInt();
         System.out.println("Ingrese la fecha formato d#M#yyyy:");
         System.out.println("Por ejemplo la fecha de hoy seria: " + parserMax.FechaX.fechaEjemplo());
-        master += (" " + parserMax.FechaX.paser(Reader.consola.nextLine()));//split[2]
-        System.out.println("Habitaciones disponibles: ");
-        System.out.println("\033[35m" + master.split(" ")[2] + " Dias: " + Integer.parseInt(master.split(" ")[1]));
-        showListHabitDispo(master.split(" ")[2], Integer.parseInt(master.split(" ")[1]));//fecha dia
+        Reader.consola.nextLine();
+        reservMaz.fechaIni = parserMax.FechaX.paser(Reader.consola.nextLine());
+        System.out.println("Habitaciones disponibles para :" + reservMaz.fechaIni);
+        showListHabitDispo(reservMaz.fechaIni, reservMaz.dias);//fecha dia
         System.out.println("Ingrese las habitaciones:");
-        master += (" " + Reader.consola.nextLine());
+        reservMaz.Id_habitacion = Reader.consola.nextLine();
         System.out.println("¿Desea agregar la segunda Habitacion?");
         System.out.println("1 = SI \t 2 = NO");
         if (Reader.consola.nextInt() == 1) {
             System.out.println("nueva habitacion");
-            //limpiando Buffer podes
-            Reader.consola.nextLine();
-            master += (":" + Reader.consola.nextLine());
+            reservMaz.setXtraHabitacion(Reader.consola.nextLine());
         }
-        //limpiando Buffer podes
-        Reader.consola.nextLine();
         System.out.println("Ingrese tipo de paquete: ");
         System.out.println("1 = Basico 2 = Primium 3 = Ninguno");
-        master += (" " + Reader.consola.nextLine());
-        //algun metodo que defina si puede hacer la reservacion y si hay habitaciones disponibles
-        //aqui adentro voy a crear las habitaciones cuando haya metodo que devvuelva habitaciones
-        System.out.println("\033[35m" + master + " Debug");
-        ReservaNueva(master.split(" "));
+        reservMaz.setTipo(StatadosX.parseStatPack(Reader.consola.nextLine()));//ON 5
+
+        //datos de los huespedes
+        System.out.println("Desea agregar mas Huespedes: ");
+        System.out.println("1 = Si, 2 = No");
+        if (Reader.consola.nextInt() == 1) {
+            int aux = reservMaz.getMaxHuesped();
+            for (int j = 0; j < aux; j++) {
+                //Datos del huesped partial string NAME#LASTNAME#DUI[ESPACE] ON 6
+
+            }
+        }
+        System.out.println("\033[35m" + reservMaz.toString() + " Debug");
+        ListaDeReservas.add(reservMaz);
     }
 
     public void cambioFecha(String dui, String fecha) {
@@ -197,9 +172,9 @@ public class GestorHotel {
     public void ReservaNueva(String[] masterType) {
         System.out.println(masterType[3]);
         Reservacion Prototype = new Reservacion(GestorBase.lastIDReserva, GestorBase.lastIDFactura, GestorBase.lastIDHuesped, masterType[3]);
-        Prototype.setDias(Integer.parseInt(masterType[1]));
+        Prototype.dias = (Integer.parseInt(masterType[1]));
         Prototype.setEstado(EstadoReservacion.Activa);
-        Prototype.setPersonaAPagar(base.creadoPersona(masterType[0]));
+        Prototype.setPersonaAPagar(MakerX.creadoPersona(masterType[0]));
         Prototype.setTipo(StatadosX.parseStatPack(masterType[4]));
         Prototype.setFechaIni(masterType[2]);
         ListaDeReservas.add(Prototype);
@@ -316,20 +291,20 @@ public class GestorHotel {
 
         return bool;
     }
-    
+
     public void PagarReservacion(String dui) {
-        ArrayList<Reservacion> listN=getListReserX();
+        ArrayList<Reservacion> listN = getListReserX();
         base.printListReservas(listN);
-        ArrayList<Reservacion> listNa=new ArrayList<>();
-        for(Reservacion e : listN){
-            if(e.PersonaAPagar.duiR().equals(dui)){
+        ArrayList<Reservacion> listNa = new ArrayList<>();
+        for (Reservacion e : listN) {
+            if (e.PersonaAPagar.duiR().equals(dui)) {
                 listNa.add(e);
             }
         }
         base.printListReservas(listNa);
         System.out.println("Ingrese la fecha de la reserva con el formato:");
-        String fecha=Reader.consola.next();
+        String fecha = Reader.consola.next();
         pagarReserva(dui, fecha);
     }
-    
+
 }
