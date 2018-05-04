@@ -101,11 +101,11 @@ public class GestorHotel {
         ReservaNueva(master.split(" "));
     }
 
-    public void cambioFecha(String dui, String fecha) {
+    public void cambioFecha(String dui, String fecha1,String fecha2) {
 
         for (Reservacion e : ListaDeReservas) {
-            if (dui.equals(e.PersonaAPagar.duiR())) {
-                e.fechaIni = fecha;
+            if (dui.equals(e.PersonaAPagar.duiR())&&fecha1.equals(e.fechaIni)) {
+                e.fechaIni = fecha2;
             }
         }
         base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
@@ -137,9 +137,9 @@ public class GestorHotel {
         base.Escribir(listN, GestorBase.RESERVAS);
     }
 
-    public void cambioPack(String dui, PaqueteTipo tipo) {
+    public void cambioPack(String dui,String fecha ,PaqueteTipo tipo) {
         for (Reservacion e : this.ListaDeReservas) {
-            if (e.PersonaAPagar.duiR().equals(dui)) {
+            if (e.PersonaAPagar.duiR().equals(dui)&&e.fechaIni.equals(fecha)) {
                 e.tipo = tipo;
             }
         }
@@ -147,11 +147,11 @@ public class GestorHotel {
         base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
 
-    public void cambioHabitacion(String dui, String habitacion) {
+    public void cambioHabitacion(String dui, String habitacion,String fecha) {
 
         for (Habitacion p : ListaDeHabitacion) {
             for (Reservacion e : ListaDeReservas) {
-                if (dui.equals(e.PersonaAPagar.duiR()) && p.habitacionEstado.equals(1) == true) {
+                if (dui.equals(e.PersonaAPagar.duiR()) && p.habitacionEstado.equals(1) == true && e.fechaIni.equals(fecha)) {
                     e.Id_habitacion = habitacion;
                 }
             }
@@ -169,12 +169,12 @@ public class GestorHotel {
 
     }
 
-    public void CambioPersonaP(String dui, String dui2, String nombre, String Apellido) {
+    public void CambioPersonaP(String dui, String dui2, String nombre, String Apellido,String fecha) {
 
         Persona aux;
 
         for (Reservacion e : ListaDeReservas) {
-            if (dui.equals(e.PersonaAPagar.duiR())) {
+            if (dui.equals(e.PersonaAPagar.duiR())&&fecha.equals(e.fechaIni)) {
                 aux = e.PersonaAPagar;
                 e.PersonaAPagar.cambioDui(dui2);
                 e.PersonaAPagar.Nombre = nombre;

@@ -203,14 +203,21 @@ public class Menu {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
         // metodo para saber si existe la reserva
+        
         System.out.println("Ingrese el nombre del nuevo titular: ");
         String auxnombre = Reader.consola.next();
+        
         System.out.println("Ingrese el apellido: ");
         String auxapellido = Reader.consola.next();
+        
         System.out.println("Ingrese el dui: ");
         String auxdui = Reader.consola.next();
+        
+        System.out.println("Ingrese la fecha: ");
+        String fecha = Reader.consola.next();
+        
         Persona aux = new Persona(auxnombre, auxapellido, auxdui);
-        gestorHotel.CambioPersonaP(duiPago, auxdui, auxnombre, auxapellido);
+        gestorHotel.CambioPersonaP(duiPago, auxdui, auxnombre, auxapellido,fecha);
     }
 
     private void CambioPaquete() {
@@ -219,17 +226,19 @@ public class Menu {
         String duiPago = Reader.consola.nextLine();
         System.out.print(duiPago+"\n");
         // metodo para saber si existe la reserva
+        System.out.println("Ingrese la fecha: ");
+        String fecha = Reader.consola.next();
         System.out.println("Ingrese 1 basico,2 premium,3 ninguno");
         int opcion = Reader.consola.nextInt();
         switch (opcion) {
             case 1:
-                gestorHotel.cambioPack(duiPago, PaqueteTipo.basico);
+                gestorHotel.cambioPack(duiPago, fecha ,PaqueteTipo.basico);
                 break;
             case 2:
-                gestorHotel.cambioPack(duiPago, PaqueteTipo.premium);
+                gestorHotel.cambioPack(duiPago, fecha ,PaqueteTipo.premium);
                 break;
             case 3:
-                gestorHotel.cambioPack(duiPago, PaqueteTipo.ninguno);
+                gestorHotel.cambioPack(duiPago, fecha ,PaqueteTipo.ninguno);
                 break;
         }
     }
