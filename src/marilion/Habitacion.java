@@ -16,35 +16,21 @@ public class Habitacion {
     public char indicadorDePiso;
     public int numeroHabitacion;
     public EstadoHabitacion habitacionEstado;
-    public ArrayList<Huesped> listaHuesped;
 
     public Habitacion(char indicadorDePiso, int numeroHabitacion, EstadoHabitacion habitacionEstado) {
         this.indicadorDePiso = indicadorDePiso;
         this.numeroHabitacion = numeroHabitacion;
         this.habitacionEstado = habitacionEstado;
-        this.listaHuesped = new ArrayList<>();
-    }
-
-    public Habitacion(char indicadorDePiso, int numeroHabitacion, EstadoHabitacion habitacionEstado, ArrayList<Huesped> listaHuesped) {
-        this.indicadorDePiso = indicadorDePiso;
-        this.numeroHabitacion = numeroHabitacion;
-        this.habitacionEstado = habitacionEstado;
-        this.listaHuesped = listaHuesped;
     }
 
     //Devuelve una linea para la base de dato
     @Override
     public String toString() {
-        String re;
-        re = indicadorDePiso + "#" + numeroHabitacion + " " + habitacionEstado + " ";
-        for (Huesped h : listaHuesped) {
-            re += h.ToString();
-        }
-        return re;
+        return indicadorDePiso + "#" + numeroHabitacion + " " + habitacionEstado + " ";
     }
 
     public String getHabId() {
-        String aux = String.valueOf(indicadorDePiso)+numeroHabitacion;
+        String aux = String.valueOf(indicadorDePiso) + numeroHabitacion;
         return aux;
     }
 
@@ -58,10 +44,6 @@ public class Habitacion {
 
     public void setHabitacionEstado(EstadoHabitacion habitacionEstado) {
         this.habitacionEstado = habitacionEstado;
-    }
-
-    public void setListaHuesped(ArrayList<Huesped> listaHuesped) {
-        this.listaHuesped = listaHuesped;
     }
 
 }

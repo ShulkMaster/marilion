@@ -20,6 +20,7 @@ public class GestorHotel {
 
     ArrayList<Habitacion> ListaDeHabitacion;
     ArrayList<Huesped> ListaDeHuespedes;
+    ArrayList<Huesped[]> ListaDehues;
     ArrayList<Reservacion> ListaDeReservas;
     ArrayList<Factura> ListaDeFactura;
     ArrayList<Administrador> ListaDeAdmins;
@@ -171,24 +172,6 @@ public class GestorHotel {
             
         }*/
 
-        base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
-    }
-
-    /**
-     *
-     * @param masterType String whit the following format
-     * IDreserva,IDfactura,IDhuespedes,IDhabitacion, dias,estado, pagador, tipo,
-     * fechaini
-     */
-    public void ReservaNueva(String[] masterType) {
-        System.out.println(masterType[3]);
-        Reservacion Prototype = new Reservacion(GestorBase.lastIDReserva, GestorBase.lastIDFactura, GestorBase.lastIDHuesped, masterType[3]);
-        Prototype.dias = (Integer.parseInt(masterType[1]));
-        Prototype.setEstado(EstadoReservacion.Activa);
-        Prototype.setPersonaAPagar(MakerX.creadoPersona(masterType[0]));
-        Prototype.setTipo(StatadosX.parseStatPack(masterType[4]));
-        Prototype.setFechaIni(masterType[2]);
-        base.AutoIncrement();
         base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
 

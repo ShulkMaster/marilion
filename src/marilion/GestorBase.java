@@ -62,7 +62,6 @@ public class GestorBase {
         return filecontent;
     }
 
-
     /**
      * metodo crear huespedes
      *
@@ -93,56 +92,6 @@ public class GestorBase {
         return listaAux;
     }
 
-    /**
-     * este metodo crea habitacion para probar el gestor de bases por que a
-     * gerar se le ocurrio que seria buena idea tener una ArrayList dentro de un
-     * arraylist dentro del objeto y se quejan de mi menu :v
-     *
-     * @param master es la cadena maestra que contiene una linea del archivo de
-     * texto en que se guarda la informacion, ese registro contiene toda la
-     * informacion necesaria para recontruir una habitacion en memoria RAM
-     * @return Habitacion
-     */
-    private Habitacion creadoHabitacion(String[] master) {
-        char indica = master[0].split("#")[0].charAt(0);
-        int index = Integer.parseInt(master[0].split("#")[1]);
-        EstadoHabitacion estado = StatadosX.parseStateHabitacion(master[1]);
-        /*
-        en el archivo los nombre de huespedes se separan por :
-          este metodo devuelve el arreglo de cadenas con los diferentes
-        nombres de los huespedes en la Habitacion
-         */
-        return new Habitacion(indica, index, estado);
-
-    }
-
-    /**
-     * este metodo crea una factura para probar el gestor de bases por que a
-     * gerar se le ocurrio que seria buena idea tener una ArrayList dentro de un
-     * arraylist dentro del objeto y se quejan de mi menu :v
-     *
-     * @param master es la cadena maestra que contiene una linea del archivo de
-     * texto en que se guarda la informacion, ese registro contiene toda la
-     * informacion necesaria para recontruir una factura en memoria RAM
-     * @return factura
-     */
-    private Factura creadoFactura(String master) {
-        int Id_fact;
-        float monto2;
-        Persona client2;
-        String fecha;
-        Id_fact = Integer.parseInt(master.split(" ")[0]);
-        client2 = MakerX.creadoPersona(master.split(" ")[1]);
-        monto2 = Float.parseFloat(master.split(" ")[2]);
-        fecha = master.split(" ")[3];
-        /*en el archivo los atributos de personas clientes se separan por #
-          este metodo devuelve el arreglo de cadenas con los diferentes
-          atributos del cliente en la reservacion
-         */
-        return new Factura(Id_fact, client2, monto2, fecha);
-
-    }
-
     private Reservacion creadoReservacion(String master) {
         System.out.println(master);
         int reserva, factura, huesped;
@@ -160,16 +109,6 @@ public class GestorBase {
         return auxReser;
     }
 
-    private Administrador creadoAdmin(String master) {
-        String username, password, nombre, apellido, dui;
-        username = master.split(" ")[0];
-        password = master.split(" ")[1];
-        nombre = master.split(" ")[2];
-        apellido = master.split(" ")[3];
-        dui = master.split(" ")[4];
-        return new Administrador(username, password, nombre, apellido, dui);
-    }
-
     public void printListHabitacion(ArrayList<Habitacion> param) {
         int contador = 1;
         for (Habitacion auxH : param) {
@@ -177,10 +116,6 @@ public class GestorBase {
             System.out.println("indicador de piso: " + auxH.indicadorDePiso);
             System.out.println("estado de habitacion: " + auxH.habitacionEstado);
             System.out.println("numero de habitacion: " + auxH.numeroHabitacion);
-            System.out.println("lista de huespedes");
-            for (Huesped auxhues : auxH.listaHuesped) {
-                System.out.println("\t" + auxhues.Nombre + " " + auxhues.Apellido);
-            }
             contador++;
         }
     }
@@ -265,7 +200,7 @@ public class GestorBase {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
         for (String registro : getFileContent("habitacionTEST")) {
             System.out.println(registro);
-            listaAux.add(creadoHabitacion(registro.split(" ")));
+            listaAux.add(MakerX.creadbita(registro.split(" ")));
         }
         return listaAux;
     }
@@ -273,7 +208,7 @@ public class GestorBase {
     public ArrayList<Factura> getListFactura() {
         ArrayList<Factura> listaAux = new ArrayList<>();
         for (String registro : getFileContent("facturaTEST")) {
-            Factura currenFactura = creadoFactura(registro);
+            Factura currenFactura = MakerX.creadoFactura(registro);
             listaAux.add(currenFactura);
         }
         return listaAux;
@@ -291,16 +226,17 @@ public class GestorBase {
     public ArrayList<Administrador> getListAdministradores() {
         ArrayList<Administrador> listaAux = new ArrayList<>();
         for (String registro : getFileContent("adminTEST")) {
-            Administrador currenAdmin = creadoAdmin(registro);
+            Administrador currenAdmin = MakerX.creadoAdmin(registro);
             listaAux.add(currenAdmin);
         }
         return listaAux;
     }
 
     public ArrayList<Huesped> getListHuespedes() {
-        ArrayList<Huesped> listaAux;
-        String registro = getFileContent("huespedesTEST").get(0);
-        listaAux = creadoHuesped(registro.split(" ")[1].split(":"));
+        ArrayList<Huesped> listaAux = new ArrayList<>();
+        for (String registro : getFileContent("huespedesTEST")) {
+            listaAux.add(creadoHuesped(registro.split(" ")[1].split(":")[0]));
+        }
         return listaAux;
     }
 
@@ -308,7 +244,7 @@ public class GestorBase {
     public <E> void Escribir(ArrayList<E> lista, String filename) {
         FileWriter fichero;
         PrintWriter pw;
-        archivoTXT = new File(filename+".txt");
+        archivoTXT = new File(filename + ".txt");
         try {
             fichero = new FileWriter(archivoTXT);
             pw = new PrintWriter(fichero);

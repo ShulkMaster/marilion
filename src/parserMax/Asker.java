@@ -21,5 +21,12 @@ public class Asker {
         master += ("#"+Reader.consola.nextLine());
         return master;
     }
+    
+    public static String askHabitad(){
+    String master = "";
+    
+    
+    return master;
+    }
 
 }
