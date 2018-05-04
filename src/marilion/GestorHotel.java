@@ -415,5 +415,12 @@ public class GestorHotel {
             }
         }
     }
-
+    
+    public void EntregarHabitacion(String id_habitacion) {
+        for (Habitacion ha : ListaDeHabitacion) {
+            if (ha.getHabId().equals(id_habitacion)) {
+                ha.habitacionEstado = EstadoHabitacion.EnUso;
+            }
+        }
+    }
 }
