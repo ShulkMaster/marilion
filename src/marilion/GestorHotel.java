@@ -382,7 +382,7 @@ public class GestorHotel {
         } else {
             System.out.print("No hay ninguna avitacion que se acople a la fecha nueva y dias nuevo a hospedarse");
         }
-
+        base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
 
     public void HabilitarHabitacionC(String id_habitacion) {
