@@ -391,6 +391,7 @@ public class GestorHotel {
                 ha.habitacionEstado = EstadoHabitacion.Habilitada;
             }
         }
+        base.Escribir(ListaDeHabitacion, GestorBase.HABITACIONES);
     }
 
     public void DeshabilitarHabitacion(String id_habitacion) {
@@ -399,6 +400,7 @@ public class GestorHotel {
                 ha.habitacionEstado = EstadoHabitacion.Deshabilitada;
             }
         }
+        base.Escribir(ListaDeHabitacion, GestorBase.HABITACIONES);
     }
 
     public void HabilitarPiso(int pisoNumero) {
@@ -408,6 +410,7 @@ public class GestorHotel {
                 ha.habitacionEstado = EstadoHabitacion.Habilitada;
             }
         }
+        base.Escribir(ListaDeHabitacion, GestorBase.HABITACIONES);
     }
     
     public void DeshabilitarPiso(int pisoNumero) {
@@ -417,6 +420,7 @@ public class GestorHotel {
                 ha.habitacionEstado = EstadoHabitacion.Deshabilitada;
             }
         }
+        base.Escribir(ListaDeHabitacion, GestorBase.HABITACIONES);
     }
     
     public void EntregarHabitacion(String id_habitacion) {
@@ -425,5 +429,6 @@ public class GestorHotel {
                 ha.habitacionEstado = EstadoHabitacion.EnUso;
             }
         }
+        base.Escribir(ListaDeHabitacion, GestorBase.HABITACIONES);
     }
 }
