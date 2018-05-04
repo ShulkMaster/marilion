@@ -82,7 +82,7 @@ public class Reservacion {
         System.out.println(Id_habitacion.split(":")[0].substring(1));
         int base = Integer.parseInt(Id_habitacion.split(":")[0].substring(1));
         int base2;
-        System.out.println(base );
+        System.out.println(base);
         if (medida < 2) {
             base2 = Integer.parseInt(Id_habitacion.split(":")[1].substring(1));
             System.out.println(base2);
@@ -108,6 +108,10 @@ public class Reservacion {
             }
         }
         return base;
+    }
+
+    public String[] getHIDs() {
+        return Id_habitacion.split(":");
     }
 
 }
