@@ -37,8 +37,9 @@ public class GestorHotel {
 
     public void CrearReservacion() {
         Reservacion reservMaz = new Reservacion();
-        reservMaz.Id_factura = GestorBase.lastIDReserva;
+        reservMaz.Id_reservacion = GestorBase.lastIDReserva;
         reservMaz.Id_factura = GestorBase.lastIDFactura;
+        reservMaz.Id_huespedes = GestorBase.lastIDHuesped;
         reservMaz.Estado = EstadoReservacion.Activa;
         Reader.consola.nextLine();
         reservMaz.PersonaAPagar = MakerX.creadoPersona(Asker.askPerson());
@@ -51,7 +52,7 @@ public class GestorHotel {
         System.out.println("Habitaciones disponibles para :" + reservMaz.fechaIni);
         showListHabitDispo(reservMaz.fechaIni, reservMaz.dias);//fecha dia
         System.out.println("Ingrese las habitaciones:");
-        reservMaz.Id_habitacion = Reader.consola.nextLine();
+        reservMaz.Id_habitacion = (Reader.consola.nextLine()+":");
         System.out.println("¿Desea agregar la segunda Habitacion?");
         System.out.println("1 = SI \t 2 = NO");
         if (Reader.consola.nextInt() == 1) {
@@ -75,6 +76,7 @@ public class GestorHotel {
         }
         System.out.println("\033[35m" + reservMaz.toString() + " Debug");
         ListaDeReservas.add(reservMaz);
+        base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
 
     public void cambioFecha(String dui,String fecha1 , String fecha2) {
