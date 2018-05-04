@@ -308,7 +308,7 @@ public class GestorBase {
     public <E> void Escribir(ArrayList<E> lista, String filename) {
         FileWriter fichero;
         PrintWriter pw;
-        archivoTXT = new File(filename+"txt");
+        archivoTXT = new File(filename+".txt");
         try {
             fichero = new FileWriter(archivoTXT);
             pw = new PrintWriter(fichero);
