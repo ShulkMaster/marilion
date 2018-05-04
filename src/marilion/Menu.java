@@ -41,7 +41,7 @@ public class Menu {
     public void Opciones(int elect) {
         String StrMenu = "| 1. Crear Reservacion   | 2. pagar Reservacion  | 3. Cancelar Reservacion  | 4. Cambiar Reservacion | 5. Ver lista de Reservacion |\n"
                 + "| 6. Entregar Habitacion | 7. Retirar Habitacion | 8. Gestion de Habitacion | 9. DB options          | 10. Exit                    |";
-        String StrMenu4 = "| 1. Cambio Fecha | 2. Cambio Principal | 3. Cambio Paquete | 4. Cambio de dias | 5. Cambio de acompanniantes |";
+        String StrMenu4 = "| 1. Cambio Fecha | 2. Cambio Principal | 3. Cambio Paquete | 4. Cambio de dias | 5. Cambio de acompanniantes | 6. Cambio fecha y dias |";
         String StrMenu8 = "| 1. Habilitar Habitacion | 2. deshabilitar habitacion | 3. habilitar piso | 4. deshabilitar piso | ";
         String StrMenu9 = "| 1. Facturas | 2. Reservas | 3. Huespedes Actuales | 4. Habitaciones |";
         switch (elect) {
@@ -96,6 +96,8 @@ public class Menu {
                         case 5:
                             this.CambioDeAcompanniantes();
                             break;
+                        case 6:
+                            this.CambioDeFechaYDias();
                     }
                     break;
                 case 5:
@@ -196,7 +198,7 @@ public class Menu {
             gestorHotel.cambioFecha(duiPago,fecha,fechaN);
             break;
         }
-        //aca va el verdadero cambio de fecha
+
 
     }
     
@@ -212,12 +214,15 @@ public class Menu {
             String mes = Reader.consola.next();
             System.out.println("Ingrese el annio:");
             String annio = Reader.consola.next();
+            
+            System.out.println("Ingrese los nuevos dias a quedarse:");
+            int num = Reader.consola.nextInt();
 
             String fecha = dia + "#" + mes + "#" + annio;
-            gestorHotel.cambioDias(duiPago,fecha);
+            gestorHotel.cambioDias(duiPago,fecha,num);
             break;
         }
-        //aca va el verdadero cambio de fecha
+
 
     }
 
@@ -354,6 +359,40 @@ public class Menu {
 
     private void DB_Habitaciones() {
         archivador.printListHabitacion(gestorHotel.ListaDeHabitacion);
+    }
+
+    private void CambioDeFechaYDias() {
+        System.out.println("Ingrese el dui de la persona a pagar:");
+        String duiPago = Reader.consola.next();
+        boolean bool=gestorHotel.Comprobador(duiPago);
+        while (bool==true) {
+            System.out.println("Ingrese la fecha de la reserva:");
+            System.out.println("Ingrese el dia:");
+            String dia = Reader.consola.next();
+            System.out.println("Ingrese el mes:");
+            String mes = Reader.consola.next();
+            System.out.println("Ingrese el annio:");
+            String annio = Reader.consola.next();
+            
+            System.out.println("Ingrese la fecha de la nueva reserva:");
+            System.out.println("Ingrese el dia:");
+            String diaN = Reader.consola.next();
+            System.out.println("Ingrese el mes:");
+            String mesN = Reader.consola.next();
+            System.out.println("Ingrese el annio:");
+            String annioN = Reader.consola.next();
+
+            String fecha = dia + "#" + mes + "#" + annio;
+            String fechaN = diaN + "#" + mesN + "#" + annioN;
+            gestorHotel.cambioFecha(duiPago,fecha,fechaN);
+
+            System.out.println("Ingrese los nuevos dias a quedarse:");
+            int num = Reader.consola.nextInt();
+            
+            gestorHotel.cambioFechaYDias(duiPago,fecha,fechaN, num);
+            break;
+            
+        }
     }
 
 }
