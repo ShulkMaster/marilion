@@ -162,9 +162,11 @@ public class Menu {
     }
 
     private void CancelarReservacion() {
-        System.out.println("Ingrese el dui de la persona a pagar:");
+        System.out.println("Ingrese el dui de la persona a cancelar:");
         String duiPago = Reader.consola.next();
-        gestorHotel.CancelaReserva(duiPago);
+        System.out.println("Ingrese la fecha de la reserva a cancelar con el formato dd#mm#yy:");
+        String fecha = Reader.consola.next();
+        gestorHotel.CancelaReserva(duiPago,fecha);
     }
 
     private void CambioFecha() {

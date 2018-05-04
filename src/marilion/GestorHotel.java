@@ -126,10 +126,10 @@ public class GestorHotel {
         return bool;
     }
 
-    public void CancelaReserva(String dui) {
+    public void CancelaReserva(String dui,String fecha) {
         ArrayList<Reservacion> listN = new ArrayList<>();
         for (Reservacion e : ListaDeReservas) {
-            if (!dui.equals(e.PersonaAPagar.duiR())) {
+            if (!dui.equals(e.PersonaAPagar.duiR())&&!fecha.equals(e.fechaIni)) {
                 listN.add(e);
             }
         }
