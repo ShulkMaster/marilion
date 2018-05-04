@@ -82,7 +82,7 @@ public class Menu {
                     opcion = Reader.consola.nextInt();
                     switch (opcion) {
                         case 1:
-                            this.CambioFechaND(0);
+                            this.CambioFechaND();
                             break;
                         case 2:
                             this.cambioPrincipal();
@@ -91,7 +91,7 @@ public class Menu {
                             this.CambioPaquete();
                             break;
                         case 4:
-                            this.CambioFechaND(1);
+                            this.CambioDias();
                             break;
                         case 5:
                             this.CambioDeAcompanniantes();
@@ -170,26 +170,51 @@ public class Menu {
         gestorHotel.CancelaReserva(duiPago,fecha);
     }
 
-    private void CambioFechaND(int num) {
+    private void CambioFechaND() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
         boolean bool=gestorHotel.Comprobador(duiPago);
-        int Num=-1;
         while (bool==true) {
-            System.out.println("Ingrese la fecha:");
+            System.out.println("Ingrese la fecha de la reserva:");
             System.out.println("Ingrese el dia:");
             String dia = Reader.consola.next();
             System.out.println("Ingrese el mes:");
             String mes = Reader.consola.next();
             System.out.println("Ingrese el annio:");
             String annio = Reader.consola.next();
-            if(num!=0){
-                System.out.println("Ingrese los dias a quedarse ");
-                Num=Reader.consola.nextInt();
-            }
+            
+            System.out.println("Ingrese la fecha de la nueva reserva:");
+            System.out.println("Ingrese el dia:");
+            String diaN = Reader.consola.next();
+            System.out.println("Ingrese el mes:");
+            String mesN = Reader.consola.next();
+            System.out.println("Ingrese el annio:");
+            String annioN = Reader.consola.next();
 
             String fecha = dia + "#" + mes + "#" + annio;
-            gestorHotel.cambioFecha(duiPago,fecha , Num);
+            String fechaN = diaN + "#" + mesN + "#" + annioN;
+            gestorHotel.cambioFecha(duiPago,fecha,fechaN);
+            break;
+        }
+        //aca va el verdadero cambio de fecha
+
+    }
+    
+    private void CambioDias() {
+        System.out.println("Ingrese el dui de la persona a pagar:");
+        String duiPago = Reader.consola.next();
+        boolean bool=gestorHotel.Comprobador(duiPago);
+        while (bool==true) {
+            System.out.println("Ingrese la fecha de la reserva:");
+            System.out.println("Ingrese el dia:");
+            String dia = Reader.consola.next();
+            System.out.println("Ingrese el mes:");
+            String mes = Reader.consola.next();
+            System.out.println("Ingrese el annio:");
+            String annio = Reader.consola.next();
+
+            String fecha = dia + "#" + mes + "#" + annio;
+            gestorHotel.cambioDias(duiPago,fecha);
             break;
         }
         //aca va el verdadero cambio de fecha

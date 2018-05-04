@@ -77,20 +77,15 @@ public class GestorHotel {
         ListaDeReservas.add(reservMaz);
     }
 
-    public void cambioFecha(String dui,String fecha2,int dias) {
+    public void cambioFecha(String dui,String fecha1 , String fecha2) {
         int aux=0;
         ArrayList<Habitacion> listN=new ArrayList<>();
-        Reservacion auxR = null;
-
+        
         for (Reservacion e : ListaDeReservas) {
             
-            if (dui.equals(e.PersonaAPagar.duiR()) ) {
-                auxR=e;
-                if(dias==-1){
-                    dias=e.dias;
-                }
-                
-                listN = getListHabitDispo(fecha2,dias);
+            if (dui.equals(e.PersonaAPagar.duiR())&&fecha1.equals(e.fechaIni)) {
+                aux=e.dias;
+                listN = getListHabitDispo(fecha2,aux);
             }
         }
         for(Habitacion e:listN){
@@ -102,8 +97,13 @@ public class GestorHotel {
         if(aux!=0){
             System.out.print("Escoja una de las habitaciones anteriores o la misma si se puede:");
             String hab=Reader.consola.next();
-            auxR.fechaIni=fecha2;
-            auxR.Id_habitacion=hab;
+            for (Reservacion e : ListaDeReservas) {
+                if (dui.equals(e.PersonaAPagar.duiR()) ) {
+                    e.fechaIni=fecha2;
+                    e.Id_habitacion=hab;
+                }
+            }
+            
         }
         else{
             System.out.print("No hay ninguna avitacion que se acople a la fecha y dias deseados a hospedarse");
@@ -315,5 +315,40 @@ public class GestorHotel {
         String fecha = Reader.consola.next();
         pagarReserva(dui, fecha);
     }
-
+    
+    public void cambioDias(String dui,String fecha) {
+        int aux=0;
+        ArrayList<Habitacion> listN=new ArrayList<>();
+        
+        for (Reservacion e : ListaDeReservas) {
+            
+            if (dui.equals(e.PersonaAPagar.duiR())&&fecha.equals(e.fechaIni)) {
+                aux=e.dias;
+                listN = getListHabitDispo(fecha,aux);
+            }
+        }
+        for(Habitacion e:listN){
+            if(e!=null){
+            aux++;
+            System.out.print(e.getHabId()+"\n");
+            }
+        }
+        if(aux!=0){
+            System.out.print("Escoja una de las habitaciones anteriores o la misma si se puede:");
+            String hab=Reader.consola.next();
+            for (Reservacion e : ListaDeReservas) {
+                if (dui.equals(e.PersonaAPagar.duiR()) ) {
+                    e.fechaIni=fecha;
+                    e.Id_habitacion=hab;
+                }
+            }
+            
+        }
+        else{
+            System.out.print("No hay ninguna avitacion que se acople a la fecha y dias deseados a hospedarse");
+        }
+        
+        base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
+    }
+    
 }
