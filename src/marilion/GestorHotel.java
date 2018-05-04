@@ -97,7 +97,7 @@ public class GestorHotel {
             System.out.print("Escoja una de las habitaciones anteriores o la misma si se puede:");
             String hab=Reader.consola.next();
             for (Reservacion e : ListaDeReservas) {
-                if (dui.equals(e.PersonaAPagar.duiR()) ) {
+                if (dui.equals(e.PersonaAPagar.duiR())&&fecha1.equals(e.fechaIni)) {
                     e.fechaIni=fecha2;
                     e.Id_habitacion=hab;
                 }
@@ -335,7 +335,7 @@ public class GestorHotel {
             System.out.print("Escoja una de las habitaciones anteriores o la misma si se puede:");
             String hab=Reader.consola.next();
             for (Reservacion e : ListaDeReservas) {
-                if (dui.equals(e.PersonaAPagar.duiR()) ) {
+                if (dui.equals(e.PersonaAPagar.duiR())&&fecha.equals(e.fechaIni)) {
                     e.dias=num;
                     e.Id_habitacion=hab;
                 }
@@ -369,7 +369,7 @@ public class GestorHotel {
             System.out.print("Escoja una de las habitaciones anteriores o la misma si se puede:");
             String hab=Reader.consola.next();
             for (Reservacion e : ListaDeReservas) {
-                if (dui.equals(e.PersonaAPagar.duiR()) ) {
+                if (dui.equals(e.PersonaAPagar.duiR())&&fecha1.equals(e.fechaIni)) {
                     e.fechaIni=fecha2;
                     e.dias=num;
                     e.Id_habitacion=hab;
