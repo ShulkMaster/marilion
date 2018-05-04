@@ -5,6 +5,8 @@
  */
 package marilion;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author gerar IDreserva,IDfactura,IDhuespedes,IDhabitacion, dias,estado,
@@ -16,6 +18,7 @@ public class Reservacion {
     public String Id_habitacion;
     public EstadoReservacion Estado;
     public Persona PersonaAPagar;
+    public ArrayList<Huesped> Huespesdes;
 
     public void setPersonaAPagar(Persona PersonaAPagar) {
         this.PersonaAPagar = PersonaAPagar;

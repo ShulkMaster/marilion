@@ -410,7 +410,6 @@ public class GestorHotel {
         for (Habitacion ha : ListaDeHabitacion) {
             if (ha.getHabId().equals(id_habitacion)) {
                 ha.habitacionEstado = EstadoHabitacion.EnUso;
-                ha.listaHuesped=null;
             }
         }
         base.Escribir(ListaDeHabitacion, GestorBase.HABITACIONES);
