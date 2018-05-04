@@ -19,12 +19,16 @@ public class Marilion {
             String pass = Reader.consola.next();
             if (menu.login(user, pass)) {
                 menu.Iniciar();
+                System.out.println("Ingrese 1 para salir: ");
+                int ex = Reader.consola.nextInt();
+                if (ex == 1) {
+                    break;
+                }
             } else {
                 System.out.println("Usuario o contrasennia incorrectos");
                 System.out.println("Ingrese 1 para salir: ");
                 int ex = Reader.consola.nextInt();
-                if(ex == 1)
-                {
+                if (ex == 1) {
                     break;
                 }
             }
