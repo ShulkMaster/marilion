@@ -13,9 +13,9 @@ public class Marilion {
         Menu menu = new Menu();
 
         while (true) {
-            System.out.print("Ingrese Usuario: ");
+            System.out.print("Ingrese Usuario: (sensual) ");
             String user = Reader.consola.next();
-            System.out.print("Ingrese contrasennia: ");
+            System.out.print("Ingrese contrasennia: (mangoneada)");
             String pass = Reader.consola.next();
             if (menu.login(user, pass)) {
                 menu.Iniciar();
