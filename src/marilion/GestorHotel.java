@@ -283,6 +283,8 @@ public class GestorHotel {
                     Factura fac = GestorCompra.getFactura(AuxRe);
                     ListaDeFactura.add(fac);
                     AuxRe.Estado = EstadoReservacion.pagada;
+                    base.Escribir(ListaDeFactura, GestorBase.FACTURAS);
+                    base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
                     break;
                 }
             }
