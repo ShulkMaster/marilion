@@ -1,60 +1,60 @@
-a#1
-a#2
-a#3
-a#4
-a#5
-a#6
-a#7
-a#8
-a#9
-a#10
-b#1
-b#2
-b#3
-b#4
-b#5
-b#6
-b#7
-b#8
-b#9
-b#10
-c#1
-c#2
-c#3
-c#4
-c#5
-c#6
-c#7
-c#8
-c#9
-c#10
-d#1
-d#2
-d#3
-d#4
-d#5
-d#6
-d#7
-d#8
-d#9
-d#10
-e#1
-e#2
-e#3
-e#4
-e#5
-e#6
-e#7
-e#8
-e#9
-e#10
-f#1
-f#2
-f#3
-f#4
-f#5
-f#6
-f#7
-f#8
-f#9
-f#10
+a#1 Habilitada 
+a#2 Habilitada 
+a#3 Habilitada 
+a#4 Habilitada 
+a#5 Habilitada 
+a#6 Habilitada 
+a#7 Habilitada 
+a#8 Habilitada 
+a#9 Habilitada 
+a#10 Habilitada 
+b#1 Habilitada 
+b#2 Habilitada 
+b#3 Habilitada 
+b#4 Habilitada 
+b#5 Habilitada 
+b#6 Habilitada 
+b#7 Habilitada 
+b#8 Habilitada 
+b#9 Habilitada 
+b#10 Deshabilitada 
+c#1 Habilitada 
+c#2 Habilitada 
+c#3 Habilitada 
+c#4 Habilitada 
+c#5 Habilitada 
+c#6 Habilitada 
+c#7 Habilitada 
+c#8 Habilitada 
+c#9 Habilitada 
+c#10 Habilitada 
+d#1 Habilitada 
+d#2 Habilitada 
+d#3 Habilitada 
+d#4 Habilitada 
+d#5 Habilitada 
+d#6 Habilitada 
+d#7 Habilitada 
+d#8 Habilitada 
+d#9 Habilitada 
+d#10 Habilitada 
+e#1 Habilitada 
+e#2 Habilitada 
+e#3 Habilitada 
+e#4 Habilitada 
+e#5 Habilitada 
+e#6 Habilitada 
+e#7 Habilitada 
+e#8 Habilitada 
+e#9 Habilitada 
+e#10 Habilitada 
+f#1 Habilitada 
+f#2 Habilitada 
+f#3 Habilitada 
+f#4 Habilitada 
+f#5 Habilitada 
+f#6 Habilitada 
+f#7 Habilitada 
+f#8 Habilitada 
+f#9 Habilitada 
+f#10 Habilitada 

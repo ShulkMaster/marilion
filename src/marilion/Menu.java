@@ -306,15 +306,15 @@ public class Menu {
     }
 
     private void EntregarHabitacion() {
-        System.out.println("Ingrese el dui de la persona a pagar:");
-        String duiPago = Reader.consola.next();
-        //aca el metodo del gestor de hotel si se puede efectuar la entrega o no
+        System.out.println("Ingrese el id de la habitacion eje b3:");
+        String id = Reader.consola.next();
+        gestorHotel.EntregarHabitacion(id);
     }
 
     private void RetirarHabitacion() {
-        System.out.println("Ingrese el dui de la persona a pagar:");
-        String duiPago = Reader.consola.next();
-        //aca el metodo del gestor de hotel para retirar habitacion y los huespedes que estaban en ese reserva
+        System.out.println("Ingrese el id de la habitacion eje b3:");
+        String id = Reader.consola.next();
+        gestorHotel.HabilitarHabitacionC(id);
     }
 
     private void habilitarHabitacion() {
