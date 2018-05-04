@@ -23,6 +23,10 @@ public class Factura {
         this.fecha = fecha;
     }
 
+    Factura() {
+       
+    }
+
     @Override
     public String toString() {
         return Id_factura+" "+cliente.toString()+" "+monto+" "+fecha;
