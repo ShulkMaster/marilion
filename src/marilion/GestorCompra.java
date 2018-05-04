@@ -38,7 +38,7 @@ public class GestorCompra {
     
    /* public Factura RegresarFactura(Reservacion re)
     {
-        
+        return new Factura();
     }
     
     */
