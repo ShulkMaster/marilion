@@ -178,7 +178,7 @@ public class Menu {
         while (bool==true) {
             System.out.println("Ingrese la fecha:");
             System.out.println("Ingrese el dia:");
-            int dia = Reader.consola.nextInt();
+            String dia = Reader.consola.next();
             System.out.println("Ingrese el mes:");
             String mes = Reader.consola.next();
             System.out.println("Ingrese el annio:");
@@ -190,6 +190,7 @@ public class Menu {
 
             String fecha = dia + "#" + mes + "#" + annio;
             gestorHotel.cambioFecha(duiPago,fecha , Num);
+            break;
         }
         //aca va el verdadero cambio de fecha
 

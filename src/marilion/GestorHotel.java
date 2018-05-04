@@ -96,7 +96,7 @@ public class GestorHotel {
         for(Habitacion e:listN){
             if(e!=null){
             aux++;
-            System.out.print(e.toString()+"\n");
+            System.out.print(e.getHabId()+"\n");
             }
         }
         if(aux!=0){
