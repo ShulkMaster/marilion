@@ -26,7 +26,7 @@ public class GestorHotel {
     public GestorHotel() {
         // base.escribirHabitacion();
         this.ListaDeHabitacion = base.getListHabitacion();
-        //this.ListaDeHuespedes = base.getListHuespedesActivos();
+        this.ListaDeHuespedes = base.getListHuespedes();
         this.ListaDeReservas = base.getListReservacion();
         this.ListaDeFactura = base.getListFactura();
         this.ListaDeAdmins = base.getListAdministradores();
@@ -86,6 +86,8 @@ public class GestorHotel {
         System.out.println("1 = SI \t 2 = NO");
         if (Reader.consola.nextInt() == 1) {
             System.out.println("nueva habitacion");
+            //limpiando Buffer podes
+            Reader.consola.nextLine();
             master += (":" + Reader.consola.nextLine());
         }
         //limpiando Buffer podes

@@ -34,7 +34,7 @@ public class Reservacion {
         return Id_habitacion;
     }
     
-    private String[] parseID(){
+    public String[] parseID(){
         return Id_habitacion.split("#");
     }
     
