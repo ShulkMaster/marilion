@@ -38,8 +38,8 @@ public class Marilion {
             } else {
                 System.out.println("Usuario o contrasennia incorrectos");
                 System.out.println("Ingrese 1 para salir: ");
-                int ex = Reader.consola.nextInt();
-                if (ex == 1) {
+                String ex = Reader.consola.nextLine();
+                if (ex.equals(1)) {
                     break;
                 }
             }
