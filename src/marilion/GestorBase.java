@@ -186,7 +186,6 @@ public class GestorBase {
             }
         }
         AutoIncrement();
-        System.out.println(lastIDReserva + " " + lastIDFactura + " " + lastIDHuesped + " CheckOut");
     }
 
     public void AutoIncrement() {
@@ -199,7 +198,6 @@ public class GestorBase {
     public ArrayList<Habitacion> getListHabitacion() {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
         for (String registro : getFileContent("habitacionTEST")) {
-            System.out.println(registro);
             listaAux.add(MakerX.creadbita(registro.split(" ")));
         }
         return listaAux;
