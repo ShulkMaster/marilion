@@ -7,7 +7,7 @@ package marilion;
 
 import parserMax.Reader;
 import java.util.ArrayList;
-//import parserMax.ValidaHabitacion;
+import parserMax.ValidaHabitacion;
 
 /**
  *

@@ -127,7 +127,6 @@ public class Reservacion {
     public void addHUesped(String HID, int hIndex) {
         int HHuesMax = Integer.parseInt(HID.split(":")[hIndex].substring(1));
         HHuesMax = HHuesMax % 2;
-         System.out.println("El modulo es " + HHuesMax);
         if(HHuesMax == 0){
         HHuesMax = 3;
         }else{

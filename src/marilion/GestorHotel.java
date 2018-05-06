@@ -47,9 +47,9 @@ public class GestorHotel {
         System.out.println("Ingrese el numero de dias para hospedarse: ");
         reservMaz.dias = Reader.consola.nextInt();
         System.out.println("Ingrese la fecha formato d#M#yyyy:");
-        System.out.println("Por ejemplo la fecha de hoy seria: " + parserMax.FechaX.fechaEjemplo());
+        System.out.println("Por ejemplo la fecha de hoy seria: " + FechaX.fechaEjemplo());
         Reader.consola.nextLine();
-        reservMaz.fechaIni = parserMax.FechaX.paser(Reader.consola.nextLine());
+        reservMaz.fechaIni = FechaX.paser(Reader.consola.nextLine());
         System.out.println("Habitaciones disponibles para :" + reservMaz.fechaIni);
         showListHabitDispo(reservMaz.fechaIni, reservMaz.dias);//fecha dia
         System.out.println("Ingrese las habitaciones:");

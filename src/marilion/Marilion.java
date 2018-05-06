@@ -1,6 +1,6 @@
 package marilion;
 
-import parserMax.Reader;
+import CosasInutiles.Reader;
 
 /**
  *
