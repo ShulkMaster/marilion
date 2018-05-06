@@ -40,7 +40,7 @@ public class GestorHotel {
         Reservacion reservMaz = new Reservacion();
         reservMaz.Id_reservacion = GestorBase.lastIDReserva;
         reservMaz.Id_factura = GestorBase.lastIDFactura;
-        reservMaz.Id_huespedes = GestorBase.lastIDHuesped;
+        //reservMaz.Id_huespedes = GestorBase.lastIDHuesped;
         reservMaz.Estado = EstadoReservacion.Activa;
         Reader.consola.nextLine();
         reservMaz.PersonaAPagar = MakerX.creadoPersona(Asker.askPerson());
@@ -53,28 +53,19 @@ public class GestorHotel {
         System.out.println("Habitaciones disponibles para :" + reservMaz.fechaIni);
         showListHabitDispo(reservMaz.fechaIni, reservMaz.dias);//fecha dia
         System.out.println("Ingrese las habitaciones:");
-        reservMaz.Id_habitacion = (Reader.consola.nextLine()+":");
+        reservMaz.Id_habitacion = (Reader.consola.nextLine() + ":");
+        reservMaz.addHUesped(reservMaz.Id_habitacion , 0);
         System.out.println("¿Desea agregar la segunda Habitacion?");
         System.out.println("1 = SI \t 2 = NO");
-        if (Reader.consola.nextInt() == 1) {
-            Reader.consola.nextLine();
+        if (Reader.consola.nextLine().equals("1")) {
             System.out.println("nueva habitacion");
             reservMaz.setXtraHabitacion(Reader.consola.nextLine());
+            reservMaz.addHUesped(reservMaz.Id_habitacion , 1);
         }
         System.out.println("Ingrese tipo de paquete: ");
         System.out.println("1 = Basico 2 = Primium 3 = Ninguno");
         reservMaz.setTipo(StatadosX.parseStatPack(Reader.consola.nextLine()));//ON 5
         //datos de los huespedes hasta aqui bien
-        System.out.println("Desea agregar mas Huespedes: ");
-        System.out.println("1 = Si, 2 = No");
-        if (Reader.consola.nextInt() == 1) {
-            Reader.consola.nextLine();
-            int aux = reservMaz.getMaxHuesped();
-            for (int j = 0; j < aux; j++) {
-                //Datos del huesped partial string NAME#LASTNAME#DUI[ESPACE] ON 6
-
-            }
-        }
         System.out.println("\033[35m" + reservMaz.toString() + " Debug");
         ListaDeReservas.add(reservMaz);
         base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
@@ -181,7 +172,7 @@ public class GestorHotel {
             System.out.println("<-------------- Reservacion " + contador + "-------------------->");
             System.out.println("ID reservacion: " + auxF.Id_reservacion);
             System.out.println("ID factura: " + auxF.Id_factura);
-            System.out.println("ID huespedes: " + auxF.Id_huespedes);
+            //System.out.println("ID huespedes: " + auxF.Id_huespedes);
             System.out.println("ID habitacion: " + auxF.Id_habitacion);
             System.out.println("ID Dias duracion: " + auxF.dias);
             System.out.println("Estado : " + auxF.Estado);
@@ -201,7 +192,6 @@ public class GestorHotel {
     public ArrayList<Habitacion> getListHabitDispo(String fecha, int days) {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
         for (Habitacion auxH : getListHabitaReady()) {
-            System.out.println(auxH.getHabId());
             if (FechaX.doMatch(fecha, days, getListReserChox(auxH.getHabId()))) {
                 listaAux.add(auxH);
             }
@@ -395,7 +385,7 @@ public class GestorHotel {
         }
         base.Escribir(ListaDeHabitacion, GestorBase.HABITACIONES);
     }
-    
+
     public void DeshabilitarPiso(int pisoNumero) {
         String pisos = "abcdef";
         for (Habitacion ha : ListaDeHabitacion) {
@@ -405,7 +395,7 @@ public class GestorHotel {
         }
         base.Escribir(ListaDeHabitacion, GestorBase.HABITACIONES);
     }
-    
+
     public void EntregarHabitacion(String id_habitacion) {
         for (Habitacion ha : ListaDeHabitacion) {
             if (ha.getHabId().equals(id_habitacion)) {

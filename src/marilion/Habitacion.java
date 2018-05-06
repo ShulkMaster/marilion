@@ -9,8 +9,6 @@ package marilion;
  *
  * @author mcdre
  */
-import java.util.ArrayList;
-
 public class Habitacion {
 
     public char indicadorDePiso;

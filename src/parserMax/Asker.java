@@ -16,17 +16,27 @@ public class Asker {
         System.out.println("Ingrese el nombre de la Persona a pagar: ");
         master += Reader.consola.nextLine();
         System.out.println("Ingrese el Apellido de la Persona a pagar: ");
-        master += ("#"+Reader.consola.nextLine());
+        master += ("#" + Reader.consola.nextLine());
         System.out.println("Ingrese el DUI de la Persona a pagar: ");
-        master += ("#"+Reader.consola.nextLine());
+        master += ("#" + Reader.consola.nextLine());
         return master;
     }
-    
-    public static String askHabitad(){
-    String master = "";
-    
-    
-    return master;
+
+    public static String askHuesp() {
+        String master = "";
+        System.out.println("Ingrese el nombre de la Persona: ");
+        master += Reader.consola.nextLine();
+        System.out.println("Ingrese el Apellido de la Persona: ");
+        master += ("#" + Reader.consola.nextLine());
+        System.out.println("Ingrese el DUI de la Persona: ");
+        master += ("#" + Reader.consola.nextLine());
+        return master;
+    }
+
+    public static String askHabitad() {
+        String master = "";
+
+        return master;
     }
 
 }

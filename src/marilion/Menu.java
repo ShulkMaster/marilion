@@ -7,7 +7,7 @@ package marilion;
 
 import parserMax.Reader;
 import java.util.ArrayList;
-import parserMax.ValidaHabitacion;
+//import parserMax.ValidaHabitacion;
 
 /**
  *
@@ -323,7 +323,7 @@ public class Menu {
         //metodo para ver todas las habitaciones deshabilitadas;
         System.out.println("Ingrese el id de la habitacion eje b3");
         String habiHabilitar = Reader.consola.next();
-        if(ValidaHabitacion.Isvali(habiHabilitar))
+        if(/*ValidaHabitacion.Isvali(habiHabilitar)*/true)
         {
             gestorHotel.HabilitarHabitacionC(habiHabilitar);
         
@@ -335,7 +335,7 @@ public class Menu {
         //metodo para ver todas las habitaciones habilitadas;
         System.out.println("Ingrese el id de la habitacion eje b3");
         String habideshabilitar = Reader.consola.next();
-        if(ValidaHabitacion.Isvali(habideshabilitar))
+        if(/*ValidaHabitacion.Isvali(habideshabilitar)*/true)
         {
             gestorHotel.DeshabilitarHabitacion(habideshabilitar);
         }

@@ -6,6 +6,8 @@
 package marilion;
 
 import java.util.ArrayList;
+import parserMax.Asker;
+import parserMax.MakerX;
 
 /**
  *
@@ -14,26 +16,26 @@ import java.util.ArrayList;
  */
 public class Reservacion {
 
-    public int Id_reservacion, Id_factura, Id_huespedes, dias;
+    public int Id_reservacion, Id_factura, dias;
     public String Id_habitacion;
     public EstadoReservacion Estado;
     public Persona PersonaAPagar;
+    public String fechaIni;
+    public PaqueteTipo tipo;
     public ArrayList<Huesped> Huespesdes;
 
     public void setPersonaAPagar(Persona PersonaAPagar) {
         this.PersonaAPagar = PersonaAPagar;
     }
-    public String fechaIni;
-    public PaqueteTipo tipo;
 
     public Reservacion() {
+        Huespesdes = new ArrayList<>();
     }
 
     public Reservacion(int Id_reservacion, int Id_factura, int Id_huespedes, String Id_habitacion) {
         this.Id_reservacion = Id_reservacion;
         this.Id_factura = Id_factura;
-        this.Id_huespedes = Id_huespedes;
-        this.Id_habitacion = (Id_habitacion+":");
+        this.Id_habitacion = (Id_habitacion + ":");
     }
 
     public String getId_habitacion() {
@@ -48,7 +50,7 @@ public class Reservacion {
     public String toString() {
         return Id_reservacion + " "
                 + Id_factura + " "
-                + Id_huespedes + " "
+                + huesped2String() + " "
                 + Id_habitacion + " "
                 + dias + " "
                 + Estado + " "
@@ -57,8 +59,12 @@ public class Reservacion {
                 + fechaIni;
     }
 
-    public void setId_huespedes(int Id_huespedes) {
-        this.Id_huespedes = Id_huespedes;
+    private String huesped2String() {
+        String huespedeX = "";
+        for (Huesped auxHues : Huespesdes) {
+            huespedeX += auxHues.ToString();
+        }
+        return huespedeX;
     }
 
     public void setXtraHabitacion(String Id_habitacion) {
@@ -118,4 +124,18 @@ public class Reservacion {
         return Id_habitacion.split(":");
     }
 
+    public void addHUesped(String HID, int hIndex) {
+        int HHuesMax = Integer.parseInt(HID.split(":")[hIndex].substring(1));
+        HHuesMax = HHuesMax % 2;
+         System.out.println("El modulo es " + HHuesMax);
+        if(HHuesMax == 0){
+        HHuesMax = 3;
+        }else{
+        HHuesMax = 2;
+        }
+        System.out.println("Ingrese " + HHuesMax + " huespedes");
+        for (int i = 0; i < HHuesMax; i++) {
+            Huespesdes.add(MakerX.creadohues(Asker.askHuesp()));
+        }
+    }
 }

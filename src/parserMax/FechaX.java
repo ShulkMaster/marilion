@@ -37,7 +37,6 @@ public class FechaX {
             }
             return provisional;
         } catch (ParseException ex) {
-            Logger.getLogger(FechaX.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println("Error al procesar la fecha: Fecha de la reserva es hoy");
             return STANDARFORMAT.format(new Date());
         }

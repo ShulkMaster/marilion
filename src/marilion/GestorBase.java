@@ -138,7 +138,7 @@ public class GestorBase {
             System.out.println("<-------------- Reservacion " + contador + "-------------------->");
             System.out.println("ID reservacion: " + auxF.Id_reservacion);
             System.out.println("ID factura: " + auxF.Id_factura);
-            System.out.println("ID huespedes: " + auxF.Id_huespedes);
+            //System.out.println("ID huespedes: " + auxF.Id_huespedes);
             System.out.println("ID habitacion: " + auxF.Id_habitacion);
             System.out.println("Dias a hospedarse: " + auxF.dias);
             System.out.println("Estado : " + auxF.Estado);
@@ -180,9 +180,6 @@ public class GestorBase {
             }
             if (auxF.Id_factura > lastIDFactura) {
                 lastIDFactura = auxF.Id_factura;
-            }
-            if (auxF.Id_huespedes > lastIDHuesped) {
-                lastIDHuesped = auxF.Id_huespedes;
             }
         }
         AutoIncrement();
