@@ -69,7 +69,8 @@ public class Menu {
             switch (opcion) {
                 case 1:
                     //crear reservacion
-                    gestorHotel.CrearReservacion();
+                    this.crearReservacion();
+                   
                     break;
                 case 2:
                     this.PagoReservacion();
@@ -394,6 +395,10 @@ public class Menu {
             break;
             
         }
+    }
+
+    private void crearReservacion() {
+        gestorHotel.CrearReservacion();
     }
 
 }
