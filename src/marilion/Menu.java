@@ -7,6 +7,7 @@ package marilion;
 
 import parserMax.Reader;
 import java.util.ArrayList;
+import parserMax.ValidaHabitacion;
 
 /**
  *
@@ -322,7 +323,11 @@ public class Menu {
         //metodo para ver todas las habitaciones deshabilitadas;
         System.out.println("Ingrese el id de la habitacion eje b3");
         String habiHabilitar = Reader.consola.next();
-        gestorHotel.HabilitarHabitacionC(habiHabilitar);
+        if(ValidaHabitacion.Isvali(habiHabilitar))
+        {
+            gestorHotel.HabilitarHabitacionC(habiHabilitar);
+        
+        }
         
     }
 
@@ -330,21 +335,33 @@ public class Menu {
         //metodo para ver todas las habitaciones habilitadas;
         System.out.println("Ingrese el id de la habitacion eje b3");
         String habideshabilitar = Reader.consola.next();
-        gestorHotel.DeshabilitarHabitacion(habideshabilitar);
+        if(ValidaHabitacion.Isvali(habideshabilitar))
+        {
+            gestorHotel.DeshabilitarHabitacion(habideshabilitar);
+        }
+        
     }
 
     private void HabilitarPiso() {
         //metodo para ver todas los pisos deshabilitados
         System.out.println("Ingrese el numero del piso");
         int pisohabilitar = Reader.consola.nextInt();
-        gestorHotel.HabilitarPiso(pisohabilitar);
+        if(pisohabilitar <= 6)
+        {
+            gestorHotel.HabilitarPiso(pisohabilitar);
+        }
+        
     }
 
     private void deshaiblitarPiso() {
         //metodo para ver todos los pisos haabilitados
         System.out.println("Ingrese el numero del piso");
         int pisodeshabilitar = Reader.consola.nextInt();
-        gestorHotel.DeshabilitarPiso(pisodeshabilitar);
+        if(pisodeshabilitar <= 6)
+        {
+            gestorHotel.DeshabilitarPiso(pisodeshabilitar);
+        }
+        
     }
 
     private void DB_Facturas() {
