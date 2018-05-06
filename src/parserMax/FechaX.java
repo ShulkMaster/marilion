@@ -46,12 +46,15 @@ public class FechaX {
             for (Reservacion problem : problematica) {
                 Date fechaRev2 = STANDARFORMAT.parse(problem.fechaIni);
                 Date fechaRevFin2 = getFechafinal(fechaRev2, problem.dias);
+                System.out.println(fechaDeseada+" "+fechaReservFin+" "+fechaRev2+""+fechaRevFin2);
                 long mayor = getmayor(fechaReserv, fechaReservFin, fechaRev2, fechaRevFin2);
                 long menor = getmenor(fechaReserv.getTime(), fechaReservFin.getTime(), fechaRev2.getTime(), fechaRevFin2.getTime());
                 if ((restar(fechaReservFin, fechaReserv))+(restar(fechaRevFin2, fechaRev2)) <= (mayor - menor)) {
+                    System.out.println("No se metio al array");
                     return false;
                 }
             }
+            System.out.println("Si se metio al array");
             return true;
         } catch (ParseException ex) {
             Logger.getLogger(FechaX.class.getName()).log(Level.SEVERE, null, ex);

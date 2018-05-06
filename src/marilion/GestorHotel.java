@@ -92,7 +92,7 @@ public class GestorHotel {
             for (Reservacion e : ListaDeReservas) {
                 if (dui.equals(e.PersonaAPagar.duiR()) && fecha1.equals(e.fechaIni)) {
                     e.fechaIni = fecha2;
-                    e.setId_habitacion(hab); 
+                    e.setId_habitacion(hab);
                 }
             }
 
@@ -185,20 +185,21 @@ public class GestorHotel {
 
     public void showListHabitDispo(String fecha, int days) {
         ArrayList<Habitacion> listaAux = getListHabitDispo(fecha, days);
-        ArrayList<Habitacion> temporal = ListaDeHabitacion;
-        for(Habitacion auxH : listaAux){
+        for (Habitacion auxH : listaAux) {
             System.out.println(auxH.habitacionEstado);
             System.out.println(auxH.getHabId());
             System.out.println(auxH.indicadorDePiso);
             System.out.println(auxH.numeroHabitacion);
         }
-        base.printListHabitacion(temporal);
     }
 
     public ArrayList<Habitacion> getListHabitDispo(String fecha, int days) {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
-        for (Habitacion auxH : getListHabitaReady()) {
-            if (FechaX.donotMatch(fecha, days, getListReserChox(auxH.getHabId()))) {
+        ArrayList<Habitacion> lisReady = getListHabitaReady();
+        ArrayList<Reservacion> ReservorioActivo = getListReserX();
+        for (Habitacion auxH : lisReady) {
+            System.out.println(auxH.getHabId());
+            if (FechaX.donotMatch(fecha, days, getListReserChox(auxH.getHabId(), ReservorioActivo))) {
                 listaAux.add(auxH);
             }
         }
@@ -209,6 +210,7 @@ public class GestorHotel {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
         for (Habitacion auxH : ListaDeHabitacion) {
             if (auxH.habitacionEstado.equals(EstadoHabitacion.Habilitada) || auxH.habitacionEstado.equals(EstadoHabitacion.EnUso)) {
+                System.out.println("Habitaciones activas: " + auxH.getHabId());
                 listaAux.add(auxH);
             }
         }
@@ -222,12 +224,15 @@ public class GestorHotel {
      * haya que revisar
      * @return Reservaciones con posible conflicto cronologico
      */
-    private ArrayList<Reservacion> getListReserChox(String CurrenHabiID) {
+    private ArrayList<Reservacion> getListReserChox(String CurrenHabiID, ArrayList<Reservacion> Reservorio) {
         ArrayList<Reservacion> listaAux = new ArrayList<>();
-        for (Reservacion auxH : getListReserX()) {
-            if (auxH.getId_habitacion().equals(CurrenHabiID)) {
-                System.out.println("\033[35mReservas Potencialmente problematica :" + auxH.getId_reservacion());
-                listaAux.add(auxH);
+
+        System.out.println(CurrenHabiID+" esto es actual");
+        for (Reservacion Reservex : Reservorio) {
+            System.out.println("La habitacion en proceso es: " + Reservex.getId_habitacion());
+            if (Reservex.getHIDs()[0].equals(CurrenHabiID)) {
+                System.out.println("\033[35mReservas Potencialmente problematica :" + Reservex.getId_reservacion());
+                listaAux.add(Reservex);
             }
         }
         return listaAux;
@@ -242,9 +247,10 @@ public class GestorHotel {
      */
     private ArrayList<Reservacion> getListReserX() {
         ArrayList<Reservacion> listaAux = new ArrayList<>();
-        for (Reservacion auxH : ListaDeReservas) {
-            if (auxH.Estado.equals(EstadoReservacion.Activa) || auxH.Estado.equals(EstadoReservacion.EnUso)) {
-                listaAux.add(auxH);
+        for (Reservacion auxRex : ListaDeReservas) {
+            if (auxRex.Estado.equals(EstadoReservacion.Activa) || auxRex.Estado.equals(EstadoReservacion.EnUso)) {
+                System.out.println("Reservaciones activas o en uso: " + auxRex.getId_reservacion());
+                listaAux.add(auxRex);
             }
 
         }

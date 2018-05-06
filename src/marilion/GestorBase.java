@@ -27,7 +27,6 @@ public class GestorBase {
     //se cambiaro los 4 archivos por uno generico que lo carga 1 a la vez
     public static int lastIDReserva = 0;
     public static int lastIDFactura = 0;
-    public static int lastIDHuesped = 0;
     public static final String RESERVAS = "reservas";
     public static final String FACTURAS = "facturas";
     public static final String HABITACIONES = "habitaciones";
@@ -97,6 +96,7 @@ public class GestorBase {
         String Id_Habitacion;
         reserva = Integer.parseInt(master.split(" ")[0]);
         factura = Integer.parseInt(master.split(" ")[1]);
+        System.out.println(reserva + " " + factura);
         Id_Habitacion = master.split(" ")[3];
         Reservacion auxReser = new Reservacion(reserva, factura, Id_Habitacion);
         auxReser.selfAddHuesped(master.split(" ")[2]);
@@ -114,15 +114,19 @@ public class GestorBase {
         int controles = 0;
         for (int i = 'a'; i < maxChar + 1; i++) {
             for (int j = 0; j < maxHabid; j++) {
-                if (param.get(controles).habitacionEstado.equals(EstadoHabitacion.Habilitada)) {
-                    System.out.print("\033[32m[" + param.get(controles).getHabId().toUpperCase() + "]" + " ");
-                } else if (param.get(controles).habitacionEstado.equals(EstadoHabitacion.EnUso)) {
-                    System.out.print("\033[34m[" + param.get(controles).getHabId().toUpperCase() + "]" + " ");
-                } else if (param.get(controles).habitacionEstado.equals(EstadoHabitacion.Deshabilitada)) {
-                    System.out.print("\033[35m[" + param.get(controles).getHabId().toUpperCase() + "]" + " ");
-                }
-                else{
-                     System.out.print((char)27 + "[34;43m[?]"  + " ");
+                switch (param.get(controles).habitacionEstado) {
+                    case Habilitada:
+                        System.out.print("\033[32m[" + param.get(controles).getHabId().toUpperCase() + "]" + " ");
+                        break;
+                    case EnUso:
+                        System.out.print("\033[34m[" + param.get(controles).getHabId().toUpperCase() + "]" + " ");
+                        break;
+                    case Deshabilitada:
+                        System.out.print("\033[35m[" + param.get(controles).getHabId().toUpperCase() + "]" + " ");
+                        break;
+                    default:
+                        System.out.print((char) 27 + "[34;43m[?]" + " ");
+                        break;
                 }
                 controles++;
             }
@@ -187,25 +191,24 @@ public class GestorBase {
     public void checkOutIds(ArrayList<Reservacion> masterRay) {
         for (Reservacion auxF : masterRay) {
             if (auxF.getId_reservacion() > lastIDReserva) {
-                auxF.setId_reservacion(lastIDReserva);
+                lastIDReserva = auxF.getId_reservacion();
             }
             if (auxF.getId_factura() > lastIDFactura) {
-                auxF.setId_factura(lastIDFactura);
+                lastIDFactura = auxF.getId_factura();
             }
         }
         AutoIncrement();
+        System.out.println(lastIDFactura + " " + lastIDReserva + "checkout");
     }
 
     public void AutoIncrement() {
         lastIDReserva += 1;
         lastIDFactura += 1;
-        lastIDHuesped += 1;
-
     }
 
     public ArrayList<Habitacion> getListHabitacion() {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
-        for (String registro : getFileContent("habitacionTEST")) {
+        for (String registro : getFileContent("habitaciones")) {
             listaAux.add(MakerX.creadbita(registro.split(" ")));
         }
         return listaAux;
