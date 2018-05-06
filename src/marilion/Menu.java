@@ -5,9 +5,9 @@
  */
 package marilion;
 
-import parserMax.Reader;
+import CosasInutiles.Reader;
 import java.util.ArrayList;
-import parserMax.ValidaHabitacion;
+import CosasInutiles.ValidaHabitacion;
 
 /**
  *
