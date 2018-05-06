@@ -15,8 +15,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import CosasInutiles.StatadosX;
-import CosasInutiles.MakerX;
+import parserMax.StatadosX;
+import parserMax.MakerX;
 
 /**
  *

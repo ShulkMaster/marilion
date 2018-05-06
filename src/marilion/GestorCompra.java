@@ -5,7 +5,7 @@
  */
 package marilion;
 
-import CosasInutiles.FechaX;
+import parserMax.FechaX;
 
 /**
  *
