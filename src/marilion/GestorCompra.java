@@ -5,7 +5,7 @@
  */
 package marilion;
 
-import CosasInutiles.FechaX;
+import parserMax.FechaX;
 
 /**
  *
@@ -65,6 +65,6 @@ public class GestorCompra {
     }
 
     public static Factura getFactura(Reservacion re) {
-        return new Factura(re.Id_reservacion, re.PersonaAPagar, GestorCompra.RegresarPrecio(re), FechaX.fechaEjemplo());
+        return new Factura(re.getId_reservacion(), re.PersonaAPagar, GestorCompra.RegresarPrecio(re), FechaX.fechaEjemplo());
     }
 }

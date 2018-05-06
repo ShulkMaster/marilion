@@ -24,25 +24,22 @@ public class FechaX {
     private static final Calendar CALENTAR = Calendar.getInstance();
 
     public static String paser(String param) {
-        String provisional;
-        String fechaActual;
+        String provisional = fechaEjemplo();
         try {
-            fechaActual = STANDARFORMAT.format(new Date());
-            if (STANDARFORMAT.parse(param).compareTo(STANDARFORMAT.parse(fechaActual)) < 0) {
-                provisional = STANDARFORMAT.format(new Date());
+            if (STANDARFORMAT.parse(param).compareTo(STANDARFORMAT.parse(provisional)) < 0) {
                 System.err.println("No se pueden asignar fechas anteriores");
                 System.out.println("fecha asignada: " + provisional);
             } else {
-                provisional = param;
+                provisional = STANDARFORMAT.format(param);
             }
             return provisional;
         } catch (ParseException ex) {
             System.err.println("Error al procesar la fecha: Fecha de la reserva es hoy");
-            return STANDARFORMAT.format(new Date());
+            return provisional;
         }
     }
 
-    public static boolean doMatch(String fechaDeseada, int days1, ArrayList<Reservacion> problematica) {
+    public static boolean donotMatch(String fechaDeseada, int days1, ArrayList<Reservacion> problematica) {
         try {
             Date fechaReserv = STANDARFORMAT.parse(fechaDeseada);
             Date fechaReservFin = getFechafinal(fechaReserv, days1);
@@ -51,7 +48,7 @@ public class FechaX {
                 Date fechaRevFin2 = getFechafinal(fechaRev2, problem.dias);
                 long mayor = getmayor(fechaReserv, fechaReservFin, fechaRev2, fechaRevFin2);
                 long menor = getmenor(fechaReserv.getTime(), fechaReservFin.getTime(), fechaRev2.getTime(), fechaRevFin2.getTime());
-                if ((restar(fechaReservFin, fechaReserv))-(restar(fechaRevFin2, fechaRev2)) <= (mayor - menor)) {
+                if ((restar(fechaReservFin, fechaReserv))+(restar(fechaRevFin2, fechaRev2)) <= (mayor - menor)) {
                     return false;
                 }
             }

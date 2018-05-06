@@ -1,8 +1,8 @@
 /*
         System.out.println("\033[30mEste texto es Negro");
         System.out.println("\033[31mEste texto es Rojo");
-        System.out.println("\033[32mEste texto es Verde");
-        System.out.println("\033[33mEste texto es Amarillo");
+        System.out.println("\033[32m Este texto es Verde");
+        System.out.println("\033[33m Este texto es Amarillo");
         System.out.println("\033[34mEste texto es Azul");
         System.out.println("\033[35mEste texto es Magenta");
         System.out.println("\033[36mEste texto es Cyan");
@@ -15,8 +15,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import CosasInutiles.StatadosX;
-import CosasInutiles.MakerX;
+import parserMax.StatadosX;
+import parserMax.MakerX;
 
 /**
  *
@@ -93,30 +93,40 @@ public class GestorBase {
     }
 
     private Reservacion creadoReservacion(String master) {
-        System.out.println(master);
-        int reserva, factura, huesped;
+        int reserva, factura;
         String Id_Habitacion;
         reserva = Integer.parseInt(master.split(" ")[0]);
         factura = Integer.parseInt(master.split(" ")[1]);
-        huesped = Integer.parseInt(master.split(" ")[2]);
         Id_Habitacion = master.split(" ")[3];
-        Reservacion auxReser = new Reservacion(reserva, factura, huesped, Id_Habitacion);
+        Reservacion auxReser = new Reservacion(reserva, factura, Id_Habitacion);
+        auxReser.selfAddHuesped(master.split(" ")[2]);
         auxReser.dias = Integer.parseInt(master.split(" ")[4]);
-        auxReser.setEstado(StatadosX.parseStateReserva(master.split(" ")[5]));
-        auxReser.setPersonaAPagar(creadoHuesped(master.split(" ")[6]));
-        auxReser.setTipo(StatadosX.parseStatPack(master.split(" ")[7]));
-        auxReser.setFechaIni(master.split(" ")[8]);
+        auxReser.Estado = StatadosX.parseStateReserva(master.split(" ")[5]);
+        auxReser.PersonaAPagar = creadoHuesped(master.split(" ")[6]);
+        auxReser.tipo = StatadosX.parseStatPack(master.split(" ")[7]);
+        auxReser.fechaIni = master.split(" ")[8];
         return auxReser;
     }
 
     public void printListHabitacion(ArrayList<Habitacion> param) {
-        int contador = 1;
-        for (Habitacion auxH : param) {
-            System.out.println("<-------------- Habitacion " + contador + "-------------------->");
-            System.out.println("indicador de piso: " + auxH.indicadorDePiso);
-            System.out.println("estado de habitacion: " + auxH.habitacionEstado);
-            System.out.println("numero de habitacion: " + auxH.numeroHabitacion);
-            contador++;
+        char maxChar = 'f';
+        int maxHabid = 10;
+        int controles = 0;
+        for (int i = 'a'; i < maxChar + 1; i++) {
+            for (int j = 0; j < maxHabid; j++) {
+                if (param.get(controles).habitacionEstado.equals(EstadoHabitacion.Habilitada)) {
+                    System.out.print("\033[32m[" + param.get(controles).getHabId().toUpperCase() + "]" + " ");
+                } else if (param.get(controles).habitacionEstado.equals(EstadoHabitacion.EnUso)) {
+                    System.out.print("\033[34m[" + param.get(controles).getHabId().toUpperCase() + "]" + " ");
+                } else if (param.get(controles).habitacionEstado.equals(EstadoHabitacion.Deshabilitada)) {
+                    System.out.print("\033[35m[" + param.get(controles).getHabId().toUpperCase() + "]" + " ");
+                }
+                else{
+                     System.out.print((char)27 + "[34;43m[?]"  + " ");
+                }
+                controles++;
+            }
+            System.out.println();
         }
     }
 
@@ -136,16 +146,17 @@ public class GestorBase {
         int contador = 1;
         for (Reservacion auxF : master) {
             System.out.println("<-------------- Reservacion " + contador + "-------------------->");
-            System.out.println("ID reservacion: " + auxF.Id_reservacion);
-            System.out.println("ID factura: " + auxF.Id_factura);
-            //System.out.println("ID huespedes: " + auxF.Id_huespedes);
-            System.out.println("ID habitacion: " + auxF.Id_habitacion);
+            System.out.println("ID reservacion: " + auxF.getId_reservacion());
+            System.out.println("ID factura: " + auxF.getId_factura());
+            System.out.println("ID habitacion: " + auxF.getId_habitacion());
             System.out.println("Dias a hospedarse: " + auxF.dias);
             System.out.println("Estado : " + auxF.Estado);
             System.out.println("Persona que paga: " + auxF.PersonaAPagar.nombre() + auxF.PersonaAPagar.Apellido());
             System.out.println("DUI : " + auxF.PersonaAPagar.duiR());
             System.out.println("Paquete : " + auxF.tipo);
             System.out.println("Fecha inicial : " + auxF.fechaIni);
+            System.out.println("Huespedes: ");
+            printListHusped(auxF.Huespesdes);
             contador++;
         }
     }
@@ -162,9 +173,9 @@ public class GestorBase {
         }
     }
 
-    public void printListHusped() {
+    public void printListHusped(ArrayList<Huesped> master) {
         int contador = 1;
-        for (Huesped auxF : getListHuespedes()) {
+        for (Huesped auxF : master) {
             System.out.println("<-------------- Huespedes: " + contador + "-------------------->");
             System.out.println("Nombre: " + auxF.Nombre);
             System.out.println("Apellido: " + auxF.Apellido);
@@ -175,11 +186,11 @@ public class GestorBase {
 
     public void checkOutIds(ArrayList<Reservacion> masterRay) {
         for (Reservacion auxF : masterRay) {
-            if (auxF.Id_reservacion > lastIDReserva) {
-                lastIDReserva = auxF.Id_reservacion;
+            if (auxF.getId_reservacion() > lastIDReserva) {
+                auxF.setId_reservacion(lastIDReserva);
             }
-            if (auxF.Id_factura > lastIDFactura) {
-                lastIDFactura = auxF.Id_factura;
+            if (auxF.getId_factura() > lastIDFactura) {
+                auxF.setId_factura(lastIDFactura);
             }
         }
         AutoIncrement();

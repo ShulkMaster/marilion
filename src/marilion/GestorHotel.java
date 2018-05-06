@@ -38,9 +38,8 @@ public class GestorHotel {
 
     public void CrearReservacion() {
         Reservacion reservMaz = new Reservacion();
-        reservMaz.Id_reservacion = GestorBase.lastIDReserva;
-        reservMaz.Id_factura = GestorBase.lastIDFactura;
-        //reservMaz.Id_huespedes = GestorBase.lastIDHuesped;
+        reservMaz.setId_reservacion(GestorBase.lastIDReserva);
+        reservMaz.setId_factura(GestorBase.lastIDFactura);
         reservMaz.Estado = EstadoReservacion.Activa;
         Reader.consola.nextLine();
         reservMaz.PersonaAPagar = MakerX.creadoPersona(Asker.askPerson());
@@ -53,18 +52,18 @@ public class GestorHotel {
         System.out.println("Habitaciones disponibles para :" + reservMaz.fechaIni);
         showListHabitDispo(reservMaz.fechaIni, reservMaz.dias);//fecha dia
         System.out.println("Ingrese las habitaciones:");
-        reservMaz.Id_habitacion = (Reader.consola.nextLine() + ":");
-        reservMaz.addHUesped(reservMaz.Id_habitacion , 0);
+        reservMaz.setId_habitacion(Reader.consola.nextLine() + ":");
+        reservMaz.addHUesped(reservMaz.getId_habitacion(), 0);
         System.out.println("¿Desea agregar la segunda Habitacion?");
         System.out.println("1 = SI \t 2 = NO");
         if (Reader.consola.nextLine().equals("1")) {
             System.out.println("nueva habitacion");
             reservMaz.setXtraHabitacion(Reader.consola.nextLine());
-            reservMaz.addHUesped(reservMaz.Id_habitacion , 1);
+            reservMaz.addHUesped(reservMaz.getId_habitacion(), 1);
         }
         System.out.println("Ingrese tipo de paquete: ");
         System.out.println("1 = Basico 2 = Primium 3 = Ninguno");
-        reservMaz.setTipo(StatadosX.parseStatPack(Reader.consola.nextLine()));//ON 5
+        reservMaz.tipo = StatadosX.parseStatPack(Reader.consola.nextLine());//ON 5
         //datos de los huespedes hasta aqui bien
         System.out.println("\033[35m" + reservMaz.toString() + " Debug");
         ListaDeReservas.add(reservMaz);
@@ -93,7 +92,7 @@ public class GestorHotel {
             for (Reservacion e : ListaDeReservas) {
                 if (dui.equals(e.PersonaAPagar.duiR()) && fecha1.equals(e.fechaIni)) {
                     e.fechaIni = fecha2;
-                    e.Id_habitacion = hab;
+                    e.setId_habitacion(hab); 
                 }
             }
 
@@ -130,7 +129,7 @@ public class GestorHotel {
         for (Habitacion p : ListaDeHabitacion) {
             for (Reservacion e : ListaDeReservas) {
                 if (dui.equals(e.PersonaAPagar.duiR()) && p.habitacionEstado.equals(1) == true && e.fechaIni.equals(fecha)) {
-                    e.Id_habitacion = habitacion;
+                    e.setId_habitacion(habitacion);
                 }
             }
         }
@@ -170,10 +169,10 @@ public class GestorHotel {
         int contador = 1;
         for (Reservacion auxF : ListaDeReservas) {
             System.out.println("<-------------- Reservacion " + contador + "-------------------->");
-            System.out.println("ID reservacion: " + auxF.Id_reservacion);
-            System.out.println("ID factura: " + auxF.Id_factura);
+            System.out.println("ID reservacion: " + auxF.getId_reservacion());
+            System.out.println("ID factura: " + auxF.getId_factura());
             //System.out.println("ID huespedes: " + auxF.Id_huespedes);
-            System.out.println("ID habitacion: " + auxF.Id_habitacion);
+            System.out.println("ID habitacion: " + auxF.getId_habitacion());
             System.out.println("ID Dias duracion: " + auxF.dias);
             System.out.println("Estado : " + auxF.Estado);
             System.out.println("Persona que paga: " + auxF.PersonaAPagar.nombre() + auxF.PersonaAPagar.Apellido());
@@ -186,13 +185,20 @@ public class GestorHotel {
 
     public void showListHabitDispo(String fecha, int days) {
         ArrayList<Habitacion> listaAux = getListHabitDispo(fecha, days);
-        base.printListHabitacion(listaAux);
+        ArrayList<Habitacion> temporal = ListaDeHabitacion;
+        for(Habitacion auxH : listaAux){
+            System.out.println(auxH.habitacionEstado);
+            System.out.println(auxH.getHabId());
+            System.out.println(auxH.indicadorDePiso);
+            System.out.println(auxH.numeroHabitacion);
+        }
+        base.printListHabitacion(temporal);
     }
 
     public ArrayList<Habitacion> getListHabitDispo(String fecha, int days) {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
         for (Habitacion auxH : getListHabitaReady()) {
-            if (FechaX.doMatch(fecha, days, getListReserChox(auxH.getHabId()))) {
+            if (FechaX.donotMatch(fecha, days, getListReserChox(auxH.getHabId()))) {
                 listaAux.add(auxH);
             }
         }
@@ -220,7 +226,7 @@ public class GestorHotel {
         ArrayList<Reservacion> listaAux = new ArrayList<>();
         for (Reservacion auxH : getListReserX()) {
             if (auxH.getId_habitacion().equals(CurrenHabiID)) {
-                System.out.println("\033[35mReservas Potencialmente problematica :" + auxH.Id_reservacion);
+                System.out.println("\033[35mReservas Potencialmente problematica :" + auxH.getId_reservacion());
                 listaAux.add(auxH);
             }
         }
@@ -252,7 +258,7 @@ public class GestorHotel {
             if (AuxRe.PersonaAPagar.duiR().equals(dui)) {
                 if (AuxRe.fechaIni.equals(fecha)) {
                     System.out.println(AuxRe.fechaIni);
-                    System.out.println("Reserva ID: " + AuxRe.Id_reservacion + " Ha sido pagada");
+                    System.out.println("Reserva ID: " + AuxRe.getId_habitacion() + " Ha sido pagada");
                     Factura fac = GestorCompra.getFactura(AuxRe);
                     ListaDeFactura.add(fac);
                     AuxRe.Estado = EstadoReservacion.pagada;
@@ -314,7 +320,7 @@ public class GestorHotel {
             for (Reservacion e : ListaDeReservas) {
                 if (dui.equals(e.PersonaAPagar.duiR()) && fecha.equals(e.fechaIni)) {
                     e.dias = num;
-                    e.Id_habitacion = hab;
+                    e.setId_habitacion(hab);
                 }
             }
 
@@ -348,7 +354,7 @@ public class GestorHotel {
                 if (dui.equals(e.PersonaAPagar.duiR()) && fecha1.equals(e.fechaIni)) {
                     e.fechaIni = fecha2;
                     e.dias = num;
-                    e.Id_habitacion = hab;
+                    e.setId_habitacion(hab);
                 }
             }
 
