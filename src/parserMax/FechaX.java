@@ -46,32 +46,46 @@ public class FechaX {
             for (Reservacion problem : problematica) {
                 Date fechaRev2 = STANDARFORMAT.parse(problem.fechaIni);
                 Date fechaRevFin2 = getFechafinal(fechaRev2, problem.dias);
-                System.out.println("Dia inicial deseado: " + STANDARFORMAT.format(fechaReserv));
-                System.out.println("Dia final deseado: " + STANDARFORMAT.format(fechaReservFin));
-                System.out.println("Dia inicial interseptado: " + STANDARFORMAT.format(fechaRev2));
-                System.out.println("Dia final interseptado: " + STANDARFORMAT.format(fechaRevFin2));
                 long mayor = getmayor(fechaReserv, fechaReservFin, fechaRev2, fechaRevFin2);
                 long menor = getmenor(fechaReserv, fechaReservFin, fechaRev2, fechaRevFin2);
-                if ((restar(fechaReservFin, fechaReserv)) + (restar(fechaRevFin2, fechaRev2)) <= (mayor - menor)) {
-                    System.out.println((restar(fechaReservFin, fechaReserv)) + (restar(fechaRevFin2, fechaRev2)) <= (mayor - menor));
-                    System.out.println("se metio al array");
-                    return true;
+                if ((restar(fechaReservFin, fechaReserv)) + (restar(fechaRevFin2, fechaRev2)) > (mayor - menor)) {
+                    System.out.println("no se pudo meter al array");
+                    return false;
                 }
+            }
+            return true;
+        } catch (ParseException ex) {
+            Logger.getLogger(FechaX.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Incapas de analizar las reservas");
+            return false;
+        }
+    }
+
+    public static boolean doMatch(String fechaRe1, int days1, String fechaRe2, int days2) {
+        try {
+            Date fechaReserv = STANDARFORMAT.parse(fechaRe1);
+            Date fechaReservFin = getFechafinal(fechaReserv, days1);
+            Date fechaRev2 = STANDARFORMAT.parse(fechaRe2);
+            Date fechaRevFin2 = getFechafinal(fechaRev2, days2);
+            long mayor = getmayor(fechaReserv, fechaReservFin, fechaRev2, fechaRevFin2);
+            long menor = getmenor(fechaReserv, fechaReservFin, fechaRev2, fechaRevFin2);
+            if ((restar(fechaReservFin, fechaReserv)) + (restar(fechaRevFin2, fechaRev2)) > (mayor - menor)) {
+                return true;
             }
             return false;
         } catch (ParseException ex) {
             Logger.getLogger(FechaX.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println("Incapas de analizar las reservas");
-            return true;
+            return false;
         }
     }
 
     public static void domatch() {
         try {
             Date fechaRe1 = STANDARFORMAT.parse("6#5#2018");
-            Date fechaRe1Final = STANDARFORMAT.parse("9#5#2018");
-            Date fechaRe2 = STANDARFORMAT.parse("7#5#2018");
-            Date fechaRe2Final = STANDARFORMAT.parse("10#5#2018");
+            Date fechaRe1Final = getFechafinal(fechaRe1, 3);
+            Date fechaRe2 = STANDARFORMAT.parse("9#5#2018");
+            Date fechaRe2Final = getFechafinal(fechaRe2, 3);
             long mayor = getmayor(fechaRe1, fechaRe1Final, fechaRe2, fechaRe2Final);
             long menor = getmenor(fechaRe1, fechaRe1Final, fechaRe2, fechaRe2Final);
             if ((restar(fechaRe1Final, fechaRe1)) + (restar(fechaRe2Final, fechaRe2)) <= (mayor - menor)) {
@@ -109,7 +123,6 @@ public class FechaX {
                 aux = numero.getTime();
             }
         }
-        System.out.println(STANDARFORMAT.format(new Date(aux)) + " fecha mayor");
         return aux;
     }
 
@@ -121,7 +134,6 @@ public class FechaX {
                 aux = numero.getTime();
             }
         }
-        System.out.println(STANDARFORMAT.format(new Date(aux)) + " fecha menor");
         return aux;
     }
 
