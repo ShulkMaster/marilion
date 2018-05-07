@@ -192,6 +192,7 @@ public class GestorHotel {
     }
 
     public ArrayList<Habitacion> getListHabitDispo(String fecha, int days) {
+        ArrayList<Habitacion> aux = new ArrayList<>();
         ArrayList<Habitacion> lisReady = getListHabitaReady();
         ArrayList<Reservacion> ReservorioActivo = getListReserX();
         ArrayList<Integer> contex = new ArrayList<>();
@@ -208,7 +209,20 @@ public class GestorHotel {
                 }
             }
         }
-        return lisReady;
+        int contador2 = 0;
+        for(Habitacion hab : lisReady)
+        {
+            if(contex.contains(contador2))
+            {
+                
+            }
+            else
+            {
+                aux.add(hab);
+            }
+            contador2++;
+        }
+        return aux;
     }
 
     private ArrayList<Habitacion> getListHabitaReady() {
