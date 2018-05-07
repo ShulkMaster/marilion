@@ -416,4 +416,12 @@ public class GestorHotel {
         }
         base.Escribir(ListaDeHabitacion, GestorBase.HABITACIONES);
     }
+    public void EntregarHabitacionV(String dui,String fecha) {
+        for (Reservacion e : ListaDeReservas) {
+            if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni)) {
+                EntregarHabitacion(e.getId_habitacion());
+            }
+        }
+        
+    }
 }
