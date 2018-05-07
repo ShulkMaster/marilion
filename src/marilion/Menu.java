@@ -8,7 +8,7 @@ package marilion;
 import parserMax.Reader;
 import java.util.ArrayList;
 import parserMax.ValidaHabitacion;
-
+import parserMax.FechaX;
 /**
  *
  * @author yury_
@@ -308,15 +308,19 @@ public class Menu {
     }
 
     private void EntregarHabitacion() {
-        System.out.println("Ingrese el id de la habitacion eje b3:");
-        String id = Reader.consola.next();
-        gestorHotel.EntregarHabitacion(id);
+        System.out.println("Ingrese el dui de la persona a pagar en la reserva:");
+        String dui = Reader.consola.next();
+        
+        gestorHotel.EntregarHabitacionV(dui,FechaX.fechaEjemplo());
     }
 
     private void RetirarHabitacion() {
-        System.out.println("Ingrese el id de la habitacion eje b3:");
-        String id = Reader.consola.next();
-        gestorHotel.HabilitarHabitacionC(id);
+        System.out.println("Ingrese el dui de la persona a pagar en la reserva:");
+        String dui = Reader.consola.next();
+        System.out.println("Ingrese la fecha de la reserva:");
+        String fecha=Reader.consola.next();
+        
+        gestorHotel.RetirarHabitacionP(dui, fecha);
     }
 
     private void habilitarHabitacion() {

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package parserMax;
-
 /**
  *
  * @author yury_
@@ -13,6 +12,7 @@ public class Asker {
 
     public static String askPerson() {
         String master = "";
+        try{
         System.out.println("Ingrese el nombre de la Persona a pagar: ");
         master += Reader.consola.nextLine();
         System.out.println("Ingrese el Apellido de la Persona a pagar: ");
@@ -20,17 +20,26 @@ public class Asker {
         System.out.println("Ingrese el DUI de la Persona a pagar: ");
         master += ("#" + Reader.consola.nextLine());
         return master;
+        } catch(Exception e) {
+            System.err.println("Error al procesar los datos.");
+            return master;
+        }
     }
 
     public static String askHuesp() {
         String master = "";
+        try{
         System.out.println("Ingrese el nombre de la Persona: ");
         master += Reader.consola.nextLine();
         System.out.println("Ingrese el Apellido de la Persona: ");
         master += ("#" + Reader.consola.nextLine());
         System.out.println("Ingrese el DUI de la Persona: ");
         master += ("#" + Reader.consola.nextLine());
-        return master;
+        return master;}
+        catch(Exception e){
+            System.err.println("Error al procesar al huesped.");
+            return master;
+        }
     }
 
     public static String askHabitad() {
