@@ -6,6 +6,7 @@
 package marilion;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import parserMax.Asker;
 import parserMax.MakerX;
 
@@ -62,7 +63,6 @@ public class Reservacion {
     }
 
     public String[] getHIDs() {
-        System.out.println("Usted invoco la habitacion ID; " + Id_habitacion.split(":"));
         return Id_habitacion.split(":");
     }
 

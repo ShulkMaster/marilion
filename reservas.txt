@@ -1,6 +1,6 @@
-1 1 makano#merengue#00001:null#null2#000012: b5: 7 Activa makano#merengue#00001 basico 4#5#2018
+1 1 makano#merengue#00001:null#null2#000012: b5: 4 Activa makano#merengue#00001 basico 4#5#2018
 2 2 haduken#rui#00003:comboBriker#mastufa#00004: f9: 2 Activa beberly#hulk#00002 premium 5#5#2018
-3 3 aerhaer#ahraha#54165465:eahar#arhah#565465: f5: 7 Activa sefwfw#wefwwf#00015 premium 3#5#2018
-4 4 qefqef#qewfqf#565465:qfwqf#qwfqwf#65465: f7: 7 Activa fqwfq#fqfqw#654654 premium 6#5#2018
+3 3 aerhaer#ahraha#54165465:eahar#arhah#565465: f5: 5 Activa sefwfw#wefwwf#00015 premium 3#5#2018
+4 4 qefqef#qewfqf#565465:qfwqf#qwfqwf#65465: f7: 2 Activa fqwfq#fqfqw#654654 premium 6#5#2018
 5 5 ewegwe4g#wegweg#5654:wegweg#yl67878#5654654: f1: 2 Activa yiugwadf#aiwv#54654 premium 10#5#2018
-6 6 efwefw#fwefwefw#ewfwefef:wefwefwf#wefwefw#wefwef: f7: 4 Activa erghege#etgewg#egerg premium 6#5#2018
+6 6 efwefw#fwefwefw#ewfwefef:wefwefwf#wefwefw#wefwef: f3: 4 Activa erghege#etgewg#egerg premium 3#5#2018

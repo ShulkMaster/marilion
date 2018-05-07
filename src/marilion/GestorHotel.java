@@ -185,11 +185,9 @@ public class GestorHotel {
 
     public void showListHabitDispo(String fecha, int days) {
         ArrayList<Habitacion> listaAux = getListHabitDispo(fecha, days);
+        System.out.println("Habitaciones supuestamente disponibles");
         for (Habitacion auxH : listaAux) {
-            System.out.println(auxH.habitacionEstado);
             System.out.println(auxH.getHabId());
-            System.out.println(auxH.indicadorDePiso);
-            System.out.println(auxH.numeroHabitacion);
         }
     }
 
@@ -198,7 +196,6 @@ public class GestorHotel {
         ArrayList<Habitacion> lisReady = getListHabitaReady();
         ArrayList<Reservacion> ReservorioActivo = getListReserX();
         for (Habitacion auxH : lisReady) {
-            System.out.println(auxH.getHabId());
             if (FechaX.donotMatch(fecha, days, getListReserChox(auxH.getHabId(), ReservorioActivo))) {
                 listaAux.add(auxH);
             }
@@ -210,7 +207,6 @@ public class GestorHotel {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
         for (Habitacion auxH : ListaDeHabitacion) {
             if (auxH.habitacionEstado.equals(EstadoHabitacion.Habilitada) || auxH.habitacionEstado.equals(EstadoHabitacion.EnUso)) {
-                System.out.println("Habitaciones activas: " + auxH.getHabId());
                 listaAux.add(auxH);
             }
         }
@@ -226,12 +222,9 @@ public class GestorHotel {
      */
     private ArrayList<Reservacion> getListReserChox(String CurrenHabiID, ArrayList<Reservacion> Reservorio) {
         ArrayList<Reservacion> listaAux = new ArrayList<>();
-
-        System.out.println(CurrenHabiID+" esto es actual");
         for (Reservacion Reservex : Reservorio) {
-            System.out.println("La habitacion en proceso es: " + Reservex.getId_habitacion());
             if (Reservex.getHIDs()[0].equals(CurrenHabiID)) {
-                System.out.println("\033[35mReservas Potencialmente problematica :" + Reservex.getId_reservacion());
+                System.out.println("\033[35mReservas Potencialmente problematica : " + Reservex.getId_reservacion()+ "con habitacion "+ Reservex.getHIDs()[0]);
                 listaAux.add(Reservex);
             }
         }
@@ -249,7 +242,6 @@ public class GestorHotel {
         ArrayList<Reservacion> listaAux = new ArrayList<>();
         for (Reservacion auxRex : ListaDeReservas) {
             if (auxRex.Estado.equals(EstadoReservacion.Activa) || auxRex.Estado.equals(EstadoReservacion.EnUso)) {
-                System.out.println("Reservaciones activas o en uso: " + auxRex.getId_reservacion());
                 listaAux.add(auxRex);
             }
 

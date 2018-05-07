@@ -46,16 +46,14 @@ public class FechaX {
             for (Reservacion problem : problematica) {
                 Date fechaRev2 = STANDARFORMAT.parse(problem.fechaIni);
                 Date fechaRevFin2 = getFechafinal(fechaRev2, problem.dias);
-                System.out.println(fechaDeseada+" "+fechaReservFin+" "+fechaRev2+""+fechaRevFin2);
                 long mayor = getmayor(fechaReserv, fechaReservFin, fechaRev2, fechaRevFin2);
-                long menor = getmenor(fechaReserv.getTime(), fechaReservFin.getTime(), fechaRev2.getTime(), fechaRevFin2.getTime());
+                long menor = getmenor(fechaReserv, fechaReservFin, fechaRev2, fechaRevFin2);
                 if ((restar(fechaReservFin, fechaReserv))+(restar(fechaRevFin2, fechaRev2)) <= (mayor - menor)) {
                     System.out.println((restar(fechaReservFin, fechaReserv))+(restar(fechaRevFin2, fechaRev2)) <= (mayor - menor));
                     System.out.println("No se metio al array");
                     return false;
                 }
             }
-            System.out.println("Si se metio al array");
             return true;
         } catch (ParseException ex) {
             Logger.getLogger(FechaX.class.getName()).log(Level.SEVERE, null, ex);
@@ -88,17 +86,19 @@ public class FechaX {
         }
         return aux;
     }
-
-    public static long getmenor(long param1, long param2, long param3, long param4) {
-        long[] karray = {param1, param2, param3, param4};
-        long aux = karray[0];
-        for (long numero : karray) {
-            if (aux > numero) {
-                aux = numero;
+    
+    public static long getmenor(Date param1, Date param2, Date param3, Date param4) {
+        Date[] karray = {param1, param2, param3, param4};
+        long aux = karray[0].getTime();
+        for (Date numero : karray) {
+            if (aux > numero.getTime()) {
+                aux = numero.getTime();
             }
         }
         return aux;
     }
+
+ 
 
     public static long restar(Date x, Date y) {
         return x.getTime() - y.getTime();
