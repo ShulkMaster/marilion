@@ -29,9 +29,9 @@ public class FechaX {
             if (STANDARFORMAT.parse(param).compareTo(STANDARFORMAT.parse(provisional)) < 0) {
                 System.err.println("No se pueden asignar fechas anteriores");
                 System.out.println("fecha asignada: " + provisional);
-            } else {
-                provisional = STANDARFORMAT.format(param);
+                return provisional;
             }
+            provisional = param;
             return provisional;
         } catch (ParseException ex) {
             System.err.println("Error al procesar la fecha: Fecha de la reserva es hoy");
@@ -50,6 +50,7 @@ public class FechaX {
                 long mayor = getmayor(fechaReserv, fechaReservFin, fechaRev2, fechaRevFin2);
                 long menor = getmenor(fechaReserv.getTime(), fechaReservFin.getTime(), fechaRev2.getTime(), fechaRevFin2.getTime());
                 if ((restar(fechaReservFin, fechaReserv))+(restar(fechaRevFin2, fechaRev2)) <= (mayor - menor)) {
+                    System.out.println((restar(fechaReservFin, fechaReserv))+(restar(fechaRevFin2, fechaRev2)) <= (mayor - menor));
                     System.out.println("No se metio al array");
                     return false;
                 }
