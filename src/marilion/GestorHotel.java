@@ -418,7 +418,7 @@ public class GestorHotel {
     }
     public void EntregarHabitacionV(String dui,String fecha) {
         for (Reservacion e : ListaDeReservas) {
-            if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni)) {
+            if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni)&&e.Estado==EstadoReservacion.Activa) {
                 EntregarHabitacion(e.getId_habitacion());
             }
         }
@@ -433,20 +433,27 @@ public class GestorHotel {
         
     }
     public void RetirarHabitacionP(String dui,String fecha) {
-        int cont=0;
+        int cont = 0;
 
         for (Reservacion e : ListaDeReservas) {
             if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni)&& e.Estado==EstadoReservacion.pagada) {
+                e.Estado=EstadoReservacion.Finalizada;
                 HabilitarHabitacionF(e.getId_habitacion());
-                cont++;
+                cont=1;
+                break;
             }
-            if(e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni)&& e.Estado!=EstadoReservacion.pagada){
+            if(e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni)&& e.Estado==EstadoReservacion.EnUso){
                 System.out.print("No puede retirar la habitacion porque no esta pagada.");
+                break;
             }
+            cont=10;
         }
-        if(cont!=0){
+        if(cont==1){
             base.Escribir(ListaDeHabitacion, GestorBase.HABITACIONES);
             System.out.print("Ha retirado la habitacion correctamente");
+        }
+        if(cont==10){
+            System.out.print("Los datos que ingreso no concuerda con ninguna reservacion que tenga una habitacion en uso");
         }
         
     }
