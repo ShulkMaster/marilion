@@ -185,9 +185,21 @@ public class GestorHotel {
     public void showListHabitDispo(String fecha, int days) {
         ArrayList<Habitacion> listaAux = getListHabitDispo(fecha, days);
         System.out.println("Habitaciones supuestamente disponibles");
-        for (Habitacion auxH : listaAux) {
-            System.out.println(auxH.getHabId());
+
+        for (Habitacion p : ListaDeHabitacion) {
+            if(listaAux.contains(p)){
+                System.out.print("\033[32m["+p.getHabId()+"] ");
+            }
+            else{
+                System.out.print("\033[31m["+p.getHabId()+"] ");
+            }
+            if(p.numeroHabitacion==10){
+                System.out.println();
+            }
         }
+        System.out.println("\033[32m█ Disponible");
+        System.out.println("\033[31m█ No Disponible");
+        
     }
 
     public ArrayList<Habitacion> getListHabitDispo(String fecha, int days) {
@@ -428,7 +440,10 @@ public class GestorHotel {
     public void EntregarHabitacionV(String dui, String fecha) {
         for (Reservacion e : ListaDeReservas) {
             if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni) && e.Estado == EstadoReservacion.Activa) {
-                EntregarHabitacion(e.getId_habitacion());
+                for (String p : e.getHIDs()) {
+                    EntregarHabitacion(p);
+                }
+
             }
         }
 
@@ -449,7 +464,9 @@ public class GestorHotel {
         for (Reservacion e : ListaDeReservas) {
             if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni) && e.Estado == EstadoReservacion.pagada) {
                 e.Estado = EstadoReservacion.Finalizada;
-                HabilitarHabitacionF(e.getId_habitacion());
+                for (String p : e.getHIDs()) {
+                    HabilitarHabitacionF(p);
+                }
                 cont = 1;
                 break;
             }
