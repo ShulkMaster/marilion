@@ -43,5 +43,8 @@ public class Habitacion {
     public void setHabitacionEstado(EstadoHabitacion habitacionEstado) {
         this.habitacionEstado = habitacionEstado;
     }
-
+    public int getNumH() {
+        int aux = numeroHabitacion;
+        return aux;
+    }
 }

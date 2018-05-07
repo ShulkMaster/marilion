@@ -66,7 +66,7 @@ public class Menu {
         while (!Finalizado) {
             this.Opciones(1);
             opcion = Reader.consola.nextInt();
-
+            
             switch (opcion) {
                 case 1:
                     //crear reservacion
