@@ -196,7 +196,7 @@ public class GestorHotel {
         ArrayList<Habitacion> lisReady = getListHabitaReady();
         ArrayList<Reservacion> ReservorioActivo = getListReserX();
         for (Habitacion auxH : lisReady) {
-            if (FechaX.donotMatch(fecha, days, getListReserChox(auxH.getHabId(), ReservorioActivo))) {
+            if (!FechaX.donotMatch(fecha, days, getListReserChox(auxH.getHabId(), ReservorioActivo))) {
                 listaAux.add(auxH);
             }
         }

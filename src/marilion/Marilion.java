@@ -22,7 +22,7 @@ public class Marilion {
     public static void main(String[] args) {
         // TODO code application logic here
         Menu menu = new Menu();
-
+        
         while (true) {
             System.out.print("Ingrese Usuario (sensual): ");
             String user = Reader.consola.next();
