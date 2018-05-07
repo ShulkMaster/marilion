@@ -216,7 +216,7 @@ public class GestorBase {
 
     public ArrayList<Factura> getListFactura() {
         ArrayList<Factura> listaAux = new ArrayList<>();
-        for (String registro : getFileContent("facturaTEST")) {
+        for (String registro : getFileContent("facturas")) {
             Factura currenFactura = MakerX.creadoFactura(registro);
             listaAux.add(currenFactura);
         }
