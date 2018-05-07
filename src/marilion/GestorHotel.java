@@ -29,7 +29,6 @@ public class GestorHotel {
 
     public GestorHotel() {
         this.ListaDeHabitacion = base.getListHabitacion();
-        this.ListaDeHuespedes = base.getListHuespedes();
         this.ListaDeReservas = base.getListReservacion();
         this.ListaDeFactura = base.getListFactura();
         this.ListaDeAdmins = base.getListAdministradores();
@@ -210,14 +209,10 @@ public class GestorHotel {
             }
         }
         int contador2 = 0;
-        for(Habitacion hab : lisReady)
-        {
-            if(contex.contains(contador2))
-            {
-                
-            }
-            else
-            {
+        for (Habitacion hab : lisReady) {
+            if (contex.contains(contador2)) {
+
+            } else {
                 aux.add(hab);
             }
             contador2++;
@@ -263,7 +258,7 @@ public class GestorHotel {
     private ArrayList<Reservacion> getListReserX() {
         ArrayList<Reservacion> listaAux = new ArrayList<>();
         for (Reservacion auxRex : ListaDeReservas) {
-            if (auxRex.Estado.equals(EstadoReservacion.Activa) || auxRex.Estado.equals(EstadoReservacion.EnUso)) {
+            if (auxRex.Estado.equals(EstadoReservacion.Activa) || auxRex.Estado.equals(EstadoReservacion.EnUso) || auxRex.Estado.equals(EstadoReservacion.pagada)) {
                 listaAux.add(auxRex);
             }
 
@@ -305,7 +300,6 @@ public class GestorHotel {
 
     public void PagarReservacion(String dui) {
         ArrayList<Reservacion> listN = getListReserX();
-        base.printListReservas(listN);
         ArrayList<Reservacion> listNa = new ArrayList<>();
         for (Reservacion e : listN) {
             if (e.PersonaAPagar.duiR().equals(dui)) {
