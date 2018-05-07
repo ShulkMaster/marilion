@@ -31,6 +31,7 @@ public class GestorCompra {
         float costo = 0;
         float extra = 1.0f;
         float add = 0f;
+        try{
         switch (re.tipo) {
             case basico:
                 add = 10f;
@@ -61,7 +62,10 @@ public class GestorCompra {
             }
         }
 
-        return costo;
+        return costo;}catch(Exception e){
+            System.err.println("Error al procesar los datos.");
+            return costo;
+        }
     }
 
     public static Factura getFactura(Reservacion re) {
