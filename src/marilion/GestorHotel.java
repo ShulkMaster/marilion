@@ -331,7 +331,7 @@ public class GestorHotel {
             }
 
         } else {
-            System.out.print("No hay ninguna avitacion que se acople a los dias deseados a hospedarse en la misma fecha");
+            System.out.print("No hay ninguna habitacion que se acople a los dias deseados a hospedarse en la misma fecha");
         }
 
         base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
@@ -365,7 +365,7 @@ public class GestorHotel {
             }
 
         } else {
-            System.out.print("No hay ninguna avitacion que se acople a la fecha nueva y dias nuevo a hospedarse");
+            System.out.print("No hay ninguna habitacion que se acople a la fecha nueva y dias nuevo a hospedarse");
         }
         base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
