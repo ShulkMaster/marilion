@@ -76,7 +76,7 @@ public class FechaX {
         } catch (ParseException ex) {
             Logger.getLogger(FechaX.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println("Incapas de analizar las reservas");
-            return false;
+            return true;
         }
     }
 

@@ -192,14 +192,23 @@ public class GestorHotel {
     }
 
     public ArrayList<Habitacion> getListHabitDispo(String fecha, int days) {
-        ArrayList<Habitacion> listaAux = new ArrayList<>();
         ArrayList<Habitacion> lisReady = getListHabitaReady();
         ArrayList<Reservacion> ReservorioActivo = getListReserX();
+        ArrayList<Integer> contex = new ArrayList<>();
         for (Reservacion reserva : ReservorioActivo) {
             if (FechaX.doMatch(fecha, days, reserva.fechaIni, reserva.dias)) {
+                for (String str : reserva.getHIDs()) {
+                    int contador = 0;
+                    for (Habitacion habita : lisReady) {
+                        if (habita.getHabId().equals(str)) {
+                            contex.add(contador);
+                        }
+                        contador++;
+                    }
+                }
             }
         }
-        return listaAux;
+        return lisReady;
     }
 
     private ArrayList<Habitacion> getListHabitaReady() {
