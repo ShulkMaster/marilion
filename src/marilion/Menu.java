@@ -238,10 +238,7 @@ public class Menu {
 
     }
 
-    /* private ArrayList<Reservacion> CambioFechaAlgo(int id ,ArrayList<Reservacion> listR,String fecha) {
-        listR=gestorHotel.cambioFecha(id, listR, fecha);
-        return listR;
-    }*/
+
     private void cambioPrincipal() {
         System.out.println("Ingrese el dui de la persona a pagar:");
         String duiPago = Reader.consola.next();
