@@ -13,23 +13,4 @@ import java.util.Scanner;
  */
 public class Reader {
     public static final Scanner consola = new Scanner(System.in);
-    
-    /*public String getWord(String word){
-        String palabra ="";
-        while(palabra.equals("")){
-            System.out.println(word);
-            palabra = consola.nextLine();
-            if (!palabra.matches("^[A-Za-z]*$\\D{0}")){palabra = "";}
-        }
-        return palabra;
-    }
-    public String getNumber(String number){
-        String numero ="";
-        while(numero.equals("")){
-            System.out.println(number);
-            numero = consola.nextLine();
-            if (!numero.matches("^[0-9]*$\\D{0}")){numero = "";}
-        }
-        return numero;
-    }*/
 }
