@@ -8,6 +8,7 @@ package marilion;
 import parserMax.Reader;
 import java.util.ArrayList;
 import parserMax.FechaX;
+import static parserMax.Reader.consola;
 
 /**
  *

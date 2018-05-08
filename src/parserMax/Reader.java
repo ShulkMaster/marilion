@@ -13,12 +13,12 @@ import java.util.Scanner;
  */
 public class Reader {
     public static final Scanner consola = new Scanner(System.in);
-    Scanner sc;
-    public String getWord(String word){
+    
+    /*public String getWord(String word){
         String palabra ="";
         while(palabra.equals("")){
             System.out.println(word);
-            palabra = sc.nextLine();
+            palabra = consola.nextLine();
             if (!palabra.matches("^[A-Za-z]*$\\D{0}")){palabra = "";}
         }
         return palabra;
@@ -27,9 +27,9 @@ public class Reader {
         String numero ="";
         while(numero.equals("")){
             System.out.println(number);
-            numero = sc.nextLine();
+            numero = consola.nextLine();
             if (!numero.matches("^[0-9]*$\\D{0}")){numero = "";}
         }
         return numero;
-    }
+    }*/
 }
