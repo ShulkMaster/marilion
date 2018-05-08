@@ -439,7 +439,7 @@ public class GestorHotel {
 
     public void EntregarHabitacionV(String dui, String fecha) {
         for (Reservacion e : ListaDeReservas) {
-            if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni) && e.Estado == EstadoReservacion.Activa) {
+            if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni)) {
                 for (String p : e.getHIDs()) {
                     EntregarHabitacion(p);
                 }
