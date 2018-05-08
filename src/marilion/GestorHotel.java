@@ -99,6 +99,8 @@ public class GestorHotel {
             System.out.print("No hay ninguna avitacion que se acople a la fecha a hospedarse");
         }
 
+        System.out.print("\033[32m");
+
         base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
 
@@ -198,6 +200,7 @@ public class GestorHotel {
         }
         System.out.println("\033[32m█ Disponible");
         System.out.println("\033[31m█ No Disponible");
+        System.out.print("\033[30m");
 
     }
 
@@ -256,6 +259,7 @@ public class GestorHotel {
                 listaAux.add(Reservex);
             }
         }
+        System.out.print("\033[32m");
         return listaAux;
     }
 
@@ -353,6 +357,8 @@ public class GestorHotel {
             System.out.print("No hay ninguna habitacion que se acople a los dias deseados a hospedarse en la misma fecha");
         }
 
+        System.out.print("\033[32m");
+
         base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
 
@@ -386,6 +392,9 @@ public class GestorHotel {
         } else {
             System.out.print("No hay ninguna habitacion que se acople a la fecha nueva y dias nuevo a hospedarse");
         }
+
+        System.out.print("\033[32m");
+
         base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }
 
@@ -439,18 +448,19 @@ public class GestorHotel {
     public void EntregarHabitacionV(String dui, String fecha) {
         for (Reservacion e : ListaDeReservas) {
             if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni) && e.Estado == EstadoReservacion.pagada) {
-                e.Estado=EstadoReservacion.EnUso;
+                e.Estado = EstadoReservacion.EnUso;
                 base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
                 for (String p : e.getHIDs()) {
                     EntregarHabitacion(p);
-                    System.out.println("Se ha entregado correctamente la habitacion"+p);
+                    System.out.println("Se ha entregado correctamente la habitacion" + p);
                 }
-                
+
             }
-            if(e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni) && e.Estado == EstadoReservacion.Activa){
+            if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni) && e.Estado == EstadoReservacion.Activa) {
                 System.out.println("\033[35mNo ha pagado la reserva.");
             }
         }
+        System.out.print("\033[32m");
     }
 
     public void HabilitarHabitacionF(String id_habitacion) {
@@ -470,7 +480,7 @@ public class GestorHotel {
                 e.Estado = EstadoReservacion.Finalizada;
                 for (String p : e.getHIDs()) {
                     HabilitarHabitacionF(p);
-                    System.out.print("Se ha retirado correctamente la habitacion"+p);
+                    System.out.print("Se ha retirado correctamente la habitacion" + p);
                 }
                 base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
                 System.out.print("Ha retirado la habitacion correctamente");
@@ -486,6 +496,7 @@ public class GestorHotel {
         if (cont == 10) {
             System.out.println("\033[35mLos datos que ingreso no concuerda con ninguna reservacion que tenga una habitacion en uso");
         }
+        System.out.print("\033[32m");
 
     }
 
