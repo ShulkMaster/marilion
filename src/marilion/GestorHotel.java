@@ -480,10 +480,10 @@ public class GestorHotel {
                 e.Estado = EstadoReservacion.Finalizada;
                 for (String p : e.getHIDs()) {
                     HabilitarHabitacionF(p);
-                    System.out.print("Se ha retirado correctamente la habitacion" + p);
+                    System.out.println("\033[35mSe ha retirado correctamente la habitacion " + p);
                 }
                 base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
-                System.out.print("Ha retirado la habitacion correctamente");
+                cont=1;
                 break;
             }
             cont = 10;
@@ -491,7 +491,7 @@ public class GestorHotel {
         if (cont == 10) {
             System.out.println("\033[35mLos datos que ingreso no concuerda con ninguna reservacion que tenga una habitacion en uso");
         }
-        System.out.print("\033[32m");
+        System.out.print("\033[30m");
 
     }
     public void PrintH(){
