@@ -380,7 +380,7 @@ public class Menu {
     }
 
     private void DB_HuespedesActuales() {
-        archivador.printListAdmin(gestorHotel.ListaDeAdmins);
+        gestorHotel.PrintH();
     }
 
     private void DB_Habitaciones() {

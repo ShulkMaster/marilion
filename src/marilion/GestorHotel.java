@@ -454,7 +454,7 @@ public class GestorHotel {
                     EntregarHabitacion(p);
                     System.out.println("Se ha entregado correctamente la habitacion" + p);
                 }
-
+                break;
             }
             if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni) && e.Estado == EstadoReservacion.Activa) {
                 System.out.println("\033[35mNo ha pagado la reserva.");
@@ -476,7 +476,7 @@ public class GestorHotel {
         int cont = 0;
 
         for (Reservacion e : ListaDeReservas) {
-            if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni) && e.Estado == EstadoReservacion.pagada) {
+            if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni) && e.Estado == EstadoReservacion.EnUso) {
                 e.Estado = EstadoReservacion.Finalizada;
                 for (String p : e.getHIDs()) {
                     HabilitarHabitacionF(p);
@@ -484,11 +484,6 @@ public class GestorHotel {
                 }
                 base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
                 System.out.print("Ha retirado la habitacion correctamente");
-                break;
-            }
-            if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni) && e.Estado == EstadoReservacion.EnUso) {
-                System.out.print("\033[35mNo puede retirar la habitacion porque no esta pagada.\n");
-                cont = 15;
                 break;
             }
             cont = 10;
@@ -499,5 +494,13 @@ public class GestorHotel {
         System.out.print("\033[32m");
 
     }
-
+    public void PrintH(){
+        for(Reservacion p : ListaDeReservas){
+            if(p.Estado==EstadoReservacion.EnUso){
+                for(Huesped j : p.Huespesdes){
+                    System.out.println(j.Nombre+" "+j.Apellido+" "+j.duiR());
+                }
+            }
+        }
+    }
 }
