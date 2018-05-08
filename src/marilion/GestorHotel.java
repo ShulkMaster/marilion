@@ -446,6 +446,7 @@ public class GestorHotel {
 
             }
         }
+        base.Escribir(ListaDeHabitacion, GestorBase.HABITACIONES);
 
     }
 
@@ -455,7 +456,7 @@ public class GestorHotel {
                 ha.habitacionEstado = EstadoHabitacion.Habilitada;
             }
         }
-
+        base.Escribir(ListaDeHabitacion, GestorBase.HABITACIONES);
     }
 
     public void RetirarHabitacionP(String dui, String fecha) {
@@ -478,6 +479,7 @@ public class GestorHotel {
         }
         if (cont == 1) {
             base.Escribir(ListaDeHabitacion, GestorBase.HABITACIONES);
+            base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
             System.out.print("Ha retirado la habitacion correctamente");
         }
         if (cont == 10) {
