@@ -18,28 +18,10 @@ public class Asker {
         try{
         System.out.println("Ingrese el nombre de la Persona a pagar: ");
         master += Reader.consola.nextLine();
-        while(master.equals("")){
-            System.out.println("Ingrese el nombre de la Persona a pagar: ");
-            master += consola.nextLine();
-            if (!master.matches("^[A-Za-z]\\D{0}")){master = "";}
-        }
-        
         System.out.println("Ingrese el Apellido de la Persona a pagar: ");
         master += ("#" + Reader.consola.nextLine());
-        while(master.equals("")){
-            System.out.println("Ingrese el Apellido de la Persona a pagar: ");
-            master += (consola.nextLine());
-            if (!master.matches("^[A-Za-z]\\D{0}")){master = "";}
-        }
-        
         System.out.println("Ingrese el DUI de la Persona a pagar: ");
         master += ("#" + Reader.consola.nextLine());
-        while(master.equals("")){
-            System.out.println("Ingrese el DUI de la Persona a pagar: ");
-            master += consola.nextLine();
-            if (!master.matches("^[0-9]\\D{0}")){master = "";}
-        }
-        
         return master;
         
         } catch(Exception e) {
