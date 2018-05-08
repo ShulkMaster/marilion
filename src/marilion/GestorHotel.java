@@ -44,6 +44,14 @@ public class GestorHotel {
         reservMaz.PersonaAPagar = MakerX.creadoPersona(Asker.askPerson());
         System.out.println("Ingrese el numero de dias para hospedarse: ");
         reservMaz.dias = Reader.consola.nextInt();
+        if (reservMaz.dias>=8){
+            do{
+               System.out.println("La estadia maxima por cliente es de 7 dias");
+               System.out.println("Ingrese el numero de dias para hospedarse: ");
+               reservMaz.dias = Reader.consola.nextInt(); 
+            }while (reservMaz.dias >=8);
+        }
+        while (reservMaz.dias<8){
         System.out.println("Ingrese la fecha formato d#M#yyyy:");
         System.out.println("Por ejemplo la fecha de hoy seria: " + FechaX.fechaEjemplo());
         Reader.consola.nextLine();
@@ -67,7 +75,7 @@ public class GestorHotel {
         System.out.println("\033[35m" + reservMaz.toString() + " Debug");
         System.out.print((char) 27 + "[30;47m");
         ListaDeReservas.add(reservMaz);
-        base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
+        base.Escribir(ListaDeReservas, GestorBase.RESERVAS);}
     }
 
     public void cambioFecha(String dui, String fecha1, String fecha2) {
