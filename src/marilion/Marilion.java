@@ -21,12 +21,12 @@ public class Marilion {
 
     public static void main(String[] args) {
         // TODO code application logic here
-        Menu menu = new Menu();
+        Menu menu = Menu.getInstance();
 
         while (true) {
-            System.out.print("Ingrese Usuario (sensual): ");
+            System.out.print("Ingrese Usuario (admin): ");
             String user = Reader.consola.next();
-            System.out.print("Ingrese contrasennia (mangoneada):");
+            System.out.print("Ingrese contrasennia (admin):");
             String pass = Reader.consola.next();
             if (menu.login(user, pass)) {
                 menu.Iniciar();

@@ -208,7 +208,7 @@ public class GestorBase {
 
     public ArrayList<Habitacion> getListHabitacion() {
         ArrayList<Habitacion> listaAux = new ArrayList<>();
-        for (String registro : getFileContent("habitaciones")) {
+        for (String registro : getFileContent(HABITACIONES)) {
             listaAux.add(MakerX.creadbita(registro.split(" ")));
         }
         return listaAux;
@@ -216,7 +216,7 @@ public class GestorBase {
 
     public ArrayList<Factura> getListFactura() {
         ArrayList<Factura> listaAux = new ArrayList<>();
-        for (String registro : getFileContent("facturas")) {
+        for (String registro : getFileContent(FACTURAS)) {
             Factura currenFactura = MakerX.creadoFactura(registro);
             listaAux.add(currenFactura);
         }
@@ -243,7 +243,7 @@ public class GestorBase {
 
     public ArrayList<Huesped> getListHuespedes() {
         ArrayList<Huesped> listaAux = new ArrayList<>();
-        for (String registro : getFileContent("huespedesTEST")) {
+        for (String registro : getFileContent("huespedes")) {
             listaAux.add(creadoHuesped(registro.split(" ")[1].split(":")[0]));
         }
         return listaAux;
