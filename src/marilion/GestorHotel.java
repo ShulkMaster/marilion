@@ -473,6 +473,7 @@ public class GestorHotel {
             }
             if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni) && e.Estado == EstadoReservacion.EnUso) {
                 System.out.print("No puede retirar la habitacion porque no esta pagada.");
+                cont=15;
                 break;
             }
             cont = 10;
