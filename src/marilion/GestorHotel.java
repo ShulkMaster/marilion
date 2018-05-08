@@ -187,19 +187,18 @@ public class GestorHotel {
         System.out.println("Habitaciones supuestamente disponibles");
 
         for (Habitacion p : ListaDeHabitacion) {
-            if(listaAux.contains(p)){
-                System.out.print("\033[32m["+p.getHabId()+"] ");
+            if (listaAux.contains(p)) {
+                System.out.print("\033[32m[" + p.getHabId() + "] ");
+            } else {
+                System.out.print("\033[31m[" + p.getHabId() + "] ");
             }
-            else{
-                System.out.print("\033[31m["+p.getHabId()+"] ");
-            }
-            if(p.numeroHabitacion==10){
+            if (p.numeroHabitacion == 10) {
                 System.out.println();
             }
         }
         System.out.println("\033[32m█ Disponible");
         System.out.println("\033[31m█ No Disponible");
-        
+
     }
 
     public ArrayList<Habitacion> getListHabitDispo(String fecha, int days) {
@@ -439,14 +438,14 @@ public class GestorHotel {
 
     public void EntregarHabitacionV(String dui, String fecha) {
         for (Reservacion e : ListaDeReservas) {
-            if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni) && e.Estado == EstadoReservacion.Activa) {
+            if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni)) {
+                e.Estado=EstadoReservacion.EnUso;
+                base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
                 for (String p : e.getHIDs()) {
                     EntregarHabitacion(p);
                 }
-
             }
         }
-
     }
 
     public void HabilitarHabitacionF(String id_habitacion) {
@@ -455,7 +454,7 @@ public class GestorHotel {
                 ha.habitacionEstado = EstadoHabitacion.Habilitada;
             }
         }
-
+        base.Escribir(ListaDeHabitacion, GestorBase.HABITACIONES);
     }
 
     public void RetirarHabitacionP(String dui, String fecha) {
@@ -467,18 +466,16 @@ public class GestorHotel {
                 for (String p : e.getHIDs()) {
                     HabilitarHabitacionF(p);
                 }
-                cont = 1;
+                base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
+                System.out.print("Ha retirado la habitacion correctamente");
                 break;
             }
             if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni) && e.Estado == EstadoReservacion.EnUso) {
                 System.out.print("No puede retirar la habitacion porque no esta pagada.");
+                cont = 15;
                 break;
             }
             cont = 10;
-        }
-        if (cont == 1) {
-            base.Escribir(ListaDeHabitacion, GestorBase.HABITACIONES);
-            System.out.print("Ha retirado la habitacion correctamente");
         }
         if (cont == 10) {
             System.out.print("Los datos que ingreso no concuerda con ninguna reservacion que tenga una habitacion en uso");
