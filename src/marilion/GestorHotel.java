@@ -497,10 +497,12 @@ public class GestorHotel {
     public void PrintH(){
         for(Reservacion p : ListaDeReservas){
             if(p.Estado==EstadoReservacion.EnUso){
+                System.out.println("\033[32mLa habitacion \033[34m"+p.getId_habitacion()+"\033[32m tiene a los siguientes huespedes:");
                 for(Huesped j : p.Huespesdes){
-                    System.out.println(j.Nombre+" "+j.Apellido+" "+j.duiR());
+                    System.out.println("\033[34m"+j.Nombre+" "+j.Apellido+" "+j.duiR());
                 }
             }
         }
+        System.out.print("\033[30m");
     }
 }
