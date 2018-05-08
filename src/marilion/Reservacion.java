@@ -6,7 +6,7 @@
 package marilion;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import parserMax.Reader;
 import parserMax.Asker;
 import parserMax.MakerX;
 
@@ -84,7 +84,13 @@ public class Reservacion {
         System.out.println("Ingrese " + HHuesMax + " huespedes");
         for (int i = 0; i < HHuesMax; i++) {
             Huespesdes.add(MakerX.creadohues(Asker.askHuesp()));
+            System.out.println("¿Desea agregar mas huespedes?");
+            System.out.println("1 = si  2=no");
+            if (!Reader.consola.nextLine().equals("1")) {
+                break;
+            }
         }
+
     }
 
     public int getId_reservacion() {

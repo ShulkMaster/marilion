@@ -65,6 +65,7 @@ public class GestorHotel {
         reservMaz.tipo = StatadosX.parseStatPack(Reader.consola.nextLine());//ON 5
         //datos de los huespedes hasta aqui bien
         System.out.println("\033[35m" + reservMaz.toString() + " Debug");
+        System.out.print((char) 27 + "[30;47m");
         ListaDeReservas.add(reservMaz);
         base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
     }

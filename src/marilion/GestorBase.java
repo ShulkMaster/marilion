@@ -135,8 +135,8 @@ public class GestorBase {
         System.out.println("\033[32m█ Habilitada");
         System.out.println("\033[34m█ En uso");
         System.out.println("\033[35m█ Deshabilitada");
-        System.out.println((char) 27 + "[34;43m[?]"+"█");
-        System.out.print("\033[30m");
+        System.out.println((char) 27 + "[34;43m[?] Desconocido");
+        System.out.print((char) 27 + "[30;47m");
     }
 
     public void printListFacturas(ArrayList<Factura> master) {
