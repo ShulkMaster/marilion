@@ -13,4 +13,14 @@ import java.util.Scanner;
  */
 public class Reader {
     public static final Scanner consola = new Scanner(System.in);
+    Scanner sc;
+    public String getWord(String word){
+        String palabra ="";
+        while(palabra.equals("")){
+            System.out.println(word);
+            palabra = sc.nextLine();
+            if (!palabra.matches("^[A-Za-z]*$\\D{0}")){palabra = "";}
+        }
+        return palabra;
+    }
 }

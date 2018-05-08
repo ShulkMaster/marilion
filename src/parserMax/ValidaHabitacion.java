@@ -36,10 +36,6 @@ public class ValidaHabitacion {
                 }
             }
         }
-            
-        
-        
-        
         return validacion;
     }
 }
