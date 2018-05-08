@@ -439,14 +439,13 @@ public class GestorHotel {
     public void EntregarHabitacionV(String dui, String fecha) {
         for (Reservacion e : ListaDeReservas) {
             if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni)) {
+                e.Estado=EstadoReservacion.EnUso;
+                base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
                 for (String p : e.getHIDs()) {
                     EntregarHabitacion(p);
                 }
-
             }
         }
-        base.Escribir(ListaDeHabitacion, GestorBase.HABITACIONES);
-
     }
 
     public void HabilitarHabitacionF(String id_habitacion) {
@@ -467,7 +466,6 @@ public class GestorHotel {
                 for (String p : e.getHIDs()) {
                     HabilitarHabitacionF(p);
                 }
-                base.Escribir(ListaDeHabitacion, GestorBase.HABITACIONES);
                 base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
                 System.out.print("Ha retirado la habitacion correctamente");
                 break;
