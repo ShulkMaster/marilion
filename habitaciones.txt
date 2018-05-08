@@ -45,7 +45,7 @@ e#4 Habilitada
 e#5 Habilitada 
 e#6 Habilitada 
 e#7 Habilitada 
-e#8 EnUso 
+e#8 Habilitada 
 e#9 Habilitada 
 e#10 Habilitada 
 f#1 Habilitada 
