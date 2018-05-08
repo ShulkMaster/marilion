@@ -110,21 +110,5 @@ public class StatadosX {
         }
         return aux;
     }
-    /**
-     * Este metodo convierte datos tipo String a PagoTipo default si no funciona
-     * PagoTipo.ninguno
-     *
-     * @param value cadena con el valor de 1, 2 o 3
-     * @return PagoTipo Efectivo,Tarjeta,Cheque,Ninguno
-     *
-     * public static PagoTipo parseStatPago(String value) { PagoTipo aux; switch
-     * (value) { case "Efectivo": aux = PagoTipo.Efectivo; break; case "1": aux
-     * = PagoTipo.Efectivo; break; case "Tarjeta": aux = PagoTipo.Tarjeta;
-     * break; case "2": aux = PagoTipo.Tarjeta; break; case "Ninguno": aux =
-     * PagoTipo.Ninguno; break; case "3": aux = PagoTipo.Ninguno; break;
-     * default: System.err.println("Archivo potencialemte corrupto, estado
-     * desconocido"); aux = PagoTipo.Ninguno; break; } return aux;
-    }
-     */
 
 }
