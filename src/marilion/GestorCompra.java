@@ -13,10 +13,6 @@ import parserMax.FechaX;
  */
 public class GestorCompra {
 
-    /*private int tipoPago;
-    private float monto;
-    public Persona cliente;
-    public boolean Realizado;*/
 
     public static float PrecioDoble;
     public static float PrecioSencilla;
