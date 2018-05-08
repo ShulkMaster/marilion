@@ -438,12 +438,17 @@ public class GestorHotel {
 
     public void EntregarHabitacionV(String dui, String fecha) {
         for (Reservacion e : ListaDeReservas) {
-            if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni)) {
+            if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni) && e.Estado == EstadoReservacion.pagada) {
                 e.Estado=EstadoReservacion.EnUso;
                 base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
                 for (String p : e.getHIDs()) {
                     EntregarHabitacion(p);
+                    System.out.println("Se ha entregado correctamente la habitacion"+p);
                 }
+                
+            }
+            if(e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni) && e.Estado == EstadoReservacion.Activa){
+                System.out.println("\033[35mNo ha pagado la reserva.");
             }
         }
     }
@@ -465,20 +470,21 @@ public class GestorHotel {
                 e.Estado = EstadoReservacion.Finalizada;
                 for (String p : e.getHIDs()) {
                     HabilitarHabitacionF(p);
+                    System.out.print("Se ha retirado correctamente la habitacion"+p);
                 }
                 base.Escribir(ListaDeReservas, GestorBase.RESERVAS);
                 System.out.print("Ha retirado la habitacion correctamente");
                 break;
             }
             if (e.PersonaAPagar.duiR().equals(dui) && fecha.equals(e.fechaIni) && e.Estado == EstadoReservacion.EnUso) {
-                System.out.print("No puede retirar la habitacion porque no esta pagada.");
+                System.out.print("\033[35mNo puede retirar la habitacion porque no esta pagada.\n");
                 cont = 15;
                 break;
             }
             cont = 10;
         }
         if (cont == 10) {
-            System.out.print("Los datos que ingreso no concuerda con ninguna reservacion que tenga una habitacion en uso");
+            System.out.println("\033[35mLos datos que ingreso no concuerda con ninguna reservacion que tenga una habitacion en uso");
         }
 
     }
