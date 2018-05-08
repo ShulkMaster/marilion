@@ -23,4 +23,13 @@ public class Reader {
         }
         return palabra;
     }
+    public String getNumber(String number){
+        String numero ="";
+        while(numero.equals("")){
+            System.out.println(number);
+            numero = sc.nextLine();
+            if (!numero.matches("^[0-9]*$\\D{0}")){numero = "";}
+        }
+        return numero;
+    }
 }
